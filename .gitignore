@@ -1,0 +1,7 @@
+output
+vendor
+pip.zip
+*.pyc
+*.dump
+*.db
+cache

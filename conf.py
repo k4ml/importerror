@@ -7,7 +7,7 @@ import time
 
 # Data about this site
 BLOG_AUTHOR = "Your Name"
-BLOG_TITLE = "Demo Site"
+BLOG_TITLE = "ImportError"
 # This is the main URL for your site. It will be used
 # in a prominent link
 SITE_URL = "http://getnikola.com/"
@@ -15,7 +15,7 @@ SITE_URL = "http://getnikola.com/"
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://getnikola.com/"
 BLOG_EMAIL = "joe@demo.site"
-BLOG_DESCRIPTION = "This is a demo site for Nikola."
+BLOG_DESCRIPTION = "We failed at some point in our life"
 
 # Nikola is multilingual!
 #
@@ -95,6 +95,7 @@ NAVIGATION_LINKS = {
 POSTS = (
     ("posts/*.txt", "posts", "post.tmpl"),
     ("posts/*.rst", "posts", "post.tmpl"),
+    ("posts/*.md", "posts", "post.tmpl"),
 )
 PAGES = (
     ("stories/*.txt", "stories", "story.tmpl"),
@@ -248,7 +249,7 @@ COMPILERS = {
 # translated
 
 # Name of the theme to use.
-THEME = "bootstrap3"
+THEME = "monospace"
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.

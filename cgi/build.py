@@ -14,7 +14,7 @@ print
 
 os.chdir(PROJECT_DIR)
 
-cmd = NIKOLA_BIN + ' build'
+cmd = 'git pull origin master; ' + NIKOLA_BIN + ' build'
 
 output = []
 try:

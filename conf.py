@@ -6,7 +6,7 @@ import time
 # Configuration, please edit
 
 # Data about this site
-BLOG_AUTHOR = "Your Name"
+BLOG_AUTHOR = "Mohd Kamal Bin Mustafa"
 BLOG_TITLE = "ImportError"
 # This is the main URL for your site. It will be used
 # in a prominent link
@@ -61,7 +61,14 @@ TRANSLATIONS = {
 # You should provide a key-value pair for each used language.
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
+        ('/blog/', 'Blog'),
         ('/archive.html', 'Archives'),
+        ('/categories/index.html', 'Tags'),
+        ('/rss.xml', 'RSS'),
+    ),
+    'ms': (
+        ('/blog/', 'Blog'),
+        ('/archive.html', 'Arkib'),
         ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
     ),
@@ -98,8 +105,9 @@ POSTS = (
     ("posts/*.md", "posts", "post.tmpl"),
 )
 PAGES = (
-    ("stories/*.txt", "stories", "story.tmpl"),
-    ("stories/*.rst", "stories", "story.tmpl"),
+    ("stories/*.txt", "", "story.tmpl"),
+    ("stories/*.rst", "", "story.tmpl"),
+    ("stories/*.md", "", "story.tmpl"),
 )
 
 # One or more folders containing files to be copied as-is into the output.
@@ -154,7 +162,7 @@ HIDE_UNTRANSLATED_POSTS = True
 # TAG_PAGES_ARE_INDEXES = True
 
 # Final location is output / TRANSLATION[lang] / INDEX_PATH / index-*.html
-# INDEX_PATH = ""
+INDEX_PATH = "blog"
 
 # Create per-month archives instead of per-year
 # CREATE_MONTHLY_ARCHIVE = False
@@ -249,7 +257,7 @@ HIDE_UNTRANSLATED_POSTS = True
 # translated
 
 # Name of the theme to use.
-THEME = "monospace"
+THEME = "bootstrap"
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.

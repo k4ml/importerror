@@ -562,7 +562,7 @@ COMMENT_SYSTEM_ID = "importerror"
 # (ex. 2012-03-30T23:00:00+02:00),
 # set timzone if you want a localized posted date.
 #
-# TIMEZONE = 'Europe/Zurich'
+TIMEZONE = 'Asia/Kuala_Lumpur'
 
 # If webassets is installed, bundle JS and CSS to make site loading faster
 # USE_BUNDLES = True

@@ -257,7 +257,7 @@ INDEX_PATH = "blog"
 # translated
 
 # Name of the theme to use.
-THEME = "bootstrap"
+THEME = "mybootstrap"
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.
@@ -403,7 +403,8 @@ COMMENT_SYSTEM_ID = "importerror"
 # What MarkDown extensions to enable?
 # You will also get gist, nikola and podcast because those are
 # done in the code, hope you don't mind ;-)
-# MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite']
+import mytoc
+MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', mytoc.TocExtension()]
 
 # Social buttons. This is sample code for AddThis (which was the default for a
 # long time). Insert anything you want here, or even make it empty.

@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: draft, ansible, python, digital ocean
+.. tags: ansible, python, digital ocean, nginx
 .. date: 2013/09/27 00:56:32
 .. title: Get started with Ansible
 .. slug: get-started-with-ansible
@@ -16,6 +16,8 @@ these configuration management software, thinking they just added unnecessary
 complexity to your workflow. But after spending countles hours building 
 automation script backed by Makefiles, bash, python with fabric, I started to 
 value a dedicated tools for these tasks.
+
+<!-- TEASER_END -->
 
 The easiest way to get latest version of Ansible is by using python tools 
 [PIP]. Begin by installing it using `apt-get` (Ubuntu 12.04):-

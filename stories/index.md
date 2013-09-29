@@ -32,3 +32,11 @@ module as requested by programmer. It's a very common error when someone new to
 the language trying it out. This website on the same theme, will try provide help
 for newcomers on any technologies to overcome their first hurdle.
 
+## Others
+I can also be found at the following sites:-
+
+* http://k4ml.blogspot.com/
+* http://k4ml.github.io/
+* http://metak4ml.blogspot.com/
+* http://www.mydev.my/
+* http://github.com/k4ml/

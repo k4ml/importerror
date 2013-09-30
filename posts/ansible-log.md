@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: draft
+.. tags: ansible, sysadmin, devops, python
 .. date: 2013/09/25 02:34:04
 .. title: Ansible log
 .. slug: ansible-log

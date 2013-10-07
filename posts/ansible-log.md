@@ -78,6 +78,8 @@ Error: Host declaration is required
 
     ./bin/ansible-playbook main.yml -i ansible_hosts.ini -u root
 
+http://lextoumbourou.com/blog/posts/getting-started-with-ansible/#part-3
+
 [ansible-cfg]:http://www.ansibleworks.com/docs/faq.html#id7
 [ansible-cfg2]:https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg
 [10]:https://groups.google.com/forum/#!topic/ansible-project/QFDzbr3vGD0

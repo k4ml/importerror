@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
-.. description: 
-.. tags: draft, php, python, hosting, WIP
+.. description: This is to document a setup that I plan on a digital ocean droplet. It should allow us to host applications of different platforms to co-exists side by side.  
+.. tags: php, python, hosting, WIP
 .. date: 2013/10/04 20:18:13
 .. title: Hosting multiple apps at digital ocean droplet
 .. slug: hosting-multiple-apps-at-digital-ocean-droplet
@@ -22,6 +22,11 @@ port.  Each app will run inside specific user account so in theory it should
 allow us to host apps for multiple users. Some planning on port assignment is 
 needed however in case you want to go in this route. For example user1 will use 
 port range 10000 and user2 using port 11000 space.
+
+If you want to skip the write up and straightly get your hand dirty, just
+clone the [github repo] and fix all the path to suit your environment.
+
+<!--TEASER_END-->
 
 <a href="http://imgur.com/koVrXaN"><img src="http://i.imgur.com/koVrXaN.jpg" 
 title="Hosted by imgur.com" /></a>
@@ -369,3 +374,4 @@ https://github.com/kennethreitz/dj-static
 
 [lxc]:https://blogs.oracle.com/OTNGarage/entry/linux_containers_part_1_overview
 [supervisord.sh]:https://gist.github.com/k4ml/6846809/raw/085bbff60d4736cf89b63ce4716796e79b932739/supervisord.sh
+[github repo]:https://github.com/k4ml/do-hosting

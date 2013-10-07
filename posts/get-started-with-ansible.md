@@ -92,7 +92,13 @@ ansible server1 -a '/bin/ls' -u yourname -k
 SSH password:
 ```
 
-The option `-k` will prompt you to enter the password.
+The option `-k` will prompt you to enter the password. If you already set up
+SSH key but not using the default private, you can specify it through the command
+line:-
+
+```console
+ansible server1 -a '/bin/ls' -u yourname --private-key /path/to/id_rsa-custom
+```
 
 ## Module
 Module basically what defined the ansible functionality. There are modules to 

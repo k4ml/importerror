@@ -63,12 +63,14 @@ NAVIGATION_LINKS = {
     DEFAULT_LANG: (
         ('/blog/', 'Blog'),
         ('/archive.html', 'Archives'),
+        ('/projects.html', 'Projects'),
         ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
     ),
     'ms': (
         ('/blog/', 'Blog'),
         ('/archive.html', 'Arkib'),
+        ('/projects.html', 'Projek'),
         ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
     ),

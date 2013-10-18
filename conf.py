@@ -68,7 +68,7 @@ NAVIGATION_LINKS = {
         ('/rss.xml', 'RSS'),
     ),
     'ms': (
-        ('/blog/', 'Blog'),
+        ('/ms/blog/', 'Blog'),
         ('/archive.html', 'Arkib'),
         ('/projects.html', 'Projek'),
         ('/categories/index.html', 'Tags'),

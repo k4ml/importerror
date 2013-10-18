@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: draft, web, desktop
+.. tags: web, desktop
 .. date: 2013/10/18 18:42:26
 .. title: Aplikasi Web vs Aplikasi Desktop
 .. slug: aplikasi-web-vs-aplikasi-desktop

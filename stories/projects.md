@@ -10,3 +10,5 @@
 [Cari Harga Barang](http://harga.smach.net/)
 
 [Cari Status Halal](http://halal.smach.net/)
+
+[Hijri Reminder](http://hijri.smach.net/)

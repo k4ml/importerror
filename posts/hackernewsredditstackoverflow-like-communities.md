@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: draft
+.. tags: python, bookmark
 .. date: 2014/01/07 18:28:56
 .. title: HackerNews/Reddit/Stackoverflow like communities
 .. slug: hackernewsredditstackoverflow-like-communities

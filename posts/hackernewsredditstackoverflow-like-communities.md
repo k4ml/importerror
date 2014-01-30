@@ -20,3 +20,6 @@ While not an Q&A site, I listed also here site with domain of similar theme:-
 
 * [Hackflow](http://hackflow.com/) - Blog mostly on Python.
 * [ImportError](http://importerror.com/) - This very own site ;)
+
+[1]:http://www.reddit.com/r/programming
+[2]:https://news.ycombinator.com/

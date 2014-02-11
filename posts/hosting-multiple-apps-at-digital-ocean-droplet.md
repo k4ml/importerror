@@ -376,3 +376,6 @@ https://github.com/kennethreitz/dj-static
 [supervisord.sh]:https://gist.github.com/k4ml/6846809/raw/085bbff60d4736cf89b63ce4716796e79b932739/supervisord.sh
 [github repo]:https://github.com/k4ml/do-hosting
 [dokku]:https://github.com/progrium/dokku
+[drupal]:http://drupal.org/
+[supervisor]:http://supervisord.org/
+[virtualenv]:http://pypi.python.org/pypi/virtualenv

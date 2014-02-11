@@ -379,3 +379,6 @@ https://github.com/kennethreitz/dj-static
 [drupal]:http://drupal.org/
 [supervisor]:http://supervisord.org/
 [virtualenv]:http://pypi.python.org/pypi/virtualenv
+[Mezzanine]:http://mezzanine.jupo.org/
+[gunicorn]:http://gunicorn.org/
+[WSGI]:http://wsgi.readthedocs.org/en/latest/

@@ -10,7 +10,7 @@ BLOG_AUTHOR = "Mohd Kamal Bin Mustafa"
 BLOG_TITLE = "ImportError"
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://getnikola.com/"
+SITE_URL = "http://importerror.com/"
 # This is the URL where nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 # BASE_URL = "http://getnikola.com/"
@@ -164,7 +164,7 @@ HIDE_UNTRANSLATED_POSTS = True
 # TAG_PAGES_ARE_INDEXES = True
 
 # Final location is output / TRANSLATION[lang] / INDEX_PATH / index-*.html
-INDEX_PATH = "blog"
+#INDEX_PATH = "blog"
 
 # Create per-month archives instead of per-year
 # CREATE_MONTHLY_ARCHIVE = False
@@ -260,6 +260,8 @@ INDEX_PATH = "blog"
 
 # Name of the theme to use.
 THEME = "mybootstrap"
+THEME = 'bootstrap3-jinja'
+THEME = 'custom'
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.
@@ -607,4 +609,13 @@ TIMEZONE = 'Asia/Kuala_Lumpur'
 # Put in global_context things you want available on all your templates.
 # It can be anything, data, functions, modules, etc.
 
-GLOBAL_CONTEXT = {}
+import os
+import markdown
+
+def myinclude(filename):
+    text = open(os.path.join('themes', THEME, 'templates', filename)).read()
+    return markdown.markdown(text)
+
+GLOBAL_CONTEXT = {
+    'myinclude': myinclude,
+}

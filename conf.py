@@ -61,14 +61,12 @@ TRANSLATIONS = {
 # You should provide a key-value pair for each used language.
 NAVIGATION_LINKS = {
     DEFAULT_LANG: (
-        ('/blog/', 'Blog'),
         ('/archive.html', 'Archives'),
         ('/projects.html', 'Projects'),
         ('/categories/index.html', 'Tags'),
         ('/rss.xml', 'RSS'),
     ),
     'ms': (
-        ('/ms/blog/', 'Blog'),
         ('/archive.html', 'Arkib'),
         ('/projects.html', 'Projek'),
         ('/categories/index.html', 'Tags'),
@@ -261,7 +259,7 @@ HIDE_UNTRANSLATED_POSTS = True
 # Name of the theme to use.
 THEME = "mybootstrap"
 THEME = 'bootstrap3-jinja'
-THEME = 'custom'
+THEME = 'journal'
 
 # Color scheme to be used for code blocks. If your theme provides
 # "assets/css/code.css" this is ignored.

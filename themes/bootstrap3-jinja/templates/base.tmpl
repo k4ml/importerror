@@ -63,7 +63,10 @@ lang="{{ lang }}">
     <div class="body-content">
         <!--Body content-->
         <div class="row">
-            <div class="col-xs-6 col-md-4">
+            <div class="col-md-8 col-md-push-4">
+            {% block content %}{% endblock %}
+            </div>
+            <div class="col-md-4 col-md-pull-8">
                 <div class="panel panel-default"></div>
                 <div class="panel panel-primary">
                     <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
@@ -71,9 +74,6 @@ lang="{{ lang }}">
                         {{ myinclude('about.tmpl') }}
                     </div>
                 </div>
-            </div>
-            <div class="col-xs-6 col-md-8">
-            {% block content %}{% endblock %}
             </div>
         </div>
         <!--End of body content-->

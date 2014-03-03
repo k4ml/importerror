@@ -2,7 +2,7 @@
 .. title: PHP: Headers already sent and HTTP basic
 .. slug: php-headers-already-sent-and-http-basic
 .. date: 2014/03/03 14:37:42
-.. tags: draft, php, http, headers
+.. tags: php, http, headers
 .. link: 
 .. description: 
 .. type: text
@@ -27,6 +27,8 @@ text protocol. Being a text based protocol make it much easier to study and unde
 test it in practical manner since no special tools needed to actually implement the protocol.
 Before we delved deeper into the protocol, let also clear up what actually meant by the word
 protocol itself.
+
+<!-- TEASER_END -->
 
 To put an analogy, when two human need to communicate with each other they both need to use
 some sort of language that both of them will understand. Someone who only know Malay and try

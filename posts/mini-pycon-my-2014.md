@@ -2,7 +2,7 @@
 .. title: Mini PyCon MY 2014
 .. slug: mini-pycon-my-2014
 .. date: 2014/03/16 08:19:20
-.. tags: draft, pycon, python
+.. tags: pycon, python
 .. link: 
 .. description: 
 .. type: text

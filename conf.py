@@ -10,10 +10,10 @@ BLOG_AUTHOR = "Mohd Kamal Bin Mustafa"
 BLOG_TITLE = "ImportError"
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://importerror.com/"
+SITE_URL = "http://importerror.com"
 # This is the URL where nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-# BASE_URL = "http://getnikola.com/"
+BASE_URL = SITE_URL
 BLOG_EMAIL = "joe@demo.site"
 BLOG_DESCRIPTION = "We failed at some point in our life"
 

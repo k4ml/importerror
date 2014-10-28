@@ -10,7 +10,7 @@ BLOG_AUTHOR = "Mohd Kamal Bin Mustafa"
 BLOG_TITLE = "ImportError"
 # This is the main URL for your site. It will be used
 # in a prominent link
-SITE_URL = "http://importerror.com"
+SITE_URL = "http://k4ml.github.io"
 # This is the URL where nikola's output will be deployed.
 # If not set, defaults to SITE_URL
 BASE_URL = SITE_URL

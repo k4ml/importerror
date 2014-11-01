@@ -406,7 +406,9 @@ COMMENT_SYSTEM_ID = "importerror"
 # You will also get gist, nikola and podcast because those are
 # done in the code, hope you don't mind ;-)
 import mytoc
-MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', mytoc.TocExtension()]
+from markdown.extensions.codehilite import CodeHiliteExtension
+codehilite = CodeHiliteExtension([('linenums', True)])
+MARKDOWN_EXTENSIONS = ['fenced_code', codehilite, mytoc.TocExtension()]
 
 # Social buttons. This is sample code for AddThis (which was the default for a
 # long time). Insert anything you want here, or even make it empty.

@@ -48,6 +48,30 @@ tetapi secara asasnya adalah seperti berikut:-
 
 * $_POST dihasilkan daripada Body jadi kita boleh terus `split` data tersebut berdasarkan simbol '&'.
 
+PHP bagaimana pun hanya memproses POST data dalam bentuk `application/x-www-urlencoded` untuk dimasukkan ke dalam
+superglobal `$_POST`. Ini mungkin kerana browser hanya terhad untuk menghantar data dalam format tersebut (selain
+ `multipart/form-data` untuk upload file) maka PHP tidak memproses data dalam format yang lain. Tetapi jika anda
+ menghantar data menggunakan client HTTP selain browser, ataupun menggunakan `XMLHttpRequest` (AJAX), anda mungkin
+ menghantar dalam bentuk JSON (`application/json`) atau XML (`application/xml`). Dalam kes ini anda boleh mengakses
+ terus input stream PHP seperti berikut:-
+
+```php
+
+$data_json = json_decode(file_get_contents('php://input'));
+```
+
+Jika request kita adalah seperti berikut:-
+
+```
+POST /index.php HTTP/1.1
+Content-Type: application/json
+User-Agent: Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.
+
+{"username": "kamal", "address": "jb"}
+```
+
+`php://input` akan return JSON pada bahagian body.
+
 Ini adalah penerangan dalam bentuk yang amat ringkas bagaimana input untuk PHP dihasilkan. Saya akan cuba
 kembangkan topik ini dalam tulisan akan datang.
 

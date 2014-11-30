@@ -63,4 +63,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> django.core.management
 <module 'django.core.management' from '/home../local/lib/...django/core/management/__init__.pyc'>
 ```
+Now we know that module was in `$HOME/local/lib/python2.7/site-packages/django/core/management/__init__.py`.
+This one thing I love in python. Everything is explicit. You can easily trace down where things comes from
+without even having to understand the whole framework yet. In some other framework or languages where
+implicit import is a norm, you'll have hard time tracing down where certain functions or variables comes from
+until you know the mechanism of the framework.
 
+Let's look what inside `django.core.management` module. The function `execute_from_command_line()` was defined
+at the bottom of the source code. It just a wrapper to other function actually.
+
+```python
+def execute_from_command_line(argv=None):
+    """
+    A simple method that runs a ManagementUtility.
+    """
+    utility = ManagementUtility(argv)
+    utility.execute()
+```

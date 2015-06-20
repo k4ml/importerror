@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (git)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:36 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GIT: Remove files from commit</title><link>http://k4ml.github.io/posts/git-remove-files-from-commit.html</link><description>&lt;div&gt;&lt;p&gt;There are &lt;a href="http://stackoverflow.com/questions/12481639/remove-files-from-git-commit"&gt;lot of ways&lt;/a&gt; if you search for this, mostly involve in ammending the commit. But if you only accidentally added the files in a development/temporary branch, there's much simpler way than meddling around with the history.&lt;/p&gt;
+&lt;p&gt;When you merge branch, git will automatically commit all the changes from that branch. But there's a way to &lt;a href="http://stackoverflow.com/questions/8640887/git-merge-without-auto-commit"&gt;stop that&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;merge&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;layout&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ff&lt;/span&gt;
+&lt;span class="n"&gt;Automatic&lt;/span&gt; &lt;span class="n"&gt;merge&lt;/span&gt; &lt;span class="n"&gt;went&lt;/span&gt; &lt;span class="n"&gt;well&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;stopped&lt;/span&gt; &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="n"&gt;committing&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;requested&lt;/span&gt;
+&lt;span class="n"&gt;kamal&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;thinkblack&lt;/span&gt;&lt;span class="o"&gt;:~/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;harga&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;
+&lt;span class="cp"&gt;# On branch new-layout-fixout&lt;/span&gt;
+&lt;span class="cp"&gt;# Changes to be committed:&lt;/span&gt;
+&lt;span class="cp"&gt;#&lt;/span&gt;
+&lt;span class="cp"&gt;#       modified:   harga/models.py&lt;/span&gt;
+&lt;span class="cp"&gt;#       modified:   harga/search_indexes.py&lt;/span&gt;
+&lt;span class="cp"&gt;#       modified:   harga/templates/base.html&lt;/span&gt;
+&lt;span class="cp"&gt;#       new file:   harga/templates/sidebar.html&lt;/span&gt;
+&lt;span class="cp"&gt;#       new file:   scrapers/scrapers.db&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let say &lt;code&gt;scrapers/scrapers.db&lt;/code&gt; is the file that we accidentally committed and we don't want it. Just remove it from the index:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;reset&lt;/span&gt; &lt;span class="n"&gt;HEAD&lt;/span&gt; &lt;span class="n"&gt;scrapers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;scrapers&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now the file has been removed, we can commit the rest of the changes.&lt;/p&gt;&lt;/div&gt;</description><category>git</category><guid>http://k4ml.github.io/posts/git-remove-files-from-commit.html</guid><pubDate>Sat, 20 Jun 2015 04:00:40 GMT</pubDate></item></channel></rss>

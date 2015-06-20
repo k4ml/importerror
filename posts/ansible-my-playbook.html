@@ -1,0 +1,372 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Ansible: My Playbook | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/ansible-my-playbook.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="ansible-my-playbook.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Ansible: My Playbook</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2013-10-08T04:02:25+08:00" itemprop="datePublished">2013-10-08 04:02</time>
+        
+    
+        
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/ansible.html"><span class="badge badge-info">ansible</span></a>
+        
+            <a class="tag" href="../categories/wip.html"><span class="badge badge-info">WIP</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><p>This is my first playbook that I manage to get it working. It's an achievement for me
+as it showed that I started to get the concept around ansible:-</p>
+<!--TEASER_END -->
+
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">$hosts</span>
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add main user</span>
+      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=kamal</span>
+            <span class="l-Scalar-Plain">home=/home/kamal</span>
+            <span class="l-Scalar-Plain">groups=sudo</span>
+            <span class="l-Scalar-Plain">shell=/bin/bash</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up authorized key for kamal</span>
+      <span class="l-Scalar-Plain">authorized_key</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">user=kamal</span>
+                      <span class="l-Scalar-Plain">state=present</span>
+                      <span class="l-Scalar-Plain">key="{{ item }}"</span>
+      <span class="l-Scalar-Plain">with_file</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/home/kamal/.ssh/id_rsa-do.pub</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Upgrade apt packages</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">upgrade=yes</span>
+           <span class="l-Scalar-Plain">update_cache=yes</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Install common packages</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pkg={{ item }}</span>
+      <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">build-essential</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python-apt</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">telnet</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">vim</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set vim as default</span>
+      <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">update-alternatives --set editor /usr/bin/vim.basic</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up sudo</span>
+      <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">template src=etc/sudoers.d/custom dest=/etc/sudoers.d/custom</span>
+                <span class="l-Scalar-Plain">owner=root group=root mode=0440</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up ssh</span>
+      <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">template src=etc/ssh/sshd_config dest=/etc/ssh/sshd_config</span>
+                <span class="l-Scalar-Plain">owner=root group=root mode=0644</span>
+      <span class="l-Scalar-Plain">notify</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">Restart sshd</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Install nginx</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=nginx</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Start nginx</span>
+      <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">service nginx start</span>
+
+    <span class="c1">#- include: playbooks/nginx.yml</span>
+
+  <span class="l-Scalar-Plain">handlers</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Restart sshd</span>
+      <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">service name=ssh state=reloaded</span>
+</pre></div>
+
+
+<p>The next step is to make it more generic by parameterized certain such as username
+and file name:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">$hosts</span>
+  <span class="l-Scalar-Plain">gather_facts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">no</span>
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add main user</span>
+      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=$remote_username</span>
+            <span class="l-Scalar-Plain">home=/home/{{ remote_username }}</span>
+            <span class="l-Scalar-Plain">groups=sudo</span>
+            <span class="l-Scalar-Plain">shell=/bin/bash</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up authorized key for {{ remote_username }}</span>
+      <span class="l-Scalar-Plain">authorized_key</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">user=$remote_username</span>
+                      <span class="l-Scalar-Plain">state=present</span>
+                      <span class="l-Scalar-Plain">key="{{ item }}"</span>
+      <span class="l-Scalar-Plain">with_file</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="s">'{{</span><span class="nv"> </span><span class="s">ssh_public_key</span><span class="nv"> </span><span class="s">}}'</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Upgrade apt packages</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">upgrade=yes</span>
+           <span class="l-Scalar-Plain">update_cache=yes</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Install common packages</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pkg={{ item }}</span>
+      <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">build-essential</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python-apt</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">telnet</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">vim</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set vim as default</span>
+      <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">update-alternatives --set editor /usr/bin/vim.basic</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up sudo</span>
+      <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">template src=etc/sudoers.d/custom dest=/etc/sudoers.d/custom</span>
+                <span class="l-Scalar-Plain">owner=root group=root mode=0440</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up ssh</span>
+      <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">template src=etc/ssh/sshd_config dest=/etc/ssh/sshd_config</span>
+                <span class="l-Scalar-Plain">owner=root group=root mode=0644</span>
+      <span class="l-Scalar-Plain">notify</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">Restart sshd</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Install nginx</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=nginx</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Start nginx</span>
+      <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">service nginx start</span>
+
+  <span class="l-Scalar-Plain">handlers</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Restart sshd</span>
+      <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">service name=ssh state=reloaded</span>
+</pre></div>
+
+
+<p>Finally, I managed to modularized by splitting the tasks into separate files:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">$hosts</span>
+  <span class="l-Scalar-Plain">gather_facts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">no</span>
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">playbooks/base.yml</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">playbooks/admin_user.yml</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">playbooks/nginx.yml</span>
+
+  <span class="l-Scalar-Plain">handlers</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">playbooks/handlers.yml</span>
+</pre></div>
+
+
+<p>With the included files look like:-</p>
+<div class="code"><pre><span class="c1"># base.yml</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Upgrade apt packages</span>
+  <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">upgrade=yes</span>
+       <span class="l-Scalar-Plain">update_cache=yes</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Install common packages</span>
+  <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pkg={{ item }}</span>
+  <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">build-essential</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">python-apt</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">telnet</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">vim</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set vim as default</span>
+  <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">update-alternatives --set editor /usr/bin/vim.basic</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up sudo</span>
+  <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">template src=etc/sudoers.d/custom dest=/etc/sudoers.d/custom</span>
+            <span class="l-Scalar-Plain">owner=root group=root mode=0440</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up ssh</span>
+  <span class="l-Scalar-Plain">action</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">template src=etc/ssh/sshd_config dest=/etc/ssh/sshd_config</span>
+            <span class="l-Scalar-Plain">owner=root group=root mode=0644</span>
+  <span class="l-Scalar-Plain">notify</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">Restart sshd</span>
+</pre></div>
+
+
+<div class="code"><pre><span class="c1"># admin_user.yml</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add main user</span>
+  <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=$remote_username</span>
+        <span class="l-Scalar-Plain">home=/home/{{ remote_username }}</span>
+        <span class="l-Scalar-Plain">groups=sudo</span>
+        <span class="l-Scalar-Plain">shell=/bin/bash</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up authorized key for {{ remote_username }}</span>
+  <span class="l-Scalar-Plain">authorized_key</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">user=$remote_username</span>
+                  <span class="l-Scalar-Plain">state=present</span>
+                  <span class="l-Scalar-Plain">key="{{ item }}"</span>
+  <span class="l-Scalar-Plain">with_file</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="s">'{{</span><span class="nv"> </span><span class="s">ssh_public_key</span><span class="nv"> </span><span class="s">}}'</span>
+</pre></div>
+
+
+<div class="code"><pre><span class="c1"># nginx.yml</span>
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ensure nginx is installed</span>
+  <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pkg=nginx-full state=present</span>
+  <span class="l-Scalar-Plain">tags</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">nginx</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ensure nginx is started</span>
+  <span class="l-Scalar-Plain">service</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=nginx state=started</span>
+  <span class="l-Scalar-Plain">tags</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">nginx</span>
+</pre></div></div>
+    </div>
+    
+    </div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="ansible-playbook-specify-hosts-on-the-command-line.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="web-application-vs-desktop-application.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/ansible-my-playbook.html",
+        
+        disqus_title="Ansible: My Playbook",
+        disqus_identifier="cache/posts/ansible-my-playbook.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

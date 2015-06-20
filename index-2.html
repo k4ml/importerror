@@ -1,0 +1,370 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="We failed at some point in our life"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>ImportError (old posts, page 2) | ImportError</title><link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="assets/css/rst.css" rel="stylesheet" type="text/css"><link href="assets/css/code.css" rel="stylesheet" type="text/css"><link href="assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="assets/css/theme.css" rel="stylesheet" type="text/css"><link href="assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/index-2.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    
+        <article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/angularjs-event-handler-attached-to-all-anchor-tag-a.html" class="u-url">Angularjs: Event handler attached to all anchor tag 'a'</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-11-18T01:19:58+08:00">2013-11-18 01:19</time></small></h1>
+        <hr><div class="p-summary">
+        <p>Noticed today that angular <a href="http://docs.angularjs.org/api/ng.directive:a">modify the behavior</a> of 'a' tag to include some event handler by default. Discover this after getting error <code>Object #&lt;g&gt; has no method 'on'</code> error in my dev console. The error actually showing up after I added jquery to the page but the fact that angular attaching event to all 'a' tag really suprising. I have some 'normal' links I don't want any fancy behavior, just a link. Found a <a href="http://badwing.com/angularjs-heavy-handed-anchor-tag-disable-directive/">post on how to create new directive to disable the behavior</a> but for now I manage to escape from this by simply not using angular together with jquery.</p>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/angularjs-event-handler-attached-to-all-anchor-tag-a.html#disqus_thread" data-disqus-identifier="cache/posts/angularjs-event-handler-attached-to-all-anchor-tag-a.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/django-transactioncommit_manually-and-accessing-db-from-template.html" class="u-url">Django: @transaction.commit_manually and accessing db from template</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-11-12T03:37:17+08:00">2013-11-12 03:37</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>Bumped into this issue twice and because the first time it happened was almost a year ago, in different project, I'd already lost my mental note about it when it happened again for second time. Our views functions are wrapped inside <code>@transaction.commit_manually</code>, which look like below:-</p>
+<div class="code"><pre><span class="nd">@transaction.commit_manually</span>
+<span class="k">def</span> <span class="nf">send_message</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c"># do some stuff</span>
+    <span class="n">transaction</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'path/to/template.html'</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</pre></div>
+
+
+<p>This work flawlessly until recently, I need to add some logic in the template that need to check certain user's permission, before displaying the part. In the template, it just some function call that access db like:-</p>
+<div class="code"><pre><span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">user.can_see_this</span> <span class="o">%</span><span class="p">}</span>
+<span class="o">&lt;</span><span class="nx">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">Some</span> <span class="k">link</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;</span>
+<span class="p">{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
+</pre></div>
+
+
+<p>Django now raise <code>TransactionManagementError</code> complaining I have pending commit/rollback. It doesn't make sense because I can verify that the line that executed <code>transaction.commit()</code> was reached in the views above. Only after reading through <a href="https://code.djangoproject.com/ticket/18080">this ticket</a> on django issue tracker, I'd immediately remember the real issue.</p>
+<p>Turn out this caused by new behavior of django transaction in 1.3 and above. Before 1.3, transaction only marked as dirty if we did any write database operation but since 1.3 and above, any database operation will mark the transaction as dirty. So the following code
+will work before 1.3:-</p>
+<div class="code"><pre><span class="nd">@transaction.commit_manually</span>
+<span class="k">def</span> <span class="nf">sendmessage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">transaction</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+<span class="err"> </span> <span class="err"> </span> <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="err"> </span> <span class="err"> </span> <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">'OK'</span><span class="p">)</span>
+</pre></div>
+
+
+<p>All database operation now will mark the transaction as dirty and since we access the db in template - which happened during render after we called commit(), it obvious now why django complain we unclosed transaction.</p>
+<p>It should be written like below:-</p>
+<div class="code"><pre><span class="nd">@transaction.commit_manually</span>
+<span class="k">def</span> <span class="nf">send_message</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c"># do some stuff</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'path/to/template.html'</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+    <span class="n">transaction</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/django-transactioncommit_manually-and-accessing-db-from-template.html#disqus_thread" data-disqus-identifier="cache/posts/django-transactioncommit_manually-and-accessing-db-from-template.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/django-from-scratch.html" class="u-url">Django From Scratch</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-11-03T02:34:04+08:00">2013-11-03 02:34</time></small></h1>
+        <hr><div class="p-summary">
+        <div><div class="contents alert alert-info pull-left topic">
+<p class="first sidebar-title">Contents</p>
+<ul><li><a href="posts/django-from-scratch.html#namespace">Namespace</a></li>
+<li><a href="posts/django-from-scratch.html#views">Views</a></li>
+<li><a href="posts/django-from-scratch.html#models">Models</a></li>
+</ul></div>
+<p>There are a lot of tutorials out there on Django and the official documentation also has one. For this post, I decided not to go through the typical route on how to get started with django. Let's 'ignore' the best practices and focus on what actually work and hopefully we can learn something along the way. So let's get started by downloading Django itself from the website.</p>
+<p class="more"><a href="posts/django-from-scratch.html">Read more…</a></p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/django-from-scratch.html#disqus_thread" data-disqus-identifier="cache/posts/django-from-scratch.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/web-application-vs-desktop-application.html" class="u-url">Web Application vs Desktop Application</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-10-18T18:42:26+08:00">2013-10-18 18:42</time></small></h1>
+        <hr><div class="p-summary">
+        <p>Not translated yet, please read the Malay version.</p>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/web-application-vs-desktop-application.html#disqus_thread" data-disqus-identifier="cache/posts/web-application-vs-desktop-application.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/ansible-my-playbook.html" class="u-url">Ansible: My Playbook</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-10-08T04:02:25+08:00">2013-10-08 04:02</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>This is my first playbook that I manage to get it working. It's an achievement for me
+as it showed that I started to get the concept around ansible:-</p>
+<p class="more"><a href="posts/ansible-my-playbook.html">Read more…</a></p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/ansible-my-playbook.html#disqus_thread" data-disqus-identifier="cache/posts/ansible-my-playbook.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/ansible-playbook-specify-hosts-on-the-command-line.html" class="u-url">Ansible-Playbook: Specify hosts on the command line</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-10-07T07:28:10+08:00">2013-10-07 07:28</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>While we can specify what hosts to run the command through <code>ansible</code> command-line
+program, it's does not apply to <code>ansible-playbook</code> program. We always need to
+specify the <code>hosts:</code> attribute in our <a href="http://yaml.org/">YAML</a> playbook. It mean if we were to run
+someone's else playbook, we always have to edit the playbook to customize the hardcoded
+<code>hosts:</code> attribute.</p>
+<p>Googling for this, I found the <a href="https://gist.github.com/marktheunissen/2979474">workaround</a> (which a great resource in itself to gain
+insight what ansible capable for). We can use variables. So instead of the following
+playbook:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">myhostname</span>
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add user</span>
+      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=kamal</span>
+            <span class="l-Scalar-Plain">groups=admin</span>
+            <span class="l-Scalar-Plain">shell=/bin/bash</span>
+</pre></div>
+
+
+<p>We can write it as:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">$hosts</span>
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add user</span>
+      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=kamal</span>
+            <span class="l-Scalar-Plain">groups=admin</span>
+            <span class="l-Scalar-Plain">shell=/bin/bash</span>
+</pre></div>
+
+
+<p>And then run our playbook as:-</p>
+<div class="code"><pre><span class="go">ansible-playbook -u root --extra-vars="hosts=myhostname"</span>
+</pre></div></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/ansible-playbook-specify-hosts-on-the-command-line.html#disqus_thread" data-disqus-identifier="cache/posts/ansible-playbook-specify-hosts-on-the-command-line.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html" class="u-url">Hosting multiple apps at digital ocean droplet</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-10-04T20:18:13+08:00">2013-10-04 20:18</time></small></h1>
+        <hr><div class="p-summary">
+        <div><div class="contents alert alert-info pull-left topic">
+<p class="first sidebar-title">Contents</p>
+<ul><li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#nginx">Nginx</a></li>
+<li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#user">User</a></li>
+<li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#php">PHP</a><ul><li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#drupal">Drupal</a></li>
+</ul></li>
+<li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#supervisor">Supervisor</a></li>
+<li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#python">Python</a><ul><li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#gunicorn">Gunicorn</a></li>
+</ul></li>
+<li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#ruby">Ruby</a></li>
+<li><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#issues">Issues</a></li>
+</ul></div>
+<p>This is to document a setup that I plan on a digital ocean droplet. It should 
+allow us to host applications of different platforms to co-exists side by side.<br>
+This initially inspired by <a href="https://github.com/progrium/dokku">dokku</a> setup but dokku still has some rough edges 
+making it not ready yet for production setup. This setup simply eliminate 
+[docker] and run application natively on the host instead inside a 
+<a href="https://blogs.oracle.com/OTNGarage/entry/linux_containers_part_1_overview">container</a>.</p>
+<p>Based on diagram below, we'll use nginx as our frontend server. It'll not do 
+much other than forwarding requests to the backend apps running on different 
+port.  Each app will run inside specific user account so in theory it should 
+allow us to host apps for multiple users. Some planning on port assignment is 
+needed however in case you want to go in this route. For example user1 will use 
+port range 10000 and user2 using port 11000 space.</p>
+<p>If you want to skip the write up and straightly get your hand dirty, just
+clone the <a href="https://github.com/k4ml/do-hosting">github repo</a> and fix all the path to suit your environment.</p>
+<p class="more"><a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html">Read more…</a></p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/hosting-multiple-apps-at-digital-ocean-droplet.html#disqus_thread" data-disqus-identifier="cache/posts/hosting-multiple-apps-at-digital-ocean-droplet.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><div>
+        <ul class="pager"><li class="previous">
+                <a href="index.html" rel="prev">← Newer posts</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="index-1.html" rel="next">Older posts →</a>
+            </li>
+        
+        </ul></div>
+    
+
+    
+    
+        
+    
+       <script>var disqus_shortname="importerror";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="assets/js/bootstrap.min.js" type="text/javascript"></script><script src="assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

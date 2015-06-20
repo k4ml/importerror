@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError</title><link>http://k4ml.github.io</link><description>We failed at some point in our life</description><atom:link href="http://k4ml.github.io/ms/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>ms</language><lastBuildDate>Sat, 20 Jun 2015 12:11:36 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Bagaimana $_POST dan $_GET terhasil</title><link>http://k4ml.github.io/ms/posts/bagaimana-_post-dan-_get-terhasil.html</link><description>&lt;div&gt;&lt;p&gt;Dalam PHP, &lt;code&gt;$_POST&lt;/code&gt; dan &lt;code&gt;$_GET&lt;/code&gt; adalah 2 bentuk input yang biasa digunakan oleh developer. &lt;code&gt;$_GET&lt;/code&gt;
+mengandungi data daripada &lt;em&gt;url query string&lt;/em&gt; manakala &lt;code&gt;$_POST&lt;/code&gt; biasanya mengandungi data yang dihantar
+melalui html form. Tapi bagaimanakah data ini terhasil ?&lt;/p&gt;
+&lt;p&gt;Data untuk &lt;code&gt;$_GET&lt;/code&gt; dan &lt;code&gt;$_POST&lt;/code&gt; kedua-duanya dihasilkan dengan memproses HTTP request yang dihantar
+oleh client. Secara ringkas, HTTP request adalah dalam bentuk teks dengan format seperti berikut:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;GET&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;php&lt;/span&gt;&lt;span class="o"&gt;?&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="n"&gt;Content&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt;
+&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Agent&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Mozilla&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;5.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X11&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;i686&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;AppleWebKit&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;537.17&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;KHTML&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;Gecko&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Chrome&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;24.0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Atau:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;POST&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;php&lt;/span&gt; &lt;span class="n"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="n"&gt;Content&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;urlencoded&lt;/span&gt;
+&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Agent&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Mozilla&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;5.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X11&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;i686&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;AppleWebKit&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;537.17&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;KHTML&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;Gecko&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Chrome&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;24.0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;kamal&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;jb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;HTTP request ini terbahagi kepada 3 bahagian iaitu Request line, Headers dan Body. Untuk GET request
+bagaimana pun, tiada bahagian Body yang dihantar dalam request tersebut. Data ini dihantar dalam bentuk
+teks ke &lt;em&gt;socket&lt;/em&gt; di mana web server yang mengendalikan request ini &lt;em&gt;listen&lt;/em&gt;. PHP biasanya menggunakan
+Apache sebagai web server dan apache biasanya akan &lt;em&gt;listen&lt;/em&gt; pada port 80.&lt;/p&gt;
+&lt;p&gt;Setelah diterima oleh &lt;em&gt;web server&lt;/em&gt;, data tersebut akan di&lt;em&gt;pass&lt;/em&gt; ke PHP yang seterusnya akan memproses
+data tersebut (parsing) untuk dimasukkan ke dalam superglobal variables seperti &lt;code&gt;$_POST&lt;/code&gt;, &lt;code&gt;$_GET&lt;/code&gt; dan
+lain-lain. Bagaimana proses tersebut dilakukan adalah adalah agak kompleks dengan &lt;a href="http://stackoverflow.com/questions/16422605/how-exactly-is-php-creating-superglobal-post-get-cookie-and-request"&gt;beberapa lapis kod C&lt;/a&gt;
+tetapi secara asasnya adalah seperti berikut:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+&lt;p&gt;$_GET dihasilkan daripada Request line - GET /index.php?action=list&amp;amp;module=user HTTP/1.1&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Secara mudahnya kita boleh split kepada 3 bahagian - ['GET', '/index.php?action=list&amp;amp;module=user', 'HTTP/1.1']&lt;/li&gt;
+&lt;li&gt;Kemudian kita boleh parse bahagian kedua berdasarkan simbol '?' dan '&amp;amp;' untuk mendapatkan data yang
+  dikehendaki.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$_POST dihasilkan daripada Body jadi kita boleh terus &lt;code&gt;split&lt;/code&gt; data tersebut berdasarkan simbol '&amp;amp;'.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;PHP bagaimana pun hanya memproses POST data dalam bentuk &lt;code&gt;application/x-www-urlencoded&lt;/code&gt; untuk dimasukkan ke dalam
+superglobal &lt;code&gt;$_POST&lt;/code&gt;. Ini mungkin kerana browser hanya terhad untuk menghantar data dalam format tersebut (selain
+ &lt;code&gt;multipart/form-data&lt;/code&gt; untuk upload file) maka PHP tidak memproses data dalam format yang lain. Tetapi jika anda
+ menghantar data menggunakan client HTTP selain browser, ataupun menggunakan &lt;code&gt;XMLHttpRequest&lt;/code&gt; (AJAX), anda mungkin
+ menghantar dalam bentuk JSON (&lt;code&gt;application/json&lt;/code&gt;) atau XML (&lt;code&gt;application/xml&lt;/code&gt;). Dalam kes ini anda boleh mengakses
+ terus input stream PHP seperti berikut:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="x"&gt;$data_json = json_decode(file_get_contents('php://input'));&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Jika request kita adalah seperti berikut:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;POST&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;php&lt;/span&gt; &lt;span class="n"&gt;HTTP&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.1&lt;/span&gt;
+&lt;span class="n"&gt;Content&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;application&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Agent&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Mozilla&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;5.0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X11&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;Linux&lt;/span&gt; &lt;span class="n"&gt;i686&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;AppleWebKit&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;537.17&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;KHTML&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="n"&gt;Gecko&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;Chrome&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;24.0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;"username"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"kamal"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"address"&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"jb"&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;php://input&lt;/code&gt; akan return JSON pada bahagian body.&lt;/p&gt;
+&lt;p&gt;Ini adalah penerangan dalam bentuk yang amat ringkas bagaimana input untuk PHP dihasilkan. Saya akan cuba
+kembangkan topik ini dalam tulisan akan datang.&lt;/p&gt;&lt;/div&gt;</description><category>php</category><guid>http://k4ml.github.io/ms/posts/bagaimana-_post-dan-_get-terhasil.html</guid><pubDate>Mon, 31 Mar 2014 08:23:49 GMT</pubDate></item><item><title>Aplikasi Web vs Aplikasi Desktop</title><link>http://k4ml.github.io/ms/posts/aplikasi-web-vs-aplikasi-desktop.html</link><description>&lt;div&gt;&lt;p&gt;Mereka yang baru bermula dalam pembangunan aplikasi web kerap kali keliru akan 
+konsep dalam aplikasi web dan menganggap ianya sama dengan aplikasi desktop. Ini menyebabkan mereka mengharapkan dapat melakukan perkara yang sama seperti 
+mana dalam aplikasi desktop. Antara contoh soalan popular yang seringkali 
+ditanya adalah bagaimana untuk mencetak daripada aplikasi web mereka.&lt;/p&gt;
+&lt;p&gt;Pertama sekali mari kita lihat diagram ringkas susun atur sebuah aplikasi 
+desktop:-&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://i.imgur.com/LWG9VlQl.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Dalam rajah di atas, kita dapat lihat bagaimana aplikasi yang kita bangunkan 
+dapat berhubung terus dengan &lt;em&gt;hardware&lt;/em&gt; melalui OS (&lt;em&gt;Operating System&lt;/em&gt;). Ini 
+membolehkan aplikasi tersebut untuk mencapai dan menggunakan peranti-peranti 
+lain seperti &lt;em&gt;printer&lt;/em&gt; dan &lt;em&gt;webcam&lt;/em&gt; yang bersambung dengan komputer tersebut. Seterusnya, kita lihat pula rajah susunan sebuah aplikasi web:-&lt;/p&gt;
+&lt;p&gt;&lt;img src="http://i.imgur.com/eOt8gRzl.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Di atas dapat diperhatikan bagaimana aplikasi tidak lagi dijalankan secara 
+terus pada &lt;em&gt;computer&lt;/em&gt; sebagaimana dalam aplikasi desktop. Sebaliknya ia hanya 
+dicapai melalui perantaraan &lt;em&gt;browser&lt;/em&gt;. Ini menyebabkan capaian aplikasi web 
+kepada fungsi-fungsi komputer hanya terhad kepada apa yang &lt;em&gt;browser&lt;/em&gt; benarkan. Dan sememangya atas tujuan keselamatan, &lt;em&gt;browser&lt;/em&gt; akan menghadkan capaian 
+aplikasi kepada &lt;em&gt;hardware&lt;/em&gt; seperti &lt;em&gt;printer&lt;/em&gt; dan &lt;em&gt;webcam&lt;/em&gt;. Ini antara perbezaan penting yang harus difahami apabila membangunkan sebuah aplikasi web.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Perhatian&lt;/strong&gt;: Rajah di atas menunjukkan susunan LOGIKAL manakala secara FIZIKAL boleh sahaja sebuah aplikasi web itu dijalankan dalam komputer yang sama. Walaubagaimana pun kekangan asal sebuah aplikasi web tetap sama. &lt;/p&gt;&lt;/div&gt;</description><category>web</category><category>desktop</category><guid>http://k4ml.github.io/ms/posts/aplikasi-web-vs-aplikasi-desktop.html</guid><pubDate>Fri, 18 Oct 2013 10:42:26 GMT</pubDate></item></channel></rss>

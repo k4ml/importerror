@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="ms"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Memahami Session dalam Aplikasi Web | ImportError</title><link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/ms/posts/memahami-session-dalam-aplikasi-web.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../rss.xml"><link rel="alternate" hreflang="en" href="../../posts/understanding-session-in-web-application..html"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../../archive.html">Arkib</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../../projects.html">Projek</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+            </li><li><a href="../../index.html" rel="alternate" hreflang="en">English</a></li>
+        
+    
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="../.././ms/posts/memahami-session-dalam-aplikasi-web.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Memahami Session dalam Aplikasi Web</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2013-10-28T18:36:43+08:00" itemprop="datePublished">2013-10-28 18:36</time>
+        
+    
+        
+            
+                  |  
+                <a href="../../posts/understanding-session-in-web-application..html" rel="alternate" hreflang="en">Read in English</a>
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/php.html"><span class="badge badge-info">php</span></a>
+        
+            <a class="tag" href="../categories/session.html"><span class="badge badge-info">session</span></a>
+        
+            <a class="tag" href="../categories/http.html"><span class="badge badge-info">http</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><p><em>Session</em> dalam aplikasi web adalah untuk mengatasi masalah yang berkaitan dengan sifat <em>stateless</em> dalam protokol HTTP. Contohnya apabila kita melayari satu laman web, dan membuka laman utama dan kemudian laman yang kedua, server tidak akan dapat mengenalpasti orang yang mengakses laman kedua adalah orang yang sama mengakses laman pertama tadi. Ini menyebabkan masalah apabila kita ingin membangunkan aplikasi di mana sebahagian daripada laman kita adalah untuk pengguna tertentu sahaja. Ataupun aplikasi yang perlu menyimpan data apa yang user lakukan pada laman pertama, dan seterusnya memaparkan di laman yang kedua atau seterusnya. Contohnya sebuah laman <em>e-commerce</em> yang mempunyai fungsi <em>shopping cart</em>. Di laman pertama, pengguna akan <em>add</em> barangan yang ingin dibeli ke dalam <em>cart</em>. Bila pengguna membuka laman lain di website tersebut, kita mungkin ingin memaparkan kepada pengguna apa yang telah mereka masukkan ke dalam <em>cart</em>.</p>
+<p><a href="http://tools.ietf.org/html/rfc2616">Protokol HTTP</a> mempunyai konsep <em>cookie</em>, di mana apabila pengguna mengakses laman web kita, kita boleh 'tanam' data yang akan disimpan dalam komputer pengguna. Setiap kali mereka mengakses laman kita, data tersebut akan dihantar sekali. Ini membolehkan kita mengenalpasti pengguna ini telah pun melawat laman kita sebelum ini. Jadi secara teori, kita boleh menggunakan <em>cookie</em> ini untuk menyelesaikan masalah berkaitan <em>shopping cart</em> sebelum ini. Kita boleh simpan barang yang pengguna masukkan ke dalam <em>cart</em> di dalam <em>cookie</em>. <em>Cookie</em> bagaimana pun mempunyai beberapa masalah seperti saiz yang terhad (4K) dan juga pengguna boleh mengubah data yang disimpan di dalam <em>cookie</em> sesuka hati mereka. Ada cara untuk mengelakkan data dalam <em>cookie</em> diubah namun ia di luar skop artikel ini.</p>
+<p>Jadi satu teknik baru untuk menyimpan data pengguna digunakan - ia dipanggil <em>session</em>. Ia masih menggunakan <em>cookie</em> tetapi tidak menyimpan kesemua data ke dalam cookie. Sebaliknya apa yang disimpan dalam <em>cookie</em> hanyalah rujukan (reference / pointer) kepada data sebenar yang di simpan di bahagian server. Apa yang disimpan dalam <em>cookie</em> hanyalah ID unik yang boleh digunakan untuk <em>query</em> <em>data store</em> di server bagi mendapatkan data sebenar. <em>data store</em> ini boleh jadi berbentuk <em>file</em> (default storage PHP session), row dalam database dan sebagainya. Dalam tulisan ini, saya cuba menunjukkan konsep asas implementasi <em>session</em> menggunakan bahasa pengaturcaraan PHP.</p>
+<p>Berikut adalah kod utama yang akan <em>implement</em> <em>session</em> bagi web aplikasi kita. Kod ini boleh disimpan dalam fail bernama <code>mysession.php</code>:-</p>
+<div class="code"><pre><span class="cp">&lt;?php</span>
+<span class="cm">/* This is for learning purpose only - just to show how session in theory being </span>
+<span class="cm">implemented. For real session usage, use the session provided by your web framework.</span>
+<span class="cm">*/</span>
+
+<span class="nv">$HERE</span> <span class="o">=</span> <span class="nb">realpath</span><span class="p">(</span><span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">));</span>
+<span class="nv">$SESSION_CLOSED</span> <span class="o">=</span> <span class="k">False</span><span class="p">;</span>
+
+<span class="k">function</span> <span class="nf">end_session</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'SESSION_CLOSED'</span><span class="p">])</span> <span class="p">{</span>
+        <span class="nv">$session_file</span> <span class="o">=</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'HERE'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">'/'</span> <span class="o">.</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'_MYSESSID'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">'.session'</span><span class="p">;</span>
+        <span class="nb">file_put_contents</span><span class="p">(</span><span class="nv">$session_file</span><span class="p">,</span> <span class="nb">serialize</span><span class="p">(</span><span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'_MYSESSION'</span><span class="p">]));</span>
+        <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'SESSION_CLOSED'</span><span class="p">]</span> <span class="o">=</span> <span class="k">True</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">start_session</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="s1">'mysessid'</span><span class="p">,</span> <span class="nv">$_COOKIE</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nv">$mysessid</span> <span class="o">=</span> <span class="nv">$_COOKIE</span><span class="p">[</span><span class="s1">'mysessid'</span><span class="p">];</span>
+        <span class="nv">$session_file</span> <span class="o">=</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'HERE'</span><span class="p">]</span> <span class="o">.</span> <span class="s1">'/'</span> <span class="o">.</span> <span class="nv">$mysessid</span> <span class="o">.</span> <span class="s1">'.session'</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">file_exists</span><span class="p">(</span><span class="nv">$session_file</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'_MYSESSION'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">unserialize</span><span class="p">(</span><span class="nb">file_get_contents</span><span class="p">(</span><span class="nv">$session_file</span><span class="p">));</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'_MYSESSION'</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="nv">$mysessid</span> <span class="o">=</span> <span class="nb">uniqid</span><span class="p">(</span><span class="s1">'MYSESSID'</span><span class="p">);</span>
+        <span class="nx">setcookie</span><span class="p">(</span><span class="s1">'mysessid'</span><span class="p">,</span> <span class="nv">$mysessid</span><span class="p">);</span>
+        <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'_MYSESSION'</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">'_MYSESSID'</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$mysessid</span><span class="p">;</span>
+    <span class="nb">register_shutdown_function</span><span class="p">(</span><span class="s1">'end_session'</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Dan bagi setiap <em>page</em> yang ingin menggunakan fungsi <em>session</em> ini, contohnya <code>index.php</code>:-</p>
+<div class="code"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">include</span> <span class="s1">'mysession.php'</span><span class="p">;</span>
+
+<span class="nx">start_session</span><span class="p">();</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$_MYSESSION</span><span class="p">);</span>
+<span class="nv">$_MYSESSION</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'kamal'</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Page yang kedua, <code>index2.php</code>:-</p>
+<div class="code"><pre><span class="cp">&lt;?php</span>
+
+<span class="k">include</span> <span class="s1">'mysession.php'</span><span class="p">;</span>
+
+<span class="nx">start_session</span><span class="p">();</span>
+<span class="nb">print_r</span><span class="p">(</span><span class="nv">$_MYSESSION</span><span class="p">);</span>
+<span class="nv">$_MYSESSION</span><span class="p">[</span><span class="s1">'on_index2'</span><span class="p">]</span> <span class="o">=</span> <span class="k">True</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Dalam contoh di atas, apabila pengguna melawat <code>index2.php</code>, data dalam <code>$_MYSESSION['name']</code> yang disetkan pada laman pertama akan dipaparkan. Dalam function <code>start_session()</code>, apa yang berlaku adalah kita check jika pengguna mempunyai nilai cookie <code>mysessid</code>, jika ada kita akan cuba load data yang disimpan dalam <em>file</em> <code>$mysessid.session</code> ke dalam <em>variable</em> global <code>$_MYSESSION</code>. Manakala setiap kali <em>script</em> tersebut berakhir, kita akan simpan balik data dalam variable <code>$_MYSESSION</code> ke dalam <em>file</em> <code>$mysessid.session</code>. Ini adalah konsep asas bagaimana <em>session</em> berfungsi. Di sini kita menyimpan data di dalam <em>file</em> namun boleh saja data tersebut disimpan di dalam database table dengan <code>mysessid</code> berfungsi sebagai <em>primary key</em> bagi rekod tersebut.</p></div>
+    </div>
+    
+    </div>
+    
+    
+
+    
+        
+    
+        
+    
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/ms/posts/memahami-session-dalam-aplikasi-web.html",
+        
+        disqus_title="Memahami Session dalam Aplikasi Web",
+        disqus_identifier="cache/posts/memahami-session-dalam-aplikasi-web.html",
+        disqus_config = function () {
+            this.language = "./ms";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

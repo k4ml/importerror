@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Pengenalan Vagrant | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/pengenalan-vagrant.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="pengenalan-vagrant.ms" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Pengenalan Vagrant</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2013-09-29T22:43:02+08:00" itemprop="datePublished">2013-09-29 22:43</time></small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><p>Tools untuk membina <em>virtual machine</em> dengan cepat. <em>Virtual Machine</em> yang 
+dibina adalah berasaskan VirtualBox. VirtualBox adalah sebuah mesin maya, 
+seperti komputer fizikal atau laptop yang anda biasa guna. Anda boleh membina 
+sejumlah mesin maya dan memasang pelbagai jenis OS seperti Ubuntu Linux, 
+Windown 7 dan sebagainya.</p>
+<h3 id="kenapa-guna-virtual-machine">Kenapa guna <em>Virtual Machine</em> ?</h3>
+<p>Developer biasanya melakukan kerja-kerja pembangunan di komputer desktop atau 
+laptop masing-masing. Setelah siap, aplikasi tersebut akan di'deploy' ke server 
+khas yang akan dicapai oleh pengguna sistem tersebut. Ini adalah senario 
+tipikal dalam pembangunan laman web atau aplikasi web. Konfigurasi desktop atau 
+laptop yang digunakan untuk <em>development</em> biasanya berbeza dengan server yang 
+digunakan untuk <em>deployment</em>. Ini menyebabkan pelbagai isu yang tidak timbul 
+semasa proses <em>development</em> atau <em>testing</em> muncul apabila ia cuba dijalankan di 
+server. Keadaan ini amat membazirkan masa dan antara sebab <em>release</em> sesuatu 
+sistem terpaksa dilengahkan. </p>
+<p>Mengunakan <em>virtual machine</em>, <em>developer</em> dapat membina server yang sama 
+konfigurasi dengan server sebenar dalam masa yang singkat. Ini membolehkan 
+mereka menguji aplikasi yang dibangunkan dalam persekitaran sebenar. <em>Virtual 
+Machine</em> yang dibina itu juga boleh dikongsi dengan <em>developer</em> lain menjadikan 
+proses testing dalam sesuatu <em>development team</em> semakin pantas dan tidak 
+membebankan.</p>
+<h3 id="install">Install</h3>
+<p>Ada beberapa pilihan bergantung OS yang anda gunakan seperti msi installer 
+untuk Windows, package .deb untuk Debian/Ubuntu dan .dmg untuk pengguna MacOS.</p>
+<p>...</p>
+<h3 id="contoh-penggunaan-use-case">Contoh Penggunaan (Use case)</h3>
+<p>Saya hendak membina sebuah <em>base machine</em> dengan kriteria berikut:-</p>
+<ul><li>Menggunakan OS Ubuntu Precise 32bit.</li>
+<li>Semua package dikemaskini ke versi paling terkini.</li>
+<li>Package seperti postgresql, mysql dan apache2 telah siap di'install'.</li>
+</ul><p>Bina machine pertama:-</p>
+<div class="code"><pre><span class="go">vagrant box add precise32 http://files.vagrantup.com/precise32.box</span>
+<span class="go">vagrant init precise32</span>
+<span class="go">vagrant up</span>
+<span class="go">vagrant ssh</span>
+</pre></div>
+
+
+<p>Kini anda sudah berada dalam machine precise32. Update Ubuntu:-</p>
+<div class="code"><pre><span class="go">sudo apt-get update</span>
+<span class="go">sudo apt-get upgrade</span>
+</pre></div>
+
+
+<p>Install package yang dikehendaki:-</p>
+<div class="code"><pre><span class="go">sudo apt-get build-essential apache2 postgresql mysql-server</span>
+<span class="go">exit</span>
+</pre></div>
+
+
+<p>Kini anda berada dalam mesin sebenar (fizikal). Kita akan buat copy
+untuk mesin yang pertama. Buat satu file konfigurasi asas untuk mesin yang
+kita nak pakejkan ini. Simpan sebagai Vagrantfile.pkg:-</p>
+<div class="code"><pre><span class="ss">Vagrant</span><span class="p">:</span><span class="ss">:Config</span><span class="o">.</span><span class="n">run</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+    <span class="c1"># Forward apache</span>
+    <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">forward_port</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">8080</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Dalam konfigurasi di atas kita membuat <em>port forwarding</em> dari port 8080 di
+mesin fizikal ke port 80 di mesin maya yang bakal kita bina. Ini membolehkan
+kita akses apache di mesin maya menggunakan url seperti http://localhost:8080/
+daripada laptop atau desktop kita (mesin fizikal). Arahan berikutnya akan
+melaksanakan proses <em>packaging</em>.</p>
+<div class="code"><pre><span class="go">vagrant package --vagrantfile Vagrantfile.pkg</span>
+</pre></div>
+
+
+<p>Setelah siap, anda akan dapati satu fail bernama <code>package.box</code>. Fail ini boleh
+dikongsikan dengan rakan-rakan yang lain dan mereka akan mendapat sebuah mesin
+maya berasaskan Ubuntu Precise 32bit yang telah siap dipasang dengan apache2,
+mysql dan postgresql.</p>
+<p>Untuk mula menggunakan box yang baru kita hasilkan tadi, gunakan arahan berikut:-</p>
+<div class="code"><pre><span class="go">vagrant box add precise32-base package.box</span>
+<span class="go">vagrant box list</span>
+</pre></div>
+
+
+<p>Anda akan mendapat output seperti berikut:-</p>
+<div class="code"><pre><span class="go">lucid32</span>
+<span class="go">precise32-base</span>
+</pre></div>
+
+
+<p>Bina virtual machine baru berasaskan <code>precise32-base</code>:-</p>
+<div class="code"><pre><span class="go">vagrant init precise32-base</span>
+</pre></div>
+
+
+<p>Anda akan mendapat output seperti berikut:-</p>
+<div class="code"><pre><span class="go">    A `Vagrantfile` has been placed in this directory. You are now</span>
+<span class="go">    ready to `vagrant up` your first virtual environment! Please read</span>
+<span class="go">    the comments in the Vagrantfile as well as documentation on</span>
+<span class="go">    `vagrantup.com` for more information on using Vagrant.</span>
+</pre></div>
+
+
+<h3 id="rujukan">Rujukan</h3>
+<p>http://vagrantup.com/</p></div>
+    </div>
+    
+    </div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="get-started-with-ansible.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="using-xipio-to-point-domain-to-any-host.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/pengenalan-vagrant.html",
+        
+        disqus_title="Pengenalan Vagrant",
+        disqus_identifier="cache/posts/pengenalan-vagrant.md.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

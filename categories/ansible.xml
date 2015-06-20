@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (ansible)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/ansible.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:36 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Ansible: Manage users from central file</title><link>http://k4ml.github.io/posts/ansible-manage-users-from-central-file.html</link><description>&lt;div&gt;&lt;p&gt;I want to achieve this kind of playbook:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Development server&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;devserver&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;sudo&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;vars_files&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;data/users/users.yml&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;vars&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;users&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"{{&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;all_users.ali&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;}}"&lt;/span&gt;
+        &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"{{&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;all_users.kamal&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;}}"&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;roles&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;development&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;mysql-client&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;users&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;common&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Users should be defined in a central file but in playbook for each hosts, I should be
+able to mix and match users like above. The file &lt;code&gt;data/users/users.yml&lt;/code&gt; above look like:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="l-Scalar-Plain"&gt;all_users&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l-Scalar-Plain"&gt;ali&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;username&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;ali&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Ali Ahmad&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;groups&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'admin'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;ssh_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+          &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"ssh-dss&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;AAAA&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;..."&lt;/span&gt;
+
+    &lt;span class="l-Scalar-Plain"&gt;kamal&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;username&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;kamal&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Kamal Mustafa&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;groups&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'admin'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;ssh_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+          &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"ssh-rsa&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;AAAA&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;..."&lt;/span&gt;
+
+&lt;span class="l-Scalar-Plain"&gt;users_deleted&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user1&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Initially I used &lt;a href="https://github.com/mivok/ansible-users/blob/master/tasks/main.yml"&gt;ansible-users&lt;/a&gt; roles but
+it has users defined in &lt;code&gt;group_vars&lt;/code&gt; file. It allow me to separate users by group but that also mean if some
+users exists in multiple groups, I have to repeat defining the user data.&lt;/p&gt;
+&lt;p&gt;My first attempt then look like this:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Development server&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;devserver&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;sudo&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;vars_files&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;data/users/users.yml&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;roles&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;development&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;mysql-client&lt;/span&gt;
+
+  &lt;span class="l-Scalar-Plain"&gt;tasks&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;include&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;tasks/add_user.yml accounts_to_add={{ all_users }}&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;include&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;tasks/common.yml users={{ all_users }}&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;include&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;tasks/delete_user.yml accounts_to_delete={{ deleted_users }}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With &lt;code&gt;data/users/users.yml&lt;/code&gt; defined as:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="l-Scalar-Plain"&gt;all_users&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;ali&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;kamal&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;aman&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the tasks &lt;code&gt;add_user.yml&lt;/code&gt; was very clunkyly defined:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nn"&gt;---&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Create user&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;home=/home/{{ item }} name={{ item }} shell=/bin/bash state=present&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_items&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;accounts_to_add&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add SSH key&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;authorized_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user={{ item }} key="{{ lookup('file', playbook_dir + '/data/users/' + item + '/key.pub') }}"&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_items&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;accounts_to_add&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tags&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'user-config'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Lock user {{ item }}&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;command&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;usermod --lock {{ item }}&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_items&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;accounts_to_add&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tags&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'user-config'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Had to deal with the &lt;code&gt;lookup()&lt;/code&gt; issue where it keep giving errors:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nl"&gt;fatal:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;devserver&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="n"&gt;inserted&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;parameter&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Be&lt;/span&gt; &lt;span class="n"&gt;sure&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;they&lt;/span&gt; &lt;span class="n"&gt;contain&lt;/span&gt; &lt;span class="n"&gt;equal&lt;/span&gt; &lt;span class="n"&gt;signs&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"{{var}}"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The answer actually already there, you have to quote the &lt;code&gt;lookup(...)&lt;/code&gt; but I spent hours looking for solution,
+the price has to pay when you didn't read error message properly, sigh ...&lt;/p&gt;
+&lt;p&gt;I'm not really satisfied with this solution since it mean for every playbook, you'll keep repeating the tasks
+section. [ansible-users] roles is better here since you just include the roles and the users variables being
+inferred automatically. So I keep searching for solution to split &lt;code&gt;group_vars&lt;/code&gt; file until I realized can reference
+variables in the playbook.&lt;/p&gt;&lt;/div&gt;</description><category>ansible</category><guid>http://k4ml.github.io/posts/ansible-manage-users-from-central-file.html</guid><pubDate>Wed, 01 Apr 2015 15:30:52 GMT</pubDate></item><item><title>Ansible: My Playbook</title><link>http://k4ml.github.io/posts/ansible-my-playbook.html</link><description>&lt;div&gt;&lt;p&gt;This is my first playbook that I manage to get it working. It's an achievement for me
+as it showed that I started to get the concept around ansible:-&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/ansible-my-playbook.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>ansible</category><category>WIP</category><guid>http://k4ml.github.io/posts/ansible-my-playbook.html</guid><pubDate>Mon, 07 Oct 2013 20:02:25 GMT</pubDate></item><item><title>Ansible-Playbook: Specify hosts on the command line</title><link>http://k4ml.github.io/posts/ansible-playbook-specify-hosts-on-the-command-line.html</link><description>&lt;div&gt;&lt;p&gt;While we can specify what hosts to run the command through &lt;code&gt;ansible&lt;/code&gt; command-line
+program, it's does not apply to &lt;code&gt;ansible-playbook&lt;/code&gt; program. We always need to
+specify the &lt;code&gt;hosts:&lt;/code&gt; attribute in our &lt;a href="http://yaml.org/"&gt;YAML&lt;/a&gt; playbook. It mean if we were to run
+someone's else playbook, we always have to edit the playbook to customize the hardcoded
+&lt;code&gt;hosts:&lt;/code&gt; attribute.&lt;/p&gt;
+&lt;p&gt;Googling for this, I found the &lt;a href="https://gist.github.com/marktheunissen/2979474"&gt;workaround&lt;/a&gt; (which a great resource in itself to gain
+insight what ansible capable for). We can use variables. So instead of the following
+playbook:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;myhostname&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tasks&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add user&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name=kamal&lt;/span&gt;
+            &lt;span class="l-Scalar-Plain"&gt;groups=admin&lt;/span&gt;
+            &lt;span class="l-Scalar-Plain"&gt;shell=/bin/bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;We can write it as:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;$hosts&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tasks&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add user&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name=kamal&lt;/span&gt;
+            &lt;span class="l-Scalar-Plain"&gt;groups=admin&lt;/span&gt;
+            &lt;span class="l-Scalar-Plain"&gt;shell=/bin/bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And then run our playbook as:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="go"&gt;ansible-playbook -u root --extra-vars="hosts=myhostname"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description><category>ansible</category><guid>http://k4ml.github.io/posts/ansible-playbook-specify-hosts-on-the-command-line.html</guid><pubDate>Sun, 06 Oct 2013 23:28:10 GMT</pubDate></item><item><title>Get started with Ansible</title><link>http://k4ml.github.io/posts/get-started-with-ansible.html</link><description>&lt;div&gt;&lt;div class="contents alert alert-info pull-left topic"&gt;
+&lt;p class="first sidebar-title"&gt;Contents&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#inventory"&gt;Inventory&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#credentials"&gt;Credentials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#module"&gt;Module&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#playbook"&gt;Playbook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#notes"&gt;Notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href="http://www.ansibleworks.com"&gt;Ansible&lt;/a&gt; is a configuration management tools, in the same space as &lt;a href="http://puppetlabs.com/"&gt;Puppet&lt;/a&gt;, 
+&lt;a href="http://www.opscode.com/chef/"&gt;Chef&lt;/a&gt;, &lt;a href="http://cfengine.com/"&gt;Cfengine&lt;/a&gt;, &lt;a href="http://saltstack.com/"&gt;SaltStack&lt;/a&gt; and &lt;a href="http://alternativeto.net/software/puppet/"&gt;few others&lt;/a&gt;. For so long being a 
+developer and also wearing a sysadmin hat, I have try to avoid using any of 
+these configuration management software, thinking they just added unnecessary 
+complexity to your workflow. But after spending countles hours building 
+automation script backed by Makefiles, bash, python with fabric, I started to 
+value a dedicated tools for these tasks.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>ansible</category><category>python</category><category>digital ocean</category><category>nginx</category><guid>http://k4ml.github.io/posts/get-started-with-ansible.html</guid><pubDate>Thu, 26 Sep 2013 16:56:32 GMT</pubDate></item><item><title>Ansible log</title><link>http://k4ml.github.io/posts/ansible-log.html</link><description>&lt;div&gt;&lt;p&gt;Ansible is an example of clash between sysadmin and developer mentality.&lt;br&gt;
+Sysadmin tend to think about system as a whole while developer always think 
+about their specific apps. While developer want to isolate, sysadmin want to 
+'propagate', if I can use such term.&lt;/p&gt;
+&lt;p&gt;I want to try ansible and see if it can be a better alternative to Fabric. The 
+first thing to do of course to install it. Since I'd already have my deployment 
+tools environment based on buildout, I want to install ansible using my 
+buildout config, rather than making it system-wide, or even 'user-wide' (mean 
+install it to my &lt;code&gt;$HOME&lt;/code&gt; dir). I don't want to pollute my $HOME, let alone the 
+system. It's impossible to install ansible with buildout since it want to write 
+to &lt;code&gt;/usr/share/ansible&lt;/code&gt; and buildout will raise &lt;code&gt;SandboxViolationError&lt;/code&gt; 
+exception.&lt;/p&gt;
+&lt;div class="sidebar"&gt;
+&lt;p class="first sidebar-title"&gt;What is virtualenv &amp;amp; pip ?&lt;/p&gt;
+&lt;p class="last"&gt;
+    Virtualenv allow you to create isolated python environment and pip is
+    command line tools to download Python packages from websites such as
+    PyPI.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Fortunately it's still installable through pip and also work inside virtualenv.&lt;br&gt;
+Running buildout under virtualenv still raise &lt;code&gt;SandboxViolationError&lt;/code&gt; though.  Enough rant, let's get started:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;virtualenv&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ansible&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ansible&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ansible&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I spent quite sometime reading ansible docs to finally grasp the concept of 
+inventory. It's a place (a text file) where you define all the servers you want 
+to manage. By default ansible will look in &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file. You can 
+change this through configuration file &lt;a href="http://www.ansibleworks.com/docs/faq.html#id7"&gt;$HOME/.ansible.cfg&lt;/a&gt; and 
+set the value &lt;a href="https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg"&gt;hostfile       = /etc/ansible/hosts&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;pipz&lt;/span&gt;
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add main user&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name=kamal&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;home=/home/kamal&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Set up authorized key for kamal&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;authorized_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user=kamal&lt;/span&gt;
+                  &lt;span class="l-Scalar-Plain"&gt;state=present&lt;/span&gt;
+                  &lt;span class="l-Scalar-Plain"&gt;key="{{ item }}"&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_file&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;/home/kamal/.ssh/id_rsa-do.pub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Error: Host declaration is required&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://groups.google.com/forum/#!topic/ansible-project/QFDzbr3vGD0"&gt;Missing tasks&lt;/a&gt;&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;pipz&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tasks&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add main user&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name=kamal&lt;/span&gt;
+            &lt;span class="l-Scalar-Plain"&gt;home=/home/kamal&lt;/span&gt;
+
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Set up authorized key for kamal&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;authorized_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user=kamal&lt;/span&gt;
+                      &lt;span class="l-Scalar-Plain"&gt;state=present&lt;/span&gt;
+                      &lt;span class="l-Scalar-Plain"&gt;key="{{ item }}"&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;with_file&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;/home/kamal/.ssh/id_rsa-do.pub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ansible&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;playbook&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;ansible_hosts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ini&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;http://lextoumbourou.com/blog/posts/getting-started-with-ansible/#part-3&lt;/p&gt;&lt;/div&gt;</description><category>ansible</category><category>sysadmin</category><category>devops</category><category>python</category><guid>http://k4ml.github.io/posts/ansible-log.html</guid><pubDate>Tue, 24 Sep 2013 18:34:04 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,345 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>PHP: Headers already sent and HTTP basic | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="php-headers-already-sent-and-http-basic.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">PHP: Headers already sent and HTTP basic</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2014-03-03T14:37:42+08:00" itemprop="datePublished">2014-03-03 14:37</time>
+        
+    
+        
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/php.html"><span class="badge badge-info">php</span></a>
+        
+            <a class="tag" href="../categories/http.html"><span class="badge badge-info">http</span></a>
+        
+            <a class="tag" href="../categories/headers.html"><span class="badge badge-info">headers</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><p>If there's one error that must be encountered by all PHP developers, this:-</p>
+<div class="code"><pre><span class="n">Warning</span><span class="o">:</span> <span class="n">Cannot</span> <span class="n">modify</span> <span class="n">header</span> <span class="n">information</span> <span class="o">-</span> <span class="n">headers</span> <span class="n">already</span> <span class="n">sent</span> <span class="n">by</span> <span class="o">...</span>
+</pre></div>
+
+
+<p>probably one of it. Anyone who developing in PHP must at least once having issue
+involving this. Lot of articles and answers have been written on this issue, and <a href="http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php">this
+answer on stackoverflow</a> is one of the most comprehensive write up explaining the issue,
+why it happen and how to fix it. So I don't plan to talk much on the PHP part in this post
+but more on the HTTP part.</p>
+<h3 id="what-is-http">What is HTTP ?</h3>
+<p>It's a protocol that govern how a piece of information can be exchanged over the Internet.
+There are lot of protocols defined and being used on the Internet but HTTP definitely one
+of the widely used protocol in form of what layman known as web, or World Wide Web (WWW).
+The protocol is being defined as <a href="https://www.ietf.org/rfc/rfc2616.txt">RFC 2616</a> and as we will later realized, it is a
+text protocol. Being a text based protocol make it much easier to study and understand and
+test it in practical manner since no special tools needed to actually implement the protocol.
+Before we delved deeper into the protocol, let also clear up what actually meant by the word
+protocol itself.</p>
+<!-- TEASER_END -->
+
+<p>To put an analogy, when two human need to communicate with each other they both need to use
+some sort of language that both of them will understand. Someone who only know Malay and try
+to speak to another one that can only speak in English will definitely have some hard time
+understanding each other. While we human can actually sort that kind of problem with other means
+such as body language or facial expression, computers on the other hand are pretty dumb (or at
+least haven't reach the human level of inteligence yet). So two computers that need to talk to
+each other, they must use some common language - thus the protocol. Please note however the protocol
+as being discussed here is more on high level protocol, or called as application layer. There are
+other protocol that involved moving the bits over the wire but we're not going to discuss those.</p>
+<p>As mentioned before, HTTP is a text protocol so when two computers (a client and a server) need to
+communicate they will just sent a bunch of text as outlined by the protocol. So a client may send
+the following to server:-</p>
+<div class="code"><pre><span class="n">GET</span> <span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+</pre></div>
+
+
+<p>Above is just a plain text that will be sent by client to a socket on the server, and the server
+on the other hand is required to return a response which also a plain text that may look like below:-</p>
+<div class="code"><pre><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+
+<span class="n">Hello</span> <span class="n">world</span>
+</pre></div>
+
+
+<p>I'd also mentioned above that we don't need any special tools to actually implement this protocol. Any
+tools that can open a socket connection and let us send some text through it will do. So guess what tools
+that most computers already have ? The <code>telnet</code>. Let's try to talk to a Google HTTP server and see what
+we'll get:-</p>
+<div class="code"><pre><span class="err">$</span> <span class="nx">telnet</span> <span class="nx">www.google.com</span> <span class="mi">80</span>
+<span class="nx">Trying</span> <span class="mf">173.194.126.80</span><span class="nx">...</span>
+<span class="nx">Connected</span> <span class="k">to</span> <span class="nx">www.google.com.</span>
+<span class="nx">Escape</span> <span class="nx">character</span> <span class="nx">is</span> <span class="s1">'^]'</span><span class="nx">.</span>
+<span class="nb">GET</span> <span class="p">/</span><span class="nx">index.html</span> <span class="nx">HTTP</span><span class="p">/</span><span class="nx">1.1</span>
+
+<span class="nx">HTTP</span><span class="p">/</span><span class="nx">1.1</span> <span class="mi">200</span> <span class="nx">OK</span>
+<span class="kt">Date</span><span class="p">:</span> <span class="nx">Mon</span><span class="p">,</span> <span class="mi">03</span> <span class="nx">Mar</span> <span class="mi">2014</span> <span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">22</span> <span class="nb">GMT</span>
+<span class="nx">Expires</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+<span class="k">Cache</span><span class="na">-Control</span><span class="p">:</span> <span class="k">private</span><span class="p">,</span> <span class="k">max</span><span class="na">-age</span><span class="o">=</span><span class="mi">0</span>
+<span class="nb">Content</span><span class="na">-Type</span><span class="p">:</span> <span class="nx">text</span><span class="p">/</span><span class="nx">html</span><span class="p">;</span> <span class="n">charset</span><span class="o">=</span><span class="nx">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span>
+<span class="nb">Set</span><span class="na">-Cookie</span><span class="p">:</span> <span class="n">PREF</span><span class="o">=</span><span class="n">ID</span><span class="o">=</span><span class="mi">9862</span><span class="nx">b6886e93da12</span><span class="p">:</span><span class="n">FF</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="n">TM</span><span class="o">=</span><span class="mi">1393859962</span><span class="p">:</span><span class="n">LM</span><span class="o">=</span><span class="mi">1393859962</span><span class="p">:</span><span class="n">S</span><span class="o">=</span><span class="nx">Vlib8XNFMPHru</span><span class="o">-</span><span class="mi">3</span><span class="nx">K</span><span class="p">;</span> <span class="n">expires</span><span class="o">=</span><span class="nx">Wed</span><span class="p">,</span> <span class="mi">02</span><span class="na">-Mar</span><span class="o">-</span><span class="mi">2016</span> <span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">22</span> <span class="nb">GMT</span><span class="p">;</span> <span class="n">path</span><span class="o">=/</span><span class="p">;</span> <span class="n">domain</span><span class="o">=</span><span class="bp">.</span><span class="nx">google.com</span>
+<span class="nb">Set</span><span class="na">-Cookie</span><span class="p">:</span> <span class="n">NID</span><span class="o">=</span><span class="mi">67</span><span class="o">=</span><span class="nx">cC38fiwjW6qW5bcRzZuAAHmjY2qAwgPEM5m0QL3LuSoa_gtgzHgogLmZISsEovpLDRVLL4KcdhWXO</span><span class="na">-SmT6UJUfEJ3V6yn0xmp8XcLJfEFUJ92COvGcnxgi3oYHXZcguq</span><span class="p">;</span> <span class="n">expires</span><span class="o">=</span><span class="nx">Tue</span><span class="p">,</span> <span class="mi">02</span><span class="na">-Sep</span><span class="o">-</span><span class="mi">2014</span> <span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">22</span> <span class="nb">GMT</span><span class="p">;</span> <span class="n">path</span><span class="o">=/</span><span class="p">;</span> <span class="n">domain</span><span class="o">=</span><span class="bp">.</span><span class="nx">google.com</span><span class="p">;</span> <span class="nx">HttpOnly</span>
+<span class="nx">P3P</span><span class="p">:</span> <span class="n">CP</span><span class="o">=</span><span class="s2">"This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&amp;answer=151657 for more info."</span>
+<span class="nx">Server</span><span class="p">:</span> <span class="nx">gws</span>
+<span class="nx">X</span><span class="na">-XSS-Protection</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="n">mode</span><span class="o">=</span><span class="nx">block</span>
+<span class="nx">X</span><span class="na">-Frame-Options</span><span class="p">:</span> <span class="nx">SAMEORIGIN</span>
+<span class="nx">Alternate</span><span class="na">-Protocol</span><span class="p">:</span> <span class="mi">80</span><span class="p">:</span><span class="nx">quic</span>
+<span class="nx">Transfer</span><span class="na">-Encoding</span><span class="p">:</span> <span class="nb">chunked</span>
+
+<span class="mi">8000</span>
+<span class="o">&lt;!</span><span class="nb">doctype</span> <span class="nx">html</span><span class="o">&gt;&lt;</span><span class="nx">html</span> <span class="n">itemscope</span><span class="o">=</span><span class="s2">""</span> <span class="n">itemtype</span><span class="o">=</span><span class="s2">"http://schema.org/WebPage"</span><span class="o">&gt;&lt;</span><span class="nb">head</span><span class="o">&gt;&lt;</span><span class="nb">meta</span> <span class="n">content</span><span class="o">=</span><span class="s2">"Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking for."</span> <span class="n">name</span><span class="o">=</span><span class="s2">"description"</span><span class="o">&gt;&lt;</span><span class="nb">meta</span> <span class="n">content</span><span class="o">=</span><span class="s2">"noodp"</span> <span class="n">name</span><span class="o">=</span><span class="s2">"robots"</span><span class="o">&gt;&lt;</span><span class="nb">meta</span> <span class="n">itemprop</span><span class="o">=</span><span class="s2">"image"</span> <span class="n">content</span><span class="o">=</span><span class="s2">"/images/google_favicon_128.png"</span><span class="o">&gt;&lt;</span><span class="nb">title</span><span class="o">&gt;</span><span class="nx">Google</span><span class="o">&lt;/</span><span class="nb">title</span><span class="o">&gt;&lt;</span><span class="nb">script</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">function</span><span class="p">(){</span>  <span class="nx">...</span>
+</pre></div>
+
+
+<p>Ok, probably too much stuff for a starter ;)</p>
+<h3 id="requestresponse-format">Request/Response format</h3>
+<p>Basically the meat of HTTP is defining what is the format for a request and response. Both request and response basically
+using the same structure of content that is it is divided into 2 parts. The first part is called <code>headers</code> and the second
+part known as <code>body</code>.</p>
+<div class="code"><pre><span class="n">POST</span> <span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">html</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>   <span class="o">||</span>
+<span class="nl">Host:</span> <span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span>        <span class="o">||&gt;</span> <span class="n">headers</span>
+<span class="nl">Accept:</span> <span class="err">*/</span><span class="o">*</span>                 <span class="o">||</span>
+
+<span class="n">name</span><span class="o">=</span><span class="n">kamal</span><span class="o">&amp;</span><span class="n">address</span><span class="o">=</span><span class="n">jb</span>       <span class="o">||&gt;</span> <span class="n">body</span>
+</pre></div>
+
+
+<p>And the response:-</p>
+<div class="code"><pre><span class="nx">HTTP</span><span class="p">/</span><span class="nx">1.1</span> <span class="mi">200</span> <span class="nx">OK</span>                                 <span class="o">||</span>
+<span class="kt">Date</span><span class="p">:</span> <span class="nx">Mon</span><span class="p">,</span> <span class="mi">03</span> <span class="nx">Mar</span> <span class="mi">2014</span> <span class="mi">15</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">22</span> <span class="nb">GMT</span>             <span class="o">||</span>
+<span class="nx">Expires</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>                                     <span class="o">||&gt;</span> <span class="nb">headers</span>
+<span class="k">Cache</span><span class="na">-Control</span><span class="p">:</span> <span class="k">private</span><span class="p">,</span> <span class="k">max</span><span class="na">-age</span><span class="o">=</span><span class="mi">0</span>               <span class="o">||</span>
+<span class="nb">Content</span><span class="na">-Type</span><span class="p">:</span> <span class="nx">text</span><span class="p">/</span><span class="nx">html</span><span class="p">;</span> <span class="n">charset</span><span class="o">=</span><span class="nx">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span>     <span class="o">||</span>
+
+<span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;&lt;</span><span class="nb">head</span><span class="o">&gt;&lt;</span><span class="nb">title</span><span class="o">&gt;</span><span class="nx">...</span><span class="o">&lt;/</span><span class="nx">html</span><span class="o">&gt;</span>                   <span class="o">||&gt;</span> <span class="nb">body</span>
+</pre></div>
+
+
+<p>When using browsers to submit the HTTP request, the body part will probably what you're typing in the forms and when receiving
+back the response, the body part usually what actually being rendered by browsers as the web page. For a normal users,
+the <code>headers</code> part usually not much a concern.</p>
+<h3 id="php">PHP</h3>
+<p>So what all above has any relation to the problem highlighted at the beginning of this post ? PHP (unfortunately) manage
+to hide (or in other word abstract out) all the low level details of the HTTP above through a simple language syntax.
+So to give an output from your PHP script, you just use the <code>print</code> or <code>echo</code> statement and PHP will do the job of
+'translating' it into HTTP format. So, the PHP script:-</p>
+<div class="code"><pre><span class="cp">&lt;?php</span>
+<span class="k">print</span> <span class="s1">'hello world'</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Might result in the following HTTP response:-</p>
+<div class="code"><pre><span class="go">HTTP/1.1 200 OK</span>
+<span class="go">Content-Type: text/html</span>
+
+<span class="go">hello world</span>
+</pre></div>
+
+
+<p>What if we need to include a custom header in the response ? We use the <code>header()</code> function:-</p>
+<div class="code"><pre><span class="cp">&lt;?php</span>
+<span class="nx">header</span><span class="p">(</span><span class="s1">'Content-Type: text/plain'</span><span class="p">)</span>
+<span class="k">print</span> <span class="s1">'hello world'</span><span class="p">;</span>
+</pre></div>
+
+
+<p>and it will be 'translated' as:-</p>
+<div class="code"><pre><span class="go">HTTP/1.1 200 OK</span>
+<span class="go">Content-Type: text/plain</span>
+
+<span class="go">hello world</span>
+</pre></div>
+
+
+<p>What if we call <code>print</code> first and later on <code>header()</code>:-</p>
+<div class="code"><pre><span class="cp">&lt;?php</span>
+<span class="k">print</span> <span class="s1">'hello world'</span><span class="p">;</span>
+<span class="nx">header</span><span class="p">(</span><span class="s1">'Content-Type: text/plain'</span><span class="p">)</span>
+</pre></div>
+
+
+<p>It will result in the following output:-</p>
+<div class="code"><pre><span class="go">HTTP/1.1 200 OK</span>
+
+<span class="go">hello world</span>
+<span class="go">Content-Type: text/plain</span>
+</pre></div>
+
+
+<p>And if you still following along this far, you'll immediately noticed that the above output is wrong and
+this is the reason why PHP refuse to take it and giving you the infamous error <code>Headers already sent ...</code>.</p></div>
+    </div>
+    
+    </div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="when-to-comment.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="mini-pycon-my-2014.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html",
+        
+        disqus_title="PHP: Headers already sent and HTTP basic",
+        disqus_identifier="cache/posts/php-headers-already-sent-and-http-basic.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (bookmark)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/bookmark.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:36 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>HackerNews/Reddit/Stackoverflow like communities</title><link>http://k4ml.github.io/posts/hackernewsredditstackoverflow-like-communities.html</link><description>&lt;div&gt;&lt;p&gt;Being a developer/programmer, site such as Reddit (especially &lt;a href="http://www.reddit.com/r/programming"&gt;r/programming&lt;/a&gt;) and
+&lt;a href="https://news.ycombinator.com/"&gt;HackerNews&lt;/a&gt; are my main source of latest news and updates. Next definitely Stackoverflow when looking for answers on specific programming problems. But from time to time, I'd
+also discovered few other small communities, mostly country focused while going through the google search results. So I've decided to start collecting link to these communities in this blog posts.&lt;/p&gt;
+&lt;p&gt;So here are the lists so far:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://nullpointer.ph/"&gt;nullpointer&lt;/a&gt; - Q&amp;amp;A like site in Phillipine.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://hackerstreet.in/"&gt;Hackstreet.India&lt;/a&gt; - India based site.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;While not an Q&amp;amp;A site, I listed also here site with domain of similar theme:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://hackflow.com/"&gt;Hackflow&lt;/a&gt; - Blog mostly on Python.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://importerror.com/"&gt;ImportError&lt;/a&gt; - This very own site ;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>python</category><category>bookmark</category><guid>http://k4ml.github.io/posts/hackernewsredditstackoverflow-like-communities.html</guid><pubDate>Tue, 07 Jan 2014 10:28:56 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,234 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Javascript Self Invoking Function | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/javascript-self-invoking-function.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="javascript-self-invoking-function.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Javascript Self Invoking Function</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2013-12-04T01:54:03+08:00" itemprop="datePublished">2013-12-04 01:54</time>
+        
+    
+        
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/javascript.html"><span class="badge badge-info">javascript</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><p>While peeking into Twitter <a href="https://github.com/twbs/bootstrap/blob/8a74264344489e8b9e10c5c5e2098bb75116b8bd/js/alert.js#L21">Bootstrap js</a> code, I noticed function being defined like this:-</p>
+<div class="code"><pre><span class="o">+</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"use strict"</span><span class="p">;</span>
+
+    <span class="c1">// ALERT CLASS DEFINITION</span>
+    <span class="c1">// ======================</span>
+
+    <span class="kd">var</span> <span class="nx">dismiss</span> <span class="o">=</span> <span class="s1">'[data-dismiss="alert"]'</span>
+    <span class="kd">var</span> <span class="nx">Alert</span>   <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">  </span><span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">dismiss</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">close</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+
+
+<p>Noticed the <code>+</code> sign before the keyword <code>function</code>. At first I thought it could some typo slipping through the commit but after some google, it turn out that <a href="http://stackoverflow.com/questions/13341698/javascript-plus-sign-in-front-of-function-name">just another way</a> to define self invoking function in JavaScript. Those who has been writing some JavaScript, or deal with some JS library probably already familiar with a common idiom to write code like below:-</p>
+<div class="code"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#some_dom_id'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="p">....);</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</pre></div>
+
+
+<!--TEASER_END -->
+
+<p>Above also a self invoking function. The primary reason the code being written this way is to avoid introducing unnecessary variable to the global scope. JavaScript does not has namespace so any variable defined in any part of the code (except those in function prefixed with <code>var</code>) exists as global variable. Since most code, except for (libraries) only need to manipulate the dom and does not need to expose any variables for others to use, it best if we can execute the code in isolation without adding new state to the global scope (window).</p>
+<p>The only isolation exists in JavaScript is the function scope and since JavaScript support anonymous function, this can be a perfect match. Just define an anonymous function and immediately call the function. Logically, we'll try to define function like this:-</p>
+<div class="code"><pre><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
+<span class="p">}();</span>
+</pre></div>
+
+
+<p>This however would result in syntax error since the parser expect an identifier (name) after the function keyword. In other word, above code is a statement rather than an expression that create some value. Fortunately in JavaScript, anything that we wrap inside a parantheses will be treated as an expression and JavaScript will evaluate the expression, yielding it's value. For example, <code>(1)</code> will yield a value <code>1</code> while <code>(1 + 1)</code> will yield a value <code>2</code>. So what if try to evaluate a function ?</p>
+<div class="code"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span> <span class="p">});</span>
+</pre></div>
+
+
+<p>It will yield a function as a result, which what we want. In above code, the parser will know that inside the parantheses is an expression and it should evaluate it, just like it evaluate 1 + 1 and produce 2. So what the result of evaluation function expression ? A function. So now we have a function at hand, we can call it.</p>
+<div class="code"><pre><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span> <span class="p">})();</span>
+</pre></div>
+
+
+<p>Now we know the story behind the cryptic syntax of JavaScript code commonly found on the Net. But it turn out that defining function inside a parantheses is not the only way to tell the parser to treat it as function expression instead of statement. We can also prefix the function with some arithmetic operator and the parser will happily treat it as an expression. So the above code can also be written like this:-</p>
+<div class="code"><pre><span class="o">+</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span> <span class="p">}();</span>
+</pre></div></div>
+    </div>
+    
+    </div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="angularjs-event-handler-attached-to-all-anchor-tag-a.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="hackernewsredditstackoverflow-like-communities.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/javascript-self-invoking-function.html",
+        
+        disqus_title="Javascript Self Invoking Function",
+        disqus_identifier="cache/posts/javascript-self-invoking-function.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

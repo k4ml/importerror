@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (security)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/security.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:36 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Do not trust HOST header</title><link>http://k4ml.github.io/posts/do-not-trust-host-header.html</link><description>&lt;div&gt;&lt;p&gt;This is nasty and definitely unexpected. While reading through the &lt;a href="http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html"&gt;article&lt;/a&gt;, I still have a feeling that this is not possible (at least on ubuntu) since default install of apache always create a default vhost that can act as catch-all handler in case user pass nonsense Host header but this paragraph opened my eye:-&lt;/p&gt;
+&lt;p&gt;However, the arguably ultimate authority on virtual hosting, RFC2616, has the following to say:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;5.2 The Resource Identified by a Request
+[...]
+If Request-URI is an absoluteURI, the host is part of the Request-URI. Any Host header field value in the request MUST be ignored.
+The result? On Apache and Nginx (and all compliant servers) it's possible to route requests with arbitrary host headers to any application present by using an absolute URI:
+POST https://addons.mozilla.org/en-US/firefox/users/pwreset HTTP/1.1
+Host: evil.com&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For so long I think HOST header is the definitive source to determine which site to serve under virtual hosting. A quick test proved this newly found fact:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="go"&gt;echo -en "GET /password-reset/ HTTP/1.1\r\nHost: evil.com\r\n\r\n" | nc 102.256.89.57 80&lt;/span&gt;
+&lt;span class="go"&gt;HTTP/1.1 200 OK&lt;/span&gt;
+&lt;span class="go"&gt;Date: Wed, 25 Sep 2013 07:54:00 GMT&lt;/span&gt;
+&lt;span class="go"&gt;Server: Apache/2.2.22 (Ubuntu)&lt;/span&gt;
+&lt;span class="go"&gt;Last-Modified: Fri, 13 Sep 2013 08:07:54 GMT&lt;/span&gt;
+&lt;span class="go"&gt;ETag: "25a9c-b1-4e63f5a01c982"&lt;/span&gt;
+&lt;span class="go"&gt;Accept-Ranges: bytes&lt;/span&gt;
+&lt;span class="go"&gt;Content-Length: 177&lt;/span&gt;
+&lt;span class="go"&gt;Vary: Accept-Encoding&lt;/span&gt;
+&lt;span class="go"&gt;Content-Type: text/html&lt;/span&gt;
+&lt;span class="go"&gt;X-Pad: avoid browser bug&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;It works!&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;p&amp;gt;This is the default web page for this server.&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;p&amp;gt;The web server software is running but no content has been added, yet.&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So we still safe, apache serve the default vhost. But this one:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="go"&gt;echo -en "GET http://www.mysite.com/password-reset/ HTTP/1.1\r\nHost: evil.com\r\n\r\n" | nc 102.256.89.57 80&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Give you the page of mysite.com ! Fortunately Django 1.5 has fixed for this. Better check if your app depend on the HOST header to build absolute url.&lt;/p&gt;&lt;/div&gt;</description><category>apache</category><category>http</category><category>security</category><guid>http://k4ml.github.io/posts/do-not-trust-host-header.html</guid><pubDate>Wed, 25 Sep 2013 08:00:00 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="ms"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="We failed at some point in our life"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>ImportError | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/ms/index.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Arkib</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projek</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+            </li><li><a href="../index.html" rel="alternate" hreflang="en">English</a></li>
+        
+    
+        
+    
+
+                
+                
+                
+                    
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    
+        <article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/bagaimana-_post-dan-_get-terhasil.html" class="u-url">Bagaimana $_POST dan $_GET terhasil</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-03-31T16:23:49+08:00">2014-03-31 16:23</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>Dalam PHP, <code>$_POST</code> dan <code>$_GET</code> adalah 2 bentuk input yang biasa digunakan oleh developer. <code>$_GET</code>
+mengandungi data daripada <em>url query string</em> manakala <code>$_POST</code> biasanya mengandungi data yang dihantar
+melalui html form. Tapi bagaimanakah data ini terhasil ?</p>
+<p>Data untuk <code>$_GET</code> dan <code>$_POST</code> kedua-duanya dihasilkan dengan memproses HTTP request yang dihantar
+oleh client. Secara ringkas, HTTP request adalah dalam bentuk teks dengan format seperti berikut:-</p>
+<div class="code"><pre><span class="n">GET</span> <span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">php</span><span class="o">?</span><span class="n">action</span><span class="o">=</span><span class="n">list</span><span class="o">&amp;</span><span class="n">module</span><span class="o">=</span><span class="n">user</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="o">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">i686</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.17</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">24.0</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Atau:-</p>
+<div class="code"><pre><span class="n">POST</span> <span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">php</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span> <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">urlencoded</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="o">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">i686</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.17</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">24.0</span><span class="p">.</span>
+
+<span class="n">username</span><span class="o">=</span><span class="n">kamal</span><span class="o">&amp;</span><span class="n">address</span><span class="o">=</span><span class="n">jb</span>
+</pre></div>
+
+
+<p>HTTP request ini terbahagi kepada 3 bahagian iaitu Request line, Headers dan Body. Untuk GET request
+bagaimana pun, tiada bahagian Body yang dihantar dalam request tersebut. Data ini dihantar dalam bentuk
+teks ke <em>socket</em> di mana web server yang mengendalikan request ini <em>listen</em>. PHP biasanya menggunakan
+Apache sebagai web server dan apache biasanya akan <em>listen</em> pada port 80.</p>
+<p>Setelah diterima oleh <em>web server</em>, data tersebut akan di<em>pass</em> ke PHP yang seterusnya akan memproses
+data tersebut (parsing) untuk dimasukkan ke dalam superglobal variables seperti <code>$_POST</code>, <code>$_GET</code> dan
+lain-lain. Bagaimana proses tersebut dilakukan adalah adalah agak kompleks dengan <a href="http://stackoverflow.com/questions/16422605/how-exactly-is-php-creating-superglobal-post-get-cookie-and-request">beberapa lapis kod C</a>
+tetapi secara asasnya adalah seperti berikut:-</p>
+<ul><li>
+<p>$_GET dihasilkan daripada Request line - GET /index.php?action=list&amp;module=user HTTP/1.1</p>
+<ul><li>Secara mudahnya kita boleh split kepada 3 bahagian - ['GET', '/index.php?action=list&amp;module=user', 'HTTP/1.1']</li>
+<li>Kemudian kita boleh parse bahagian kedua berdasarkan simbol '?' dan '&amp;' untuk mendapatkan data yang
+  dikehendaki.</li>
+</ul></li>
+<li>
+<p>$_POST dihasilkan daripada Body jadi kita boleh terus <code>split</code> data tersebut berdasarkan simbol '&amp;'.</p>
+</li>
+</ul><p>PHP bagaimana pun hanya memproses POST data dalam bentuk <code>application/x-www-urlencoded</code> untuk dimasukkan ke dalam
+superglobal <code>$_POST</code>. Ini mungkin kerana browser hanya terhad untuk menghantar data dalam format tersebut (selain
+ <code>multipart/form-data</code> untuk upload file) maka PHP tidak memproses data dalam format yang lain. Tetapi jika anda
+ menghantar data menggunakan client HTTP selain browser, ataupun menggunakan <code>XMLHttpRequest</code> (AJAX), anda mungkin
+ menghantar dalam bentuk JSON (<code>application/json</code>) atau XML (<code>application/xml</code>). Dalam kes ini anda boleh mengakses
+ terus input stream PHP seperti berikut:-</p>
+<div class="code"><pre><span class="x">$data_json = json_decode(file_get_contents('php://input'));</span>
+</pre></div>
+
+
+<p>Jika request kita adalah seperti berikut:-</p>
+<div class="code"><pre><span class="n">POST</span> <span class="o">/</span><span class="n">index</span><span class="p">.</span><span class="n">php</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="o">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">i686</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.17</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">24.0</span><span class="p">.</span>
+
+<span class="p">{</span><span class="s">"username"</span><span class="o">:</span> <span class="s">"kamal"</span><span class="p">,</span> <span class="s">"address"</span><span class="o">:</span> <span class="s">"jb"</span><span class="p">}</span>
+</pre></div>
+
+
+<p><code>php://input</code> akan return JSON pada bahagian body.</p>
+<p>Ini adalah penerangan dalam bentuk yang amat ringkas bagaimana input untuk PHP dihasilkan. Saya akan cuba
+kembangkan topik ini dalam tulisan akan datang.</p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/bagaimana-_post-dan-_get-terhasil.html#disqus_thread" data-disqus-identifier="cache/posts/bagaimana-_post-dan-_get-terhasil.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-"><h1 class="p-name"><a href="posts/aplikasi-web-vs-aplikasi-desktop.html" class="u-url">Aplikasi Web vs Aplikasi Desktop</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-10-18T18:42:26+08:00">2013-10-18 18:42</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>Mereka yang baru bermula dalam pembangunan aplikasi web kerap kali keliru akan 
+konsep dalam aplikasi web dan menganggap ianya sama dengan aplikasi desktop. Ini menyebabkan mereka mengharapkan dapat melakukan perkara yang sama seperti 
+mana dalam aplikasi desktop. Antara contoh soalan popular yang seringkali 
+ditanya adalah bagaimana untuk mencetak daripada aplikasi web mereka.</p>
+<p>Pertama sekali mari kita lihat diagram ringkas susun atur sebuah aplikasi 
+desktop:-</p>
+<p><img src="http://i.imgur.com/LWG9VlQl.jpg"></p>
+<p>Dalam rajah di atas, kita dapat lihat bagaimana aplikasi yang kita bangunkan 
+dapat berhubung terus dengan <em>hardware</em> melalui OS (<em>Operating System</em>). Ini 
+membolehkan aplikasi tersebut untuk mencapai dan menggunakan peranti-peranti 
+lain seperti <em>printer</em> dan <em>webcam</em> yang bersambung dengan komputer tersebut. Seterusnya, kita lihat pula rajah susunan sebuah aplikasi web:-</p>
+<p><img src="http://i.imgur.com/eOt8gRzl.jpg"></p>
+<p>Di atas dapat diperhatikan bagaimana aplikasi tidak lagi dijalankan secara 
+terus pada <em>computer</em> sebagaimana dalam aplikasi desktop. Sebaliknya ia hanya 
+dicapai melalui perantaraan <em>browser</em>. Ini menyebabkan capaian aplikasi web 
+kepada fungsi-fungsi komputer hanya terhad kepada apa yang <em>browser</em> benarkan. Dan sememangya atas tujuan keselamatan, <em>browser</em> akan menghadkan capaian 
+aplikasi kepada <em>hardware</em> seperti <em>printer</em> dan <em>webcam</em>. Ini antara perbezaan penting yang harus difahami apabila membangunkan sebuah aplikasi web.</p>
+<p><strong>Perhatian</strong>: Rajah di atas menunjukkan susunan LOGIKAL manakala secara FIZIKAL boleh sahaja sebuah aplikasi web itu dijalankan dalam komputer yang sama. Walaubagaimana pun kekangan asal sebuah aplikasi web tetap sama. </p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/aplikasi-web-vs-aplikasi-desktop.html#disqus_thread" data-disqus-identifier="cache/posts/web-application-vs-desktop-application.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><script>var disqus_shortname="importerror";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

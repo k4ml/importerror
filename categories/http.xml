@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (http)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/http.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>PHP: Headers already sent and HTTP basic</title><link>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</link><description>&lt;div&gt;&lt;p&gt;If there's one error that must be encountered by all PHP developers, this:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;Warning&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cannot&lt;/span&gt; &lt;span class="n"&gt;modify&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="n"&gt;already&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;probably one of it. Anyone who developing in PHP must at least once having issue
+involving this. Lot of articles and answers have been written on this issue, and &lt;a href="http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php"&gt;this
+answer on stackoverflow&lt;/a&gt; is one of the most comprehensive write up explaining the issue,
+why it happen and how to fix it. So I don't plan to talk much on the PHP part in this post
+but more on the HTTP part.&lt;/p&gt;
+&lt;h3 id="what-is-http"&gt;What is HTTP ?&lt;/h3&gt;
+&lt;p&gt;It's a protocol that govern how a piece of information can be exchanged over the Internet.
+There are lot of protocols defined and being used on the Internet but HTTP definitely one
+of the widely used protocol in form of what layman known as web, or World Wide Web (WWW).
+The protocol is being defined as &lt;a href="https://www.ietf.org/rfc/rfc2616.txt"&gt;RFC 2616&lt;/a&gt; and as we will later realized, it is a
+text protocol. Being a text based protocol make it much easier to study and understand and
+test it in practical manner since no special tools needed to actually implement the protocol.
+Before we delved deeper into the protocol, let also clear up what actually meant by the word
+protocol itself.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>php</category><category>http</category><category>headers</category><guid>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</guid><pubDate>Mon, 03 Mar 2014 06:37:42 GMT</pubDate></item><item><title>Do not trust HOST header</title><link>http://k4ml.github.io/posts/do-not-trust-host-header.html</link><description>&lt;div&gt;&lt;p&gt;This is nasty and definitely unexpected. While reading through the &lt;a href="http://www.skeletonscribe.net/2013/05/practical-http-host-header-attacks.html"&gt;article&lt;/a&gt;, I still have a feeling that this is not possible (at least on ubuntu) since default install of apache always create a default vhost that can act as catch-all handler in case user pass nonsense Host header but this paragraph opened my eye:-&lt;/p&gt;
+&lt;p&gt;However, the arguably ultimate authority on virtual hosting, RFC2616, has the following to say:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;5.2 The Resource Identified by a Request
+[...]
+If Request-URI is an absoluteURI, the host is part of the Request-URI. Any Host header field value in the request MUST be ignored.
+The result? On Apache and Nginx (and all compliant servers) it's possible to route requests with arbitrary host headers to any application present by using an absolute URI:
+POST https://addons.mozilla.org/en-US/firefox/users/pwreset HTTP/1.1
+Host: evil.com&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For so long I think HOST header is the definitive source to determine which site to serve under virtual hosting. A quick test proved this newly found fact:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="go"&gt;echo -en "GET /password-reset/ HTTP/1.1\r\nHost: evil.com\r\n\r\n" | nc 102.256.89.57 80&lt;/span&gt;
+&lt;span class="go"&gt;HTTP/1.1 200 OK&lt;/span&gt;
+&lt;span class="go"&gt;Date: Wed, 25 Sep 2013 07:54:00 GMT&lt;/span&gt;
+&lt;span class="go"&gt;Server: Apache/2.2.22 (Ubuntu)&lt;/span&gt;
+&lt;span class="go"&gt;Last-Modified: Fri, 13 Sep 2013 08:07:54 GMT&lt;/span&gt;
+&lt;span class="go"&gt;ETag: "25a9c-b1-4e63f5a01c982"&lt;/span&gt;
+&lt;span class="go"&gt;Accept-Ranges: bytes&lt;/span&gt;
+&lt;span class="go"&gt;Content-Length: 177&lt;/span&gt;
+&lt;span class="go"&gt;Vary: Accept-Encoding&lt;/span&gt;
+&lt;span class="go"&gt;Content-Type: text/html&lt;/span&gt;
+&lt;span class="go"&gt;X-Pad: avoid browser bug&lt;/span&gt;
+
+&lt;span class="go"&gt;&amp;lt;html&amp;gt;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;It works!&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;p&amp;gt;This is the default web page for this server.&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;p&amp;gt;The web server software is running but no content has been added, yet.&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class="go"&gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So we still safe, apache serve the default vhost. But this one:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="go"&gt;echo -en "GET http://www.mysite.com/password-reset/ HTTP/1.1\r\nHost: evil.com\r\n\r\n" | nc 102.256.89.57 80&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Give you the page of mysite.com ! Fortunately Django 1.5 has fixed for this. Better check if your app depend on the HOST header to build absolute url.&lt;/p&gt;&lt;/div&gt;</description><category>apache</category><category>http</category><category>security</category><guid>http://k4ml.github.io/posts/do-not-trust-host-header.html</guid><pubDate>Wed, 25 Sep 2013 08:00:00 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,692 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="We failed at some point in our life"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>ImportError | ImportError</title><link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="assets/css/rst.css" rel="stylesheet" type="text/css"><link href="assets/css/code.css" rel="stylesheet" type="text/css"><link href="assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="assets/css/theme.css" rel="stylesheet" type="text/css"><link href="assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/index.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    
+        <article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/git-remove-files-from-commit.html" class="u-url">GIT: Remove files from commit</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2015-06-20T12:00:40+08:00">2015-06-20 12:00</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>There are <a href="http://stackoverflow.com/questions/12481639/remove-files-from-git-commit">lot of ways</a> if you search for this, mostly involve in ammending the commit. But if you only accidentally added the files in a development/temporary branch, there's much simpler way than meddling around with the history.</p>
+<p>When you merge branch, git will automatically commit all the changes from that branch. But there's a way to <a href="http://stackoverflow.com/questions/8640887/git-merge-without-auto-commit">stop that</a>.</p>
+<div class="code"><pre><span class="err">$</span> <span class="n">git</span> <span class="n">merge</span> <span class="n">new</span><span class="o">-</span><span class="n">layout</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">commit</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">ff</span>
+<span class="n">Automatic</span> <span class="n">merge</span> <span class="n">went</span> <span class="n">well</span><span class="p">;</span> <span class="n">stopped</span> <span class="n">before</span> <span class="n">committing</span> <span class="n">as</span> <span class="n">requested</span>
+<span class="n">kamal</span><span class="err">@</span><span class="n">thinkblack</span><span class="o">:~/</span><span class="n">python</span><span class="o">/</span><span class="n">harga</span>
+<span class="err">$</span> <span class="n">git</span> <span class="n">status</span>
+<span class="cp"># On branch new-layout-fixout</span>
+<span class="cp"># Changes to be committed:</span>
+<span class="cp">#</span>
+<span class="cp">#       modified:   harga/models.py</span>
+<span class="cp">#       modified:   harga/search_indexes.py</span>
+<span class="cp">#       modified:   harga/templates/base.html</span>
+<span class="cp">#       new file:   harga/templates/sidebar.html</span>
+<span class="cp">#       new file:   scrapers/scrapers.db</span>
+</pre></div>
+
+
+<p>Let say <code>scrapers/scrapers.db</code> is the file that we accidentally committed and we don't want it. Just remove it from the index:-</p>
+<div class="code"><pre><span class="n">git</span> <span class="n">reset</span> <span class="n">HEAD</span> <span class="n">scrapers</span><span class="o">/</span><span class="n">scrapers</span><span class="p">.</span><span class="n">db</span>
+</pre></div>
+
+
+<p>Now the file has been removed, we can commit the rest of the changes.</p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/git-remove-files-from-commit.html#disqus_thread" data-disqus-identifier="cache/posts/git-remove-files-from-commit.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/ansible-manage-users-from-central-file.html" class="u-url">Ansible: Manage users from central file</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2015-04-01T23:30:52+08:00">2015-04-01 23:30</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>I want to achieve this kind of playbook:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Development server</span>
+  <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">devserver</span>
+  <span class="l-Scalar-Plain">sudo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+  <span class="l-Scalar-Plain">vars_files</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">data/users/users.yml</span>
+  <span class="l-Scalar-Plain">vars</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">users</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">all_users.ali</span><span class="nv"> </span><span class="s">}}"</span>
+        <span class="p-Indicator">-</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">all_users.kamal</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="l-Scalar-Plain">roles</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">development</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mysql-client</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">users</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">common</span>
+</pre></div>
+
+
+<p>Users should be defined in a central file but in playbook for each hosts, I should be
+able to mix and match users like above. The file <code>data/users/users.yml</code> above look like:-</p>
+<div class="code"><pre><span class="l-Scalar-Plain">all_users</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">ali</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ali</span>
+        <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ali Ahmad</span>
+        <span class="l-Scalar-Plain">groups</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'admin'</span><span class="p-Indicator">]</span>
+        <span class="l-Scalar-Plain">ssh_key</span><span class="p-Indicator">:</span>
+          <span class="p-Indicator">-</span> <span class="s">"ssh-dss</span><span class="nv"> </span><span class="s">AAAA</span><span class="nv"> </span><span class="s">..."</span>
+
+    <span class="l-Scalar-Plain">kamal</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">kamal</span>
+        <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Kamal Mustafa</span>
+        <span class="l-Scalar-Plain">groups</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'admin'</span><span class="p-Indicator">]</span>
+        <span class="l-Scalar-Plain">ssh_key</span><span class="p-Indicator">:</span>
+          <span class="p-Indicator">-</span> <span class="s">"ssh-rsa</span><span class="nv"> </span><span class="s">AAAA</span><span class="nv"> </span><span class="s">..."</span>
+
+<span class="l-Scalar-Plain">users_deleted</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user1</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user2</span>
+</pre></div>
+
+
+<p>Initially I used <a href="https://github.com/mivok/ansible-users/blob/master/tasks/main.yml">ansible-users</a> roles but
+it has users defined in <code>group_vars</code> file. It allow me to separate users by group but that also mean if some
+users exists in multiple groups, I have to repeat defining the user data.</p>
+<p>My first attempt then look like this:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Development server</span>
+  <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">devserver</span>
+  <span class="l-Scalar-Plain">sudo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+  <span class="l-Scalar-Plain">vars_files</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">data/users/users.yml</span>
+  <span class="l-Scalar-Plain">roles</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">development</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mysql-client</span>
+
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tasks/add_user.yml accounts_to_add={{ all_users }}</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tasks/common.yml users={{ all_users }}</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tasks/delete_user.yml accounts_to_delete={{ deleted_users }}</span>
+</pre></div>
+
+
+<p>With <code>data/users/users.yml</code> defined as:-</p>
+<div class="code"><pre><span class="l-Scalar-Plain">all_users</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">ali</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">kamal</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">aman</span>
+</pre></div>
+
+
+<p>And the tasks <code>add_user.yml</code> was very clunkyly defined:-</p>
+<div class="code"><pre><span class="nn">---</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Create user</span>
+  <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">home=/home/{{ item }} name={{ item }} shell=/bin/bash state=present</span>
+  <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">accounts_to_add</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add SSH key</span>
+  <span class="l-Scalar-Plain">authorized_key</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">user={{ item }} key="{{ lookup('file', playbook_dir + '/data/users/' + item + '/key.pub') }}"</span>
+  <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">accounts_to_add</span>
+  <span class="l-Scalar-Plain">tags</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'user-config'</span><span class="p-Indicator">]</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lock user {{ item }}</span>
+  <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">usermod --lock {{ item }}</span>
+  <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">accounts_to_add</span>
+  <span class="l-Scalar-Plain">tags</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'user-config'</span><span class="p-Indicator">]</span>
+</pre></div>
+
+
+<p>Had to deal with the <code>lookup()</code> issue where it keep giving errors:-</p>
+<div class="code"><pre><span class="nl">fatal:</span> <span class="p">[</span><span class="n">devserver</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">A</span> <span class="n">variable</span> <span class="n">inserted</span> <span class="n">a</span> <span class="n">new</span> <span class="n">parameter</span> <span class="n">into</span> <span class="n">the</span> <span class="n">module</span> <span class="n">args</span><span class="p">.</span> <span class="n">Be</span> <span class="n">sure</span> <span class="n">to</span> <span class="n">quote</span> <span class="n">variables</span> <span class="k">if</span> <span class="n">they</span> <span class="n">contain</span> <span class="n">equal</span> <span class="n">signs</span> <span class="p">(</span><span class="k">for</span> <span class="n">example</span><span class="o">:</span> <span class="s">"{{var}}"</span><span class="p">).</span>
+</pre></div>
+
+
+<p>The answer actually already there, you have to quote the <code>lookup(...)</code> but I spent hours looking for solution,
+the price has to pay when you didn't read error message properly, sigh ...</p>
+<p>I'm not really satisfied with this solution since it mean for every playbook, you'll keep repeating the tasks
+section. [ansible-users] roles is better here since you just include the roles and the users variables being
+inferred automatically. So I keep searching for solution to split <code>group_vars</code> file until I realized can reference
+variables in the playbook.</p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/ansible-manage-users-from-central-file.html#disqus_thread" data-disqus-identifier="cache/posts/ansible-manage-users-from-central-file.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/django-where-does-the-application-start.html" class="u-url">Django: Where does the application start ?</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-11-01T16:00:14+08:00">2014-11-01 16:00</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>The key to understand any kind of application is to know where does it start. Until
+then you'll keep banging your head, shooting in the dark and lastly, at the mercy
+of Google when trying to debug or solve any issues you have.</p>
+<p>Majority of web developers don't really know, or even care where actually their application
+start. This particularly true for those developing in PHP which abstract most of the web parts
+and it appear to developer they just writing a regular command line or desktop application.</p>
+<p>For Django developer, you can probably ignore this throughout your dev carrier but knowing it
+will help you a lot in.</p>
+<p>Django application can start (at least) from 2 possible entry point. The first entry point is
+through the development server and the second entry point is when you deploy it to production
+web server, either <code>mod_wsgi</code>, <code>gunicorn</code>, <code>Paste</code>, <code>Rocket</code>, <code>Waitress</code>, <code>Circus</code> or dozen more
+WSGI server you can find on PyPI. I can still remember the day when there's none pure Python
+WSGI server exists (except CherryPy) and how I'd really envy Rails's community for having Mongrel.
+That day has long gone.</p>
+<p>Let's dive to the first entry point - when you run your django application through the
+<code>manage.py runserver</code> command. Typical django application (as generated) by the <code>startproject</code> command
+has a file called <code>manage.py</code> at the root of the project directory. This is the file that developer use
+to interact with their application, doing things such as running development server, synching database
+tables with the models definition, loading/exporting data and so much more.</p>
+<p>If you peek into <code>manage.py</code>, it's pretty simple actually:-</p>
+<div class="code"><pre><span class="c">#!./bin/python</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">"DJANGO_SETTINGS_MODULE"</span><span class="p">,</span> <span class="s">"acara.settings"</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">django.core.management</span> <span class="kn">import</span> <span class="n">execute_from_command_line</span>
+
+    <span class="n">execute_from_command_line</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+</pre></div>
+
+
+<p>They key line here is at line 10 where a function called <code>execute_from_command_line()</code> being called.
+From here we can traverse to module <code>django.core.management</code> to find out what that function is doing.
+If you're sure where the actual module is located, just open the python console and import the module
+to inspect it's location:-</p>
+<div class="code"><pre><span class="gp">$</span> python
+<span class="go">Python 2.7.3 (default, Aug  1 2012, 05:16:07) </span>
+<span class="go">[GCC 4.6.3] on linux2</span>
+<span class="go">Type "help", "copyright", "credits" or "license" for more information.</span>
+
+<span class="gp">&gt;</span>&gt;&gt; import django.core.management
+<span class="gp">&gt;</span>&gt;&gt; django.core.management
+<span class="go">&lt;module 'django.core.management' from '/home../local/lib/...django/core/management/__init__.pyc'&gt;</span>
+</pre></div>
+
+
+<p>Now we know that module was in <code>$HOME/local/lib/python2.7/site-packages/django/core/management/__init__.py</code>.
+This one thing I love in python. Everything is explicit. You can easily trace down where things comes from
+without even having to understand the whole framework yet. In some other framework or languages where
+implicit import is a norm, you'll have hard time tracing down where certain functions or variables comes from
+until you know the mechanism of the framework.</p>
+<p>Let's look what inside <code>django.core.management</code> module. The function <code>execute_from_command_line()</code> was defined
+at the bottom of the source code. It just a wrapper to other function actually.</p>
+<div class="code"><pre><span class="k">def</span> <span class="nf">execute_from_command_line</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    A simple method that runs a ManagementUtility.</span>
+<span class="sd">    """</span>
+    <span class="n">utility</span> <span class="o">=</span> <span class="n">ManagementUtility</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+    <span class="n">utility</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/django-where-does-the-application-start.html#disqus_thread" data-disqus-identifier="cache/posts/django-where-does-the-application-start.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/bagaimana-_post-dan-_get-terhasil.html" class="u-url">Bagaimana $_POST dan $_GET terhasil</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-03-31T16:23:49+08:00">2014-03-31 16:23</time></small></h1>
+        <hr><div class="p-summary">
+        <p>No translation yet, please red the Malay version.</p>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/bagaimana-_post-dan-_get-terhasil.html#disqus_thread" data-disqus-identifier="cache/posts/bagaimana-_post-dan-_get-terhasil.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/mini-pycon-my-2014.html" class="u-url">Mini PyCon MY 2014</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-03-16T08:19:20+08:00">2014-03-16 08:19</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>This is the first mini PyCon held in Malaysia so congratulation to the <a href="http://www.pycon.my/mini-pycon-my-2014/staff">team</a> that
+finally make it happened. It just 1 day event filled with tracks on various topic
+related to python. Due to the space limitation, all sessions being held serially in
+a single room. Having attend a number of PyCon APAC last time in SG, I'm quite happy
+that I managed to follow all the sessions in this mini pycon. It quite frustrating when
+you have to decide between two interesting sessions because it run in parallel in two
+different places. Below are some quick notes from the sessions that I managed to recall.</p>
+<ul><li>
+<p>Sphinx and Read The Docs - Eric Holscher</p>
+<ul><li>Defacto documentation tools in Python Community.</li>
+<li>While RTD and Sphinx are both valuable tools that we have in Python,
+  I can't really stand RST for writing. It kind of Latex where everytime I need
+  to write, I have to read the documentation again to look for all the syntax.</li>
+<li>I have only used RTD once in the past, for writing my <a href="http://asas-django.rtfd.org">unfinished book</a>
+  on django.</li>
+</ul></li>
+<li>
+<p>Python on Google App Engine - Desmond Lua</p>
+<ul><li>Quite an interesting talk.</li>
+<li>Everything you did probably would cost money so you have to give extra
+  attention on how you write your app.</li>
+<li>I had a thought of moving <a href="http://harga.smach.net">Cari Harga Barang</a> to App Engine
+  in order to save some money on the hosting and also the time to manage it but look
+  like it will cost more with App Engine since there's lot of write operations to store
+  all the items and keep it updated daily.</li>
+</ul></li>
+<li>
+<p>Boosting Productivity with IPython - Boey Pak Cheong</p>
+<ul><li>Finally, I had a visual on what Ipython Notebook really is. In fact, in the
+  later talk, the presenter was using IPython Notebook to show and demonstrate
+  his python code snippet.</li>
+</ul></li>
+<li>
+<p>Python Powered Cloud - Joseph Ziegler</p>
+<ul><li>This imo the most interesting talk.</li>
+<li>I have long heard about Elastic Beanstalk (EB) but never had a chance to give it a try.</li>
+<li>EB probably what I have been looking on how to deploy our apps.</li>
+<li>The only downside of EB is that it based on RHEL which mean for
+  organization that been using Ubuntu, it will be a huge leap to migrate.</li>
+<li>Another cool stuff shown in this talk, the <a href="https://github.com/newsapps/beeswithmachineguns">bees army</a>.
+  It being used to DDOS the website in order to demo how EB auto scaling work. Still
+  wondering how this thing went out of my radar ;).</li>
+</ul></li>
+<li>
+<p>Python in Embedded and Robotics Development - Yap Wen Jiun</p>
+<ul><li>I'm not into robotic (yet), maybe until my kid ready to play around
+  with computer and all the stuff.</li>
+<li>There's a kind of OS for robotic stuff call <a href="http://wiki.ros.org/">ROS</a>.</li>
+</ul></li>
+<li>
+<p>Creating Powerful RESTful API Services with Django Tastypie - Leong Seh Hui</p>
+<ul><li>We used Django Rest Framework for one of our app in development.</li>
+<li>The speaker however never used DRF so unable to get his insight on the
+  differences between both framework.</li>
+<li>Looking at <a href="https://github.com/toastdriven/django-tastypie#why-tastypie">Why Tastypie section</a>
+  which say 'You DON'T want to have to write your own serializer to make the output right.',
+  ok, that sound true.</li>
+<li>Tastypie way of hooking the Resource into urls.py also captured my attention since it
+  look similar to what I'm doing with my little library <a href="https://bitbucket.org/k4ml/django-viewrouter">django-viewrouter</a>.</li>
+</ul></li>
+</ul></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/mini-pycon-my-2014.html#disqus_thread" data-disqus-identifier="cache/posts/mini-pycon-my-2014.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/php-headers-already-sent-and-http-basic.html" class="u-url">PHP: Headers already sent and HTTP basic</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-03-03T14:37:42+08:00">2014-03-03 14:37</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>If there's one error that must be encountered by all PHP developers, this:-</p>
+<div class="code"><pre><span class="n">Warning</span><span class="o">:</span> <span class="n">Cannot</span> <span class="n">modify</span> <span class="n">header</span> <span class="n">information</span> <span class="o">-</span> <span class="n">headers</span> <span class="n">already</span> <span class="n">sent</span> <span class="n">by</span> <span class="o">...</span>
+</pre></div>
+
+
+<p>probably one of it. Anyone who developing in PHP must at least once having issue
+involving this. Lot of articles and answers have been written on this issue, and <a href="http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php">this
+answer on stackoverflow</a> is one of the most comprehensive write up explaining the issue,
+why it happen and how to fix it. So I don't plan to talk much on the PHP part in this post
+but more on the HTTP part.</p>
+<h3 id="what-is-http">What is HTTP ?</h3>
+<p>It's a protocol that govern how a piece of information can be exchanged over the Internet.
+There are lot of protocols defined and being used on the Internet but HTTP definitely one
+of the widely used protocol in form of what layman known as web, or World Wide Web (WWW).
+The protocol is being defined as <a href="https://www.ietf.org/rfc/rfc2616.txt">RFC 2616</a> and as we will later realized, it is a
+text protocol. Being a text based protocol make it much easier to study and understand and
+test it in practical manner since no special tools needed to actually implement the protocol.
+Before we delved deeper into the protocol, let also clear up what actually meant by the word
+protocol itself.</p>
+<p class="more"><a href="posts/php-headers-already-sent-and-http-basic.html">Read more…</a></p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/php-headers-already-sent-and-http-basic.html#disqus_thread" data-disqus-identifier="cache/posts/php-headers-already-sent-and-http-basic.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/when-to-comment.html" class="u-url">When to comment ?</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-01-17T02:07:32+08:00">2014-01-17 02:07</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>One of the question we faced up when writing code is when to put comment for our code. It''s already pretty well known that we should comment on the 'why' part, not the 'how'. While looking through our code for some code review, I found these few lines of code:-</p>
+<div class="code"><pre><span class="c"># make requests to the API and process response</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="o">...</span>
+<span class="o">...</span>
+</pre></div>
+
+
+<p>Above I think is an example of unnecessary comment since it obvious from the code that we're making some request to a <code>url</code> and processing it's response. Good comment is something along this line:-</p>
+<div class="code"><pre><span class="c"># doing POST here since the API does not yet support PUT</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">resp</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="o">...</span>
+<span class="o">...</span>
+</pre></div>
+
+
+<p>In above illustrative situation, the request logically should be a PUT request but due to some REASON it has to be a POST. The REASON that is worthy for comment since it explain the WHY part. It help the next developer coming up to maintain this code when he probably has in mental state that the request in this section of code should be a PUT not POST. The comment help him to not start raising suspicious that this section of code now has a bug.</p>
+<p>So this just one example of when to comment our code. I'll try to add more as I encountered more examples.</p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/when-to-comment.html#disqus_thread" data-disqus-identifier="cache/posts/when-to-comment.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/python-custom-interactive-console.html" class="u-url">Python: Custom Interactive Console</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-01-13T21:34:23+08:00">2014-01-13 21:34</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>While working on new features that consist of web frontend and a backend API, I found
+a constant need to manipulate the backend API through python interactive console.
+Ideally I should implement a command line interface that I can use while waiting for the web frontend to finish but since the API (a class) already has structured methods to access all the API functionalities, a cli interface will just duplicating most of the class API methods.</p>
+<p>What tedios when accessing the API through python interactive console is having to re-import all the objects that you need every time you start the interactive console. So an idea pop up - why not create my own custom interactive console with all the objects that I need pre-imported. In python, creating your own interactive console is <a href="http://stackoverflow.com/questions/19754458/open-interactive-python-console-from-a-script">trivial</a>. The code module has all that you need.</p>
+<div class="code"><pre><span class="kn">import</span> <span class="nn">code</span>
+
+<span class="c"># SomeClass will be available in the interactive console</span>
+<span class="kn">from</span> <span class="nn">yourmodule</span> <span class="kn">import</span> <span class="n">SomeClass</span>
+
+<span class="nb">vars</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span>
+<span class="nb">vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+<span class="n">shell</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">InteractiveConsole</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+<span class="n">shell</span><span class="o">.</span><span class="n">interact</span><span class="p">()</span>
+</pre></div>
+
+
+<p>While simple and just few lines of code, above is not really useful. It doesn't have auto complete and no history, you can't use up/down arrow key to repeat the previous command. A better version:-</p>
+<div class="code"><pre><span class="kn">import</span> <span class="nn">code</span>
+<span class="kn">import</span> <span class="nn">readline</span>
+<span class="kn">import</span> <span class="nn">rlcompleter</span>
+
+<span class="c"># SomeClass will be available in the interactive console</span>
+<span class="kn">from</span> <span class="nn">yourmodule</span> <span class="kn">import</span> <span class="n">SomeClass</span>
+
+<span class="nb">vars</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span>
+<span class="nb">vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+<span class="n">readline</span><span class="o">.</span><span class="n">set_completer</span><span class="p">(</span><span class="n">rlcompleter</span><span class="o">.</span><span class="n">Completer</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span><span class="p">)</span>
+<span class="n">readline</span><span class="o">.</span><span class="n">parse_and_bind</span><span class="p">(</span><span class="s">"tab: complete"</span><span class="p">)</span>
+<span class="n">shell</span> <span class="o">=</span> <span class="n">code</span><span class="o">.</span><span class="n">InteractiveConsole</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span>
+<span class="n">shell</span><span class="o">.</span><span class="n">interact</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Above is much nicer. Now you have auto complete (type <code>Some&lt;Tab&gt;</code> and you got <code>SomeClass</code>). Cool. But I immediately noticed that the history was not preserved, mean that when I closed the console and start again, it's in blank slate. I can't repeat command in previous session. This actually how the default python console work but I'd already have <code>~/.pythonrc.py</code> that I defined as <code>PYTHONSTARTUP</code> to <a href="http://sontek.net/blog/detail/tips-and-tricks-for-the-python-interpreter">setup the tab completion and command history</a>. It seem that my pythonrc.py not being processed by this custom console.</p>
+<p>Noticing that the python console from django <code>manage.py shell</code> working correctly with my pythonrc.py, I'd take a look at the <a href="https://github.com/django/django/blob/master/django/core/management/commands/shell.py#L67">implementation code</a>. Look like django has to process PYTHONSTARTUP manually. I'm not really keen on copy-pasting the code from django but there's no way to pass your current enviroment into the console that django created.</p>
+<p>In the end, I have to copy the django code into my console function:-</p>
+<div class="code"><pre><span class="kn">import</span> <span class="nn">code</span>
+<span class="kn">import</span> <span class="nn">readline</span>
+<span class="kn">import</span> <span class="nn">rlcompleter</span>
+
+<span class="c"># SomeClass will be available in the interactive console</span>
+<span class="kn">from</span> <span class="nn">yourmodule</span> <span class="kn">import</span> <span class="n">SomeClass</span>
+
+<span class="nb">vars</span> <span class="o">=</span> <span class="nb">globals</span><span class="p">()</span>
+<span class="nb">vars</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">locals</span><span class="p">())</span>
+<span class="n">readline</span><span class="o">.</span><span class="n">set_completer</span><span class="p">(</span><span class="n">rlcompleter</span><span class="o">.</span><span class="n">Completer</span><span class="p">(</span><span class="nb">vars</span><span class="p">)</span><span class="o">.</span><span class="n">complete</span><span class="p">)</span>
+<span class="n">readline</span><span class="o">.</span><span class="n">parse_and_bind</span><span class="p">(</span><span class="s">"tab: complete"</span><span class="p">)</span>
+
+<span class="c"># copied from django.core.management.commands.shell</span>
+<span class="k">for</span> <span class="n">pythonrc</span> <span class="ow">in</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">"PYTHONSTARTUP"</span><span class="p">),</span>
+                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s">'~/.pythonrc.py'</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">pythonrc</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">pythonrc</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pythonrc</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+                <span class="k">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">handle</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">pythonrc</span><span class="p">,</span> <span class="s">'exec'</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+<span class="n">code</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="nb">vars</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I found that working directly in the console like this motivate me to write better docstring for each functions and methods as I'd constantly using the help() function to figure out what each function/class/methods are doing. This seem to be much better than having to write dedicated cli interface for your API.</p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/python-custom-interactive-console.html#disqus_thread" data-disqus-identifier="cache/posts/python-custom-interactive-console.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/hackernewsredditstackoverflow-like-communities.html" class="u-url">HackerNews/Reddit/Stackoverflow like communities</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2014-01-07T18:28:56+08:00">2014-01-07 18:28</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>Being a developer/programmer, site such as Reddit (especially <a href="http://www.reddit.com/r/programming">r/programming</a>) and
+<a href="https://news.ycombinator.com/">HackerNews</a> are my main source of latest news and updates. Next definitely Stackoverflow when looking for answers on specific programming problems. But from time to time, I'd
+also discovered few other small communities, mostly country focused while going through the google search results. So I've decided to start collecting link to these communities in this blog posts.</p>
+<p>So here are the lists so far:-</p>
+<ul><li><a href="http://nullpointer.ph/">nullpointer</a> - Q&amp;A like site in Phillipine.</li>
+<li><a href="http://hackerstreet.in/">Hackstreet.India</a> - India based site.</li>
+</ul><p>While not an Q&amp;A site, I listed also here site with domain of similar theme:-</p>
+<ul><li><a href="http://hackflow.com/">Hackflow</a> - Blog mostly on Python.</li>
+<li><a href="http://importerror.com/">ImportError</a> - This very own site ;)</li>
+</ul></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/hackernewsredditstackoverflow-like-communities.html#disqus_thread" data-disqus-identifier="cache/posts/hackernewsredditstackoverflow-like-communities.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><article class="postbox h-entry post-text"><h1 class="p-name"><a href="posts/javascript-self-invoking-function.html" class="u-url">Javascript Self Invoking Function</a>
+        <small>  
+             Posted: <time class="published dt-published" datetime="2013-12-04T01:54:03+08:00">2013-12-04 01:54</time></small></h1>
+        <hr><div class="p-summary">
+        <div><p>While peeking into Twitter <a href="https://github.com/twbs/bootstrap/blob/8a74264344489e8b9e10c5c5e2098bb75116b8bd/js/alert.js#L21">Bootstrap js</a> code, I noticed function being defined like this:-</p>
+<div class="code"><pre><span class="o">+</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span> <span class="s2">"use strict"</span><span class="p">;</span>
+
+    <span class="c1">// ALERT CLASS DEFINITION</span>
+    <span class="c1">// ======================</span>
+
+    <span class="kd">var</span> <span class="nx">dismiss</span> <span class="o">=</span> <span class="s1">'[data-dismiss="alert"]'</span>
+    <span class="kd">var</span> <span class="nx">Alert</span>   <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
+    <span class="err">  </span><span class="nx">$</span><span class="p">(</span><span class="nx">el</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">dismiss</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">close</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="p">...</span>
+</pre></div>
+
+
+<p>Noticed the <code>+</code> sign before the keyword <code>function</code>. At first I thought it could some typo slipping through the commit but after some google, it turn out that <a href="http://stackoverflow.com/questions/13341698/javascript-plus-sign-in-front-of-function-name">just another way</a> to define self invoking function in JavaScript. Those who has been writing some JavaScript, or deal with some JS library probably already familiar with a common idiom to write code like below:-</p>
+<div class="code"><pre><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#some_dom_id'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span> <span class="p">....);</span>
+<span class="p">})(</span><span class="nx">jQuery</span><span class="p">);</span>
+</pre></div>
+
+
+<p class="more"><a href="posts/javascript-self-invoking-function.html">Read more…</a></p></div>
+        
+        </div>
+        
+            
+    
+        
+    <p>
+    
+        <a href="posts/javascript-self-invoking-function.html#disqus_thread" data-disqus-identifier="cache/posts/javascript-self-invoking-function.html">Comments</a>
+    
+
+    
+
+        
+        </p></article><div>
+        <ul class="pager"><li class="next">
+                <a href="index-2.html" rel="next">Older posts →</a>
+            </li>
+        
+        </ul></div>
+    
+
+    
+    
+        
+    
+       <script>var disqus_shortname="importerror";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="assets/js/bootstrap.min.js" type="text/javascript"></script><script src="assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

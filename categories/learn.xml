@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (learn)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/learn.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Django: Where does the application start ?</title><link>http://k4ml.github.io/posts/django-where-does-the-application-start.html</link><description>&lt;div&gt;&lt;p&gt;The key to understand any kind of application is to know where does it start. Until
+then you'll keep banging your head, shooting in the dark and lastly, at the mercy
+of Google when trying to debug or solve any issues you have.&lt;/p&gt;
+&lt;p&gt;Majority of web developers don't really know, or even care where actually their application
+start. This particularly true for those developing in PHP which abstract most of the web parts
+and it appear to developer they just writing a regular command line or desktop application.&lt;/p&gt;
+&lt;p&gt;For Django developer, you can probably ignore this throughout your dev carrier but knowing it
+will help you a lot in.&lt;/p&gt;
+&lt;p&gt;Django application can start (at least) from 2 possible entry point. The first entry point is
+through the development server and the second entry point is when you deploy it to production
+web server, either &lt;code&gt;mod_wsgi&lt;/code&gt;, &lt;code&gt;gunicorn&lt;/code&gt;, &lt;code&gt;Paste&lt;/code&gt;, &lt;code&gt;Rocket&lt;/code&gt;, &lt;code&gt;Waitress&lt;/code&gt;, &lt;code&gt;Circus&lt;/code&gt; or dozen more
+WSGI server you can find on PyPI. I can still remember the day when there's none pure Python
+WSGI server exists (except CherryPy) and how I'd really envy Rails's community for having Mongrel.
+That day has long gone.&lt;/p&gt;
+&lt;p&gt;Let's dive to the first entry point - when you run your django application through the
+&lt;code&gt;manage.py runserver&lt;/code&gt; command. Typical django application (as generated) by the &lt;code&gt;startproject&lt;/code&gt; command
+has a file called &lt;code&gt;manage.py&lt;/code&gt; at the root of the project directory. This is the file that developer use
+to interact with their application, doing things such as running development server, synching database
+tables with the models definition, loading/exporting data and so much more.&lt;/p&gt;
+&lt;p&gt;If you peek into &lt;code&gt;manage.py&lt;/code&gt;, it's pretty simple actually:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!./bin/python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setdefault&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"DJANGO_SETTINGS_MODULE"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"acara.settings"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.management&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;execute_from_command_line&lt;/span&gt;
+
+    &lt;span class="n"&gt;execute_from_command_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;They key line here is at line 10 where a function called &lt;code&gt;execute_from_command_line()&lt;/code&gt; being called.
+From here we can traverse to module &lt;code&gt;django.core.management&lt;/code&gt; to find out what that function is doing.
+If you're sure where the actual module is located, just open the python console and import the module
+to inspect it's location:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; python
+&lt;span class="go"&gt;Python 2.7.3 (default, Aug  1 2012, 05:16:07) &lt;/span&gt;
+&lt;span class="go"&gt;[GCC 4.6.3] on linux2&lt;/span&gt;
+&lt;span class="go"&gt;Type "help", "copyright", "credits" or "license" for more information.&lt;/span&gt;
+
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; import django.core.management
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; django.core.management
+&lt;span class="go"&gt;&amp;lt;module 'django.core.management' from '/home../local/lib/...django/core/management/__init__.pyc'&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now we know that module was in &lt;code&gt;$HOME/local/lib/python2.7/site-packages/django/core/management/__init__.py&lt;/code&gt;.
+This one thing I love in python. Everything is explicit. You can easily trace down where things comes from
+without even having to understand the whole framework yet. In some other framework or languages where
+implicit import is a norm, you'll have hard time tracing down where certain functions or variables comes from
+until you know the mechanism of the framework.&lt;/p&gt;
+&lt;p&gt;Let's look what inside &lt;code&gt;django.core.management&lt;/code&gt; module. The function &lt;code&gt;execute_from_command_line()&lt;/code&gt; was defined
+at the bottom of the source code. It just a wrapper to other function actually.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;execute_from_command_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    A simple method that runs a ManagementUtility.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;utility&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ManagementUtility&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;utility&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description><category>django</category><category>wsgi</category><category>learn</category><guid>http://k4ml.github.io/posts/django-where-does-the-application-start.html</guid><pubDate>Sat, 01 Nov 2014 08:00:14 GMT</pubDate></item></channel></rss>

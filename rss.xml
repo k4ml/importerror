@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError</title><link>http://k4ml.github.io</link><description>We failed at some point in our life</description><atom:link href="http://k4ml.github.io/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>GIT: Remove files from commit</title><link>http://k4ml.github.io/posts/git-remove-files-from-commit.html</link><description>&lt;div&gt;&lt;p&gt;There are &lt;a href="http://stackoverflow.com/questions/12481639/remove-files-from-git-commit"&gt;lot of ways&lt;/a&gt; if you search for this, mostly involve in ammending the commit. But if you only accidentally added the files in a development/temporary branch, there's much simpler way than meddling around with the history.&lt;/p&gt;
+&lt;p&gt;When you merge branch, git will automatically commit all the changes from that branch. But there's a way to &lt;a href="http://stackoverflow.com/questions/8640887/git-merge-without-auto-commit"&gt;stop that&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;merge&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;layout&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;no&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ff&lt;/span&gt;
+&lt;span class="n"&gt;Automatic&lt;/span&gt; &lt;span class="n"&gt;merge&lt;/span&gt; &lt;span class="n"&gt;went&lt;/span&gt; &lt;span class="n"&gt;well&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;stopped&lt;/span&gt; &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="n"&gt;committing&lt;/span&gt; &lt;span class="n"&gt;as&lt;/span&gt; &lt;span class="n"&gt;requested&lt;/span&gt;
+&lt;span class="n"&gt;kamal&lt;/span&gt;&lt;span class="err"&gt;@&lt;/span&gt;&lt;span class="n"&gt;thinkblack&lt;/span&gt;&lt;span class="o"&gt;:~/&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;harga&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;
+&lt;span class="cp"&gt;# On branch new-layout-fixout&lt;/span&gt;
+&lt;span class="cp"&gt;# Changes to be committed:&lt;/span&gt;
+&lt;span class="cp"&gt;#&lt;/span&gt;
+&lt;span class="cp"&gt;#       modified:   harga/models.py&lt;/span&gt;
+&lt;span class="cp"&gt;#       modified:   harga/search_indexes.py&lt;/span&gt;
+&lt;span class="cp"&gt;#       modified:   harga/templates/base.html&lt;/span&gt;
+&lt;span class="cp"&gt;#       new file:   harga/templates/sidebar.html&lt;/span&gt;
+&lt;span class="cp"&gt;#       new file:   scrapers/scrapers.db&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Let say &lt;code&gt;scrapers/scrapers.db&lt;/code&gt; is the file that we accidentally committed and we don't want it. Just remove it from the index:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;reset&lt;/span&gt; &lt;span class="n"&gt;HEAD&lt;/span&gt; &lt;span class="n"&gt;scrapers&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;scrapers&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now the file has been removed, we can commit the rest of the changes.&lt;/p&gt;&lt;/div&gt;</description><category>git</category><guid>http://k4ml.github.io/posts/git-remove-files-from-commit.html</guid><pubDate>Sat, 20 Jun 2015 04:00:40 GMT</pubDate></item><item><title>Ansible: Manage users from central file</title><link>http://k4ml.github.io/posts/ansible-manage-users-from-central-file.html</link><description>&lt;div&gt;&lt;p&gt;I want to achieve this kind of playbook:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Development server&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;devserver&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;sudo&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;vars_files&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;data/users/users.yml&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;vars&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;users&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"{{&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;all_users.ali&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;}}"&lt;/span&gt;
+        &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"{{&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;all_users.kamal&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;}}"&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;roles&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;development&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;mysql-client&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;users&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;common&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Users should be defined in a central file but in playbook for each hosts, I should be
+able to mix and match users like above. The file &lt;code&gt;data/users/users.yml&lt;/code&gt; above look like:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="l-Scalar-Plain"&gt;all_users&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l-Scalar-Plain"&gt;ali&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;username&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;ali&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Ali Ahmad&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;groups&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'admin'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;ssh_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+          &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"ssh-dss&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;AAAA&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;..."&lt;/span&gt;
+
+    &lt;span class="l-Scalar-Plain"&gt;kamal&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;username&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;kamal&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Kamal Mustafa&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;groups&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'admin'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;ssh_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+          &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="s"&gt;"ssh-rsa&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;AAAA&lt;/span&gt;&lt;span class="nv"&gt; &lt;/span&gt;&lt;span class="s"&gt;..."&lt;/span&gt;
+
+&lt;span class="l-Scalar-Plain"&gt;users_deleted&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user1&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Initially I used &lt;a href="https://github.com/mivok/ansible-users/blob/master/tasks/main.yml"&gt;ansible-users&lt;/a&gt; roles but
+it has users defined in &lt;code&gt;group_vars&lt;/code&gt; file. It allow me to separate users by group but that also mean if some
+users exists in multiple groups, I have to repeat defining the user data.&lt;/p&gt;
+&lt;p&gt;My first attempt then look like this:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Development server&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;devserver&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;sudo&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;true&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;vars_files&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;data/users/users.yml&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;roles&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;development&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;mysql-client&lt;/span&gt;
+
+  &lt;span class="l-Scalar-Plain"&gt;tasks&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;include&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;tasks/add_user.yml accounts_to_add={{ all_users }}&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;include&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;tasks/common.yml users={{ all_users }}&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;include&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;tasks/delete_user.yml accounts_to_delete={{ deleted_users }}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With &lt;code&gt;data/users/users.yml&lt;/code&gt; defined as:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="l-Scalar-Plain"&gt;all_users&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;ali&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;kamal&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;aman&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the tasks &lt;code&gt;add_user.yml&lt;/code&gt; was very clunkyly defined:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nn"&gt;---&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Create user&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;home=/home/{{ item }} name={{ item }} shell=/bin/bash state=present&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_items&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;accounts_to_add&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add SSH key&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;authorized_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user={{ item }} key="{{ lookup('file', playbook_dir + '/data/users/' + item + '/key.pub') }}"&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_items&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;accounts_to_add&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tags&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'user-config'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Lock user {{ item }}&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;command&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;usermod --lock {{ item }}&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_items&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;accounts_to_add&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tags&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p-Indicator"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'user-config'&lt;/span&gt;&lt;span class="p-Indicator"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Had to deal with the &lt;code&gt;lookup()&lt;/code&gt; issue where it keep giving errors:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nl"&gt;fatal:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;devserver&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="n"&gt;inserted&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;parameter&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Be&lt;/span&gt; &lt;span class="n"&gt;sure&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;they&lt;/span&gt; &lt;span class="n"&gt;contain&lt;/span&gt; &lt;span class="n"&gt;equal&lt;/span&gt; &lt;span class="n"&gt;signs&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;example&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s"&gt;"{{var}}"&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The answer actually already there, you have to quote the &lt;code&gt;lookup(...)&lt;/code&gt; but I spent hours looking for solution,
+the price has to pay when you didn't read error message properly, sigh ...&lt;/p&gt;
+&lt;p&gt;I'm not really satisfied with this solution since it mean for every playbook, you'll keep repeating the tasks
+section. [ansible-users] roles is better here since you just include the roles and the users variables being
+inferred automatically. So I keep searching for solution to split &lt;code&gt;group_vars&lt;/code&gt; file until I realized can reference
+variables in the playbook.&lt;/p&gt;&lt;/div&gt;</description><category>ansible</category><guid>http://k4ml.github.io/posts/ansible-manage-users-from-central-file.html</guid><pubDate>Wed, 01 Apr 2015 15:30:52 GMT</pubDate></item><item><title>Django: Where does the application start ?</title><link>http://k4ml.github.io/posts/django-where-does-the-application-start.html</link><description>&lt;div&gt;&lt;p&gt;The key to understand any kind of application is to know where does it start. Until
+then you'll keep banging your head, shooting in the dark and lastly, at the mercy
+of Google when trying to debug or solve any issues you have.&lt;/p&gt;
+&lt;p&gt;Majority of web developers don't really know, or even care where actually their application
+start. This particularly true for those developing in PHP which abstract most of the web parts
+and it appear to developer they just writing a regular command line or desktop application.&lt;/p&gt;
+&lt;p&gt;For Django developer, you can probably ignore this throughout your dev carrier but knowing it
+will help you a lot in.&lt;/p&gt;
+&lt;p&gt;Django application can start (at least) from 2 possible entry point. The first entry point is
+through the development server and the second entry point is when you deploy it to production
+web server, either &lt;code&gt;mod_wsgi&lt;/code&gt;, &lt;code&gt;gunicorn&lt;/code&gt;, &lt;code&gt;Paste&lt;/code&gt;, &lt;code&gt;Rocket&lt;/code&gt;, &lt;code&gt;Waitress&lt;/code&gt;, &lt;code&gt;Circus&lt;/code&gt; or dozen more
+WSGI server you can find on PyPI. I can still remember the day when there's none pure Python
+WSGI server exists (except CherryPy) and how I'd really envy Rails's community for having Mongrel.
+That day has long gone.&lt;/p&gt;
+&lt;p&gt;Let's dive to the first entry point - when you run your django application through the
+&lt;code&gt;manage.py runserver&lt;/code&gt; command. Typical django application (as generated) by the &lt;code&gt;startproject&lt;/code&gt; command
+has a file called &lt;code&gt;manage.py&lt;/code&gt; at the root of the project directory. This is the file that developer use
+to interact with their application, doing things such as running development server, synching database
+tables with the models definition, loading/exporting data and so much more.&lt;/p&gt;
+&lt;p&gt;If you peek into &lt;code&gt;manage.py&lt;/code&gt;, it's pretty simple actually:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!./bin/python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;"__main__"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setdefault&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"DJANGO_SETTINGS_MODULE"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;"acara.settings"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;django.core.management&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;execute_from_command_line&lt;/span&gt;
+
+    &lt;span class="n"&gt;execute_from_command_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;They key line here is at line 10 where a function called &lt;code&gt;execute_from_command_line()&lt;/code&gt; being called.
+From here we can traverse to module &lt;code&gt;django.core.management&lt;/code&gt; to find out what that function is doing.
+If you're sure where the actual module is located, just open the python console and import the module
+to inspect it's location:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="gp"&gt;$&lt;/span&gt; python
+&lt;span class="go"&gt;Python 2.7.3 (default, Aug  1 2012, 05:16:07) &lt;/span&gt;
+&lt;span class="go"&gt;[GCC 4.6.3] on linux2&lt;/span&gt;
+&lt;span class="go"&gt;Type "help", "copyright", "credits" or "license" for more information.&lt;/span&gt;
+
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; import django.core.management
+&lt;span class="gp"&gt;&amp;gt;&lt;/span&gt;&amp;gt;&amp;gt; django.core.management
+&lt;span class="go"&gt;&amp;lt;module 'django.core.management' from '/home../local/lib/...django/core/management/__init__.pyc'&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now we know that module was in &lt;code&gt;$HOME/local/lib/python2.7/site-packages/django/core/management/__init__.py&lt;/code&gt;.
+This one thing I love in python. Everything is explicit. You can easily trace down where things comes from
+without even having to understand the whole framework yet. In some other framework or languages where
+implicit import is a norm, you'll have hard time tracing down where certain functions or variables comes from
+until you know the mechanism of the framework.&lt;/p&gt;
+&lt;p&gt;Let's look what inside &lt;code&gt;django.core.management&lt;/code&gt; module. The function &lt;code&gt;execute_from_command_line()&lt;/code&gt; was defined
+at the bottom of the source code. It just a wrapper to other function actually.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;execute_from_command_line&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;"""&lt;/span&gt;
+&lt;span class="sd"&gt;    A simple method that runs a ManagementUtility.&lt;/span&gt;
+&lt;span class="sd"&gt;    """&lt;/span&gt;
+    &lt;span class="n"&gt;utility&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ManagementUtility&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;utility&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;execute&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description><category>django</category><category>wsgi</category><category>learn</category><guid>http://k4ml.github.io/posts/django-where-does-the-application-start.html</guid><pubDate>Sat, 01 Nov 2014 08:00:14 GMT</pubDate></item><item><title>Bagaimana $_POST dan $_GET terhasil</title><link>http://k4ml.github.io/posts/bagaimana-_post-dan-_get-terhasil.html</link><description>&lt;p&gt;No translation yet, please red the Malay version.&lt;/p&gt;</description><category>php</category><guid>http://k4ml.github.io/posts/bagaimana-_post-dan-_get-terhasil.html</guid><pubDate>Mon, 31 Mar 2014 08:23:49 GMT</pubDate></item><item><title>Mini PyCon MY 2014</title><link>http://k4ml.github.io/posts/mini-pycon-my-2014.html</link><description>&lt;div&gt;&lt;p&gt;This is the first mini PyCon held in Malaysia so congratulation to the &lt;a href="http://www.pycon.my/mini-pycon-my-2014/staff"&gt;team&lt;/a&gt; that
+finally make it happened. It just 1 day event filled with tracks on various topic
+related to python. Due to the space limitation, all sessions being held serially in
+a single room. Having attend a number of PyCon APAC last time in SG, I'm quite happy
+that I managed to follow all the sessions in this mini pycon. It quite frustrating when
+you have to decide between two interesting sessions because it run in parallel in two
+different places. Below are some quick notes from the sessions that I managed to recall.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+&lt;p&gt;Sphinx and Read The Docs - Eric Holscher&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Defacto documentation tools in Python Community.&lt;/li&gt;
+&lt;li&gt;While RTD and Sphinx are both valuable tools that we have in Python,
+  I can't really stand RST for writing. It kind of Latex where everytime I need
+  to write, I have to read the documentation again to look for all the syntax.&lt;/li&gt;
+&lt;li&gt;I have only used RTD once in the past, for writing my &lt;a href="http://asas-django.rtfd.org"&gt;unfinished book&lt;/a&gt;
+  on django.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python on Google App Engine - Desmond Lua&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Quite an interesting talk.&lt;/li&gt;
+&lt;li&gt;Everything you did probably would cost money so you have to give extra
+  attention on how you write your app.&lt;/li&gt;
+&lt;li&gt;I had a thought of moving &lt;a href="http://harga.smach.net"&gt;Cari Harga Barang&lt;/a&gt; to App Engine
+  in order to save some money on the hosting and also the time to manage it but look
+  like it will cost more with App Engine since there's lot of write operations to store
+  all the items and keep it updated daily.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Boosting Productivity with IPython - Boey Pak Cheong&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Finally, I had a visual on what Ipython Notebook really is. In fact, in the
+  later talk, the presenter was using IPython Notebook to show and demonstrate
+  his python code snippet.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python Powered Cloud - Joseph Ziegler&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;This imo the most interesting talk.&lt;/li&gt;
+&lt;li&gt;I have long heard about Elastic Beanstalk (EB) but never had a chance to give it a try.&lt;/li&gt;
+&lt;li&gt;EB probably what I have been looking on how to deploy our apps.&lt;/li&gt;
+&lt;li&gt;The only downside of EB is that it based on RHEL which mean for
+  organization that been using Ubuntu, it will be a huge leap to migrate.&lt;/li&gt;
+&lt;li&gt;Another cool stuff shown in this talk, the &lt;a href="https://github.com/newsapps/beeswithmachineguns"&gt;bees army&lt;/a&gt;.
+  It being used to DDOS the website in order to demo how EB auto scaling work. Still
+  wondering how this thing went out of my radar ;).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python in Embedded and Robotics Development - Yap Wen Jiun&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;I'm not into robotic (yet), maybe until my kid ready to play around
+  with computer and all the stuff.&lt;/li&gt;
+&lt;li&gt;There's a kind of OS for robotic stuff call &lt;a href="http://wiki.ros.org/"&gt;ROS&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Creating Powerful RESTful API Services with Django Tastypie - Leong Seh Hui&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;We used Django Rest Framework for one of our app in development.&lt;/li&gt;
+&lt;li&gt;The speaker however never used DRF so unable to get his insight on the
+  differences between both framework.&lt;/li&gt;
+&lt;li&gt;Looking at &lt;a href="https://github.com/toastdriven/django-tastypie#why-tastypie"&gt;Why Tastypie section&lt;/a&gt;
+  which say 'You DON'T want to have to write your own serializer to make the output right.',
+  ok, that sound true.&lt;/li&gt;
+&lt;li&gt;Tastypie way of hooking the Resource into urls.py also captured my attention since it
+  look similar to what I'm doing with my little library &lt;a href="https://bitbucket.org/k4ml/django-viewrouter"&gt;django-viewrouter&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>pycon</category><category>python</category><guid>http://k4ml.github.io/posts/mini-pycon-my-2014.html</guid><pubDate>Sun, 16 Mar 2014 00:19:20 GMT</pubDate></item><item><title>PHP: Headers already sent and HTTP basic</title><link>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</link><description>&lt;div&gt;&lt;p&gt;If there's one error that must be encountered by all PHP developers, this:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;Warning&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cannot&lt;/span&gt; &lt;span class="n"&gt;modify&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="n"&gt;already&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;probably one of it. Anyone who developing in PHP must at least once having issue
+involving this. Lot of articles and answers have been written on this issue, and &lt;a href="http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php"&gt;this
+answer on stackoverflow&lt;/a&gt; is one of the most comprehensive write up explaining the issue,
+why it happen and how to fix it. So I don't plan to talk much on the PHP part in this post
+but more on the HTTP part.&lt;/p&gt;
+&lt;h3 id="what-is-http"&gt;What is HTTP ?&lt;/h3&gt;
+&lt;p&gt;It's a protocol that govern how a piece of information can be exchanged over the Internet.
+There are lot of protocols defined and being used on the Internet but HTTP definitely one
+of the widely used protocol in form of what layman known as web, or World Wide Web (WWW).
+The protocol is being defined as &lt;a href="https://www.ietf.org/rfc/rfc2616.txt"&gt;RFC 2616&lt;/a&gt; and as we will later realized, it is a
+text protocol. Being a text based protocol make it much easier to study and understand and
+test it in practical manner since no special tools needed to actually implement the protocol.
+Before we delved deeper into the protocol, let also clear up what actually meant by the word
+protocol itself.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>php</category><category>http</category><category>headers</category><guid>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</guid><pubDate>Mon, 03 Mar 2014 06:37:42 GMT</pubDate></item><item><title>When to comment ?</title><link>http://k4ml.github.io/posts/when-to-comment.html</link><description>&lt;div&gt;&lt;p&gt;One of the question we faced up when writing code is when to put comment for our code. It''s already pretty well known that we should comment on the 'why' part, not the 'how'. While looking through our code for some code review, I found these few lines of code:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="c"&gt;# make requests to the API and process response&lt;/span&gt;
+&lt;span class="n"&gt;resp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status_code&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Above I think is an example of unnecessary comment since it obvious from the code that we're making some request to a &lt;code&gt;url&lt;/code&gt; and processing it's response. Good comment is something along this line:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="c"&gt;# doing POST here since the API does not yet support PUT&lt;/span&gt;
+&lt;span class="n"&gt;resp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;resp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status_code&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;200&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In above illustrative situation, the request logically should be a PUT request but due to some REASON it has to be a POST. The REASON that is worthy for comment since it explain the WHY part. It help the next developer coming up to maintain this code when he probably has in mental state that the request in this section of code should be a PUT not POST. The comment help him to not start raising suspicious that this section of code now has a bug.&lt;/p&gt;
+&lt;p&gt;So this just one example of when to comment our code. I'll try to add more as I encountered more examples.&lt;/p&gt;&lt;/div&gt;</description><category>coding</category><guid>http://k4ml.github.io/posts/when-to-comment.html</guid><pubDate>Thu, 16 Jan 2014 18:07:32 GMT</pubDate></item><item><title>Python: Custom Interactive Console</title><link>http://k4ml.github.io/posts/python-custom-interactive-console.html</link><description>&lt;div&gt;&lt;p&gt;While working on new features that consist of web frontend and a backend API, I found
+a constant need to manipulate the backend API through python interactive console.
+Ideally I should implement a command line interface that I can use while waiting for the web frontend to finish but since the API (a class) already has structured methods to access all the API functionalities, a cli interface will just duplicating most of the class API methods.&lt;/p&gt;
+&lt;p&gt;What tedios when accessing the API through python interactive console is having to re-import all the objects that you need every time you start the interactive console. So an idea pop up - why not create my own custom interactive console with all the objects that I need pre-imported. In python, creating your own interactive console is &lt;a href="http://stackoverflow.com/questions/19754458/open-interactive-python-console-from-a-script"&gt;trivial&lt;/a&gt;. The code module has all that you need.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;code&lt;/span&gt;
+
+&lt;span class="c"&gt;# SomeClass will be available in the interactive console&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;yourmodule&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;
+
+&lt;span class="nb"&gt;vars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;InteractiveConsole&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interact&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;While simple and just few lines of code, above is not really useful. It doesn't have auto complete and no history, you can't use up/down arrow key to repeat the previous command. A better version:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;code&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;readline&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;rlcompleter&lt;/span&gt;
+
+&lt;span class="c"&gt;# SomeClass will be available in the interactive console&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;yourmodule&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;
+
+&lt;span class="nb"&gt;vars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rlcompleter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;complete&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_and_bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"tab: complete"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;InteractiveConsole&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interact&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Above is much nicer. Now you have auto complete (type &lt;code&gt;Some&amp;lt;Tab&amp;gt;&lt;/code&gt; and you got &lt;code&gt;SomeClass&lt;/code&gt;). Cool. But I immediately noticed that the history was not preserved, mean that when I closed the console and start again, it's in blank slate. I can't repeat command in previous session. This actually how the default python console work but I'd already have &lt;code&gt;~/.pythonrc.py&lt;/code&gt; that I defined as &lt;code&gt;PYTHONSTARTUP&lt;/code&gt; to &lt;a href="http://sontek.net/blog/detail/tips-and-tricks-for-the-python-interpreter"&gt;setup the tab completion and command history&lt;/a&gt;. It seem that my pythonrc.py not being processed by this custom console.&lt;/p&gt;
+&lt;p&gt;Noticing that the python console from django &lt;code&gt;manage.py shell&lt;/code&gt; working correctly with my pythonrc.py, I'd take a look at the &lt;a href="https://github.com/django/django/blob/master/django/core/management/commands/shell.py#L67"&gt;implementation code&lt;/a&gt;. Look like django has to process PYTHONSTARTUP manually. I'm not really keen on copy-pasting the code from django but there's no way to pass your current enviroment into the console that django created.&lt;/p&gt;
+&lt;p&gt;In the end, I have to copy the django code into my console function:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;code&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;readline&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;rlcompleter&lt;/span&gt;
+
+&lt;span class="c"&gt;# SomeClass will be available in the interactive console&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;yourmodule&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;
+
+&lt;span class="nb"&gt;vars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rlcompleter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;complete&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_and_bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"tab: complete"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# copied from django.core.management.commands.shell&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pythonrc&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"PYTHONSTARTUP"&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                 &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'~/.pythonrc.py'&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pythonrc&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isfile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pythonrc&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pythonrc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;handle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;handle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;pythonrc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'exec'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;NameError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interact&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I found that working directly in the console like this motivate me to write better docstring for each functions and methods as I'd constantly using the help() function to figure out what each function/class/methods are doing. This seem to be much better than having to write dedicated cli interface for your API.&lt;/p&gt;&lt;/div&gt;</description><category>python</category><guid>http://k4ml.github.io/posts/python-custom-interactive-console.html</guid><pubDate>Mon, 13 Jan 2014 13:34:23 GMT</pubDate></item><item><title>HackerNews/Reddit/Stackoverflow like communities</title><link>http://k4ml.github.io/posts/hackernewsredditstackoverflow-like-communities.html</link><description>&lt;div&gt;&lt;p&gt;Being a developer/programmer, site such as Reddit (especially &lt;a href="http://www.reddit.com/r/programming"&gt;r/programming&lt;/a&gt;) and
+&lt;a href="https://news.ycombinator.com/"&gt;HackerNews&lt;/a&gt; are my main source of latest news and updates. Next definitely Stackoverflow when looking for answers on specific programming problems. But from time to time, I'd
+also discovered few other small communities, mostly country focused while going through the google search results. So I've decided to start collecting link to these communities in this blog posts.&lt;/p&gt;
+&lt;p&gt;So here are the lists so far:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://nullpointer.ph/"&gt;nullpointer&lt;/a&gt; - Q&amp;amp;A like site in Phillipine.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://hackerstreet.in/"&gt;Hackstreet.India&lt;/a&gt; - India based site.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;While not an Q&amp;amp;A site, I listed also here site with domain of similar theme:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://hackflow.com/"&gt;Hackflow&lt;/a&gt; - Blog mostly on Python.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://importerror.com/"&gt;ImportError&lt;/a&gt; - This very own site ;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>python</category><category>bookmark</category><guid>http://k4ml.github.io/posts/hackernewsredditstackoverflow-like-communities.html</guid><pubDate>Tue, 07 Jan 2014 10:28:56 GMT</pubDate></item><item><title>Javascript Self Invoking Function</title><link>http://k4ml.github.io/posts/javascript-self-invoking-function.html</link><description>&lt;div&gt;&lt;p&gt;While peeking into Twitter &lt;a href="https://github.com/twbs/bootstrap/blob/8a74264344489e8b9e10c5c5e2098bb75116b8bd/js/alert.js#L21"&gt;Bootstrap js&lt;/a&gt; code, I noticed function being defined like this:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="s2"&gt;"use strict"&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;// ALERT CLASS DEFINITION&lt;/span&gt;
+    &lt;span class="c1"&gt;// ======================&lt;/span&gt;
+
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;dismiss&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'[data-dismiss="alert"]'&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;Alert&lt;/span&gt;   &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;el&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="err"&gt;  &lt;/span&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;el&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'click'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;dismiss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;close&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Noticed the &lt;code&gt;+&lt;/code&gt; sign before the keyword &lt;code&gt;function&lt;/code&gt;. At first I thought it could some typo slipping through the commit but after some google, it turn out that &lt;a href="http://stackoverflow.com/questions/13341698/javascript-plus-sign-in-front-of-function-name"&gt;just another way&lt;/a&gt; to define self invoking function in JavaScript. Those who has been writing some JavaScript, or deal with some JS library probably already familiar with a common idiom to write code like below:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'#some_dom_id'&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;click&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;....);&lt;/span&gt;
+&lt;span class="p"&gt;})(&lt;/span&gt;&lt;span class="nx"&gt;jQuery&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/javascript-self-invoking-function.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>javascript</category><guid>http://k4ml.github.io/posts/javascript-self-invoking-function.html</guid><pubDate>Tue, 03 Dec 2013 17:54:03 GMT</pubDate></item></channel></rss>

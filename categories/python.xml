@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (python)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/python.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Mini PyCon MY 2014</title><link>http://k4ml.github.io/posts/mini-pycon-my-2014.html</link><description>&lt;div&gt;&lt;p&gt;This is the first mini PyCon held in Malaysia so congratulation to the &lt;a href="http://www.pycon.my/mini-pycon-my-2014/staff"&gt;team&lt;/a&gt; that
+finally make it happened. It just 1 day event filled with tracks on various topic
+related to python. Due to the space limitation, all sessions being held serially in
+a single room. Having attend a number of PyCon APAC last time in SG, I'm quite happy
+that I managed to follow all the sessions in this mini pycon. It quite frustrating when
+you have to decide between two interesting sessions because it run in parallel in two
+different places. Below are some quick notes from the sessions that I managed to recall.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+&lt;p&gt;Sphinx and Read The Docs - Eric Holscher&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Defacto documentation tools in Python Community.&lt;/li&gt;
+&lt;li&gt;While RTD and Sphinx are both valuable tools that we have in Python,
+  I can't really stand RST for writing. It kind of Latex where everytime I need
+  to write, I have to read the documentation again to look for all the syntax.&lt;/li&gt;
+&lt;li&gt;I have only used RTD once in the past, for writing my &lt;a href="http://asas-django.rtfd.org"&gt;unfinished book&lt;/a&gt;
+  on django.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python on Google App Engine - Desmond Lua&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Quite an interesting talk.&lt;/li&gt;
+&lt;li&gt;Everything you did probably would cost money so you have to give extra
+  attention on how you write your app.&lt;/li&gt;
+&lt;li&gt;I had a thought of moving &lt;a href="http://harga.smach.net"&gt;Cari Harga Barang&lt;/a&gt; to App Engine
+  in order to save some money on the hosting and also the time to manage it but look
+  like it will cost more with App Engine since there's lot of write operations to store
+  all the items and keep it updated daily.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Boosting Productivity with IPython - Boey Pak Cheong&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Finally, I had a visual on what Ipython Notebook really is. In fact, in the
+  later talk, the presenter was using IPython Notebook to show and demonstrate
+  his python code snippet.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python Powered Cloud - Joseph Ziegler&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;This imo the most interesting talk.&lt;/li&gt;
+&lt;li&gt;I have long heard about Elastic Beanstalk (EB) but never had a chance to give it a try.&lt;/li&gt;
+&lt;li&gt;EB probably what I have been looking on how to deploy our apps.&lt;/li&gt;
+&lt;li&gt;The only downside of EB is that it based on RHEL which mean for
+  organization that been using Ubuntu, it will be a huge leap to migrate.&lt;/li&gt;
+&lt;li&gt;Another cool stuff shown in this talk, the &lt;a href="https://github.com/newsapps/beeswithmachineguns"&gt;bees army&lt;/a&gt;.
+  It being used to DDOS the website in order to demo how EB auto scaling work. Still
+  wondering how this thing went out of my radar ;).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python in Embedded and Robotics Development - Yap Wen Jiun&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;I'm not into robotic (yet), maybe until my kid ready to play around
+  with computer and all the stuff.&lt;/li&gt;
+&lt;li&gt;There's a kind of OS for robotic stuff call &lt;a href="http://wiki.ros.org/"&gt;ROS&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Creating Powerful RESTful API Services with Django Tastypie - Leong Seh Hui&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;We used Django Rest Framework for one of our app in development.&lt;/li&gt;
+&lt;li&gt;The speaker however never used DRF so unable to get his insight on the
+  differences between both framework.&lt;/li&gt;
+&lt;li&gt;Looking at &lt;a href="https://github.com/toastdriven/django-tastypie#why-tastypie"&gt;Why Tastypie section&lt;/a&gt;
+  which say 'You DON'T want to have to write your own serializer to make the output right.',
+  ok, that sound true.&lt;/li&gt;
+&lt;li&gt;Tastypie way of hooking the Resource into urls.py also captured my attention since it
+  look similar to what I'm doing with my little library &lt;a href="https://bitbucket.org/k4ml/django-viewrouter"&gt;django-viewrouter&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>pycon</category><category>python</category><guid>http://k4ml.github.io/posts/mini-pycon-my-2014.html</guid><pubDate>Sun, 16 Mar 2014 00:19:20 GMT</pubDate></item><item><title>Python: Custom Interactive Console</title><link>http://k4ml.github.io/posts/python-custom-interactive-console.html</link><description>&lt;div&gt;&lt;p&gt;While working on new features that consist of web frontend and a backend API, I found
+a constant need to manipulate the backend API through python interactive console.
+Ideally I should implement a command line interface that I can use while waiting for the web frontend to finish but since the API (a class) already has structured methods to access all the API functionalities, a cli interface will just duplicating most of the class API methods.&lt;/p&gt;
+&lt;p&gt;What tedios when accessing the API through python interactive console is having to re-import all the objects that you need every time you start the interactive console. So an idea pop up - why not create my own custom interactive console with all the objects that I need pre-imported. In python, creating your own interactive console is &lt;a href="http://stackoverflow.com/questions/19754458/open-interactive-python-console-from-a-script"&gt;trivial&lt;/a&gt;. The code module has all that you need.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;code&lt;/span&gt;
+
+&lt;span class="c"&gt;# SomeClass will be available in the interactive console&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;yourmodule&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;
+
+&lt;span class="nb"&gt;vars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;InteractiveConsole&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interact&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;While simple and just few lines of code, above is not really useful. It doesn't have auto complete and no history, you can't use up/down arrow key to repeat the previous command. A better version:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;code&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;readline&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;rlcompleter&lt;/span&gt;
+
+&lt;span class="c"&gt;# SomeClass will be available in the interactive console&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;yourmodule&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;
+
+&lt;span class="nb"&gt;vars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rlcompleter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;complete&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_and_bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"tab: complete"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;InteractiveConsole&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interact&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Above is much nicer. Now you have auto complete (type &lt;code&gt;Some&amp;lt;Tab&amp;gt;&lt;/code&gt; and you got &lt;code&gt;SomeClass&lt;/code&gt;). Cool. But I immediately noticed that the history was not preserved, mean that when I closed the console and start again, it's in blank slate. I can't repeat command in previous session. This actually how the default python console work but I'd already have &lt;code&gt;~/.pythonrc.py&lt;/code&gt; that I defined as &lt;code&gt;PYTHONSTARTUP&lt;/code&gt; to &lt;a href="http://sontek.net/blog/detail/tips-and-tricks-for-the-python-interpreter"&gt;setup the tab completion and command history&lt;/a&gt;. It seem that my pythonrc.py not being processed by this custom console.&lt;/p&gt;
+&lt;p&gt;Noticing that the python console from django &lt;code&gt;manage.py shell&lt;/code&gt; working correctly with my pythonrc.py, I'd take a look at the &lt;a href="https://github.com/django/django/blob/master/django/core/management/commands/shell.py#L67"&gt;implementation code&lt;/a&gt;. Look like django has to process PYTHONSTARTUP manually. I'm not really keen on copy-pasting the code from django but there's no way to pass your current enviroment into the console that django created.&lt;/p&gt;
+&lt;p&gt;In the end, I have to copy the django code into my console function:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;code&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;readline&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;rlcompleter&lt;/span&gt;
+
+&lt;span class="c"&gt;# SomeClass will be available in the interactive console&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;yourmodule&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SomeClass&lt;/span&gt;
+
+&lt;span class="nb"&gt;vars&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;globals&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;locals&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rlcompleter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Completer&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;complete&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse_and_bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"tab: complete"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# copied from django.core.management.commands.shell&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;pythonrc&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;"PYTHONSTARTUP"&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                 &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;expanduser&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'~/.pythonrc.py'&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;pythonrc&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isfile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pythonrc&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pythonrc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;handle&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="k"&gt;exec&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;handle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt; &lt;span class="n"&gt;pythonrc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'exec'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;NameError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;code&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interact&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;vars&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I found that working directly in the console like this motivate me to write better docstring for each functions and methods as I'd constantly using the help() function to figure out what each function/class/methods are doing. This seem to be much better than having to write dedicated cli interface for your API.&lt;/p&gt;&lt;/div&gt;</description><category>python</category><guid>http://k4ml.github.io/posts/python-custom-interactive-console.html</guid><pubDate>Mon, 13 Jan 2014 13:34:23 GMT</pubDate></item><item><title>HackerNews/Reddit/Stackoverflow like communities</title><link>http://k4ml.github.io/posts/hackernewsredditstackoverflow-like-communities.html</link><description>&lt;div&gt;&lt;p&gt;Being a developer/programmer, site such as Reddit (especially &lt;a href="http://www.reddit.com/r/programming"&gt;r/programming&lt;/a&gt;) and
+&lt;a href="https://news.ycombinator.com/"&gt;HackerNews&lt;/a&gt; are my main source of latest news and updates. Next definitely Stackoverflow when looking for answers on specific programming problems. But from time to time, I'd
+also discovered few other small communities, mostly country focused while going through the google search results. So I've decided to start collecting link to these communities in this blog posts.&lt;/p&gt;
+&lt;p&gt;So here are the lists so far:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://nullpointer.ph/"&gt;nullpointer&lt;/a&gt; - Q&amp;amp;A like site in Phillipine.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://hackerstreet.in/"&gt;Hackstreet.India&lt;/a&gt; - India based site.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;While not an Q&amp;amp;A site, I listed also here site with domain of similar theme:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://hackflow.com/"&gt;Hackflow&lt;/a&gt; - Blog mostly on Python.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://importerror.com/"&gt;ImportError&lt;/a&gt; - This very own site ;)&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>python</category><category>bookmark</category><guid>http://k4ml.github.io/posts/hackernewsredditstackoverflow-like-communities.html</guid><pubDate>Tue, 07 Jan 2014 10:28:56 GMT</pubDate></item><item><title>Django: @transaction.commit_manually and accessing db from template</title><link>http://k4ml.github.io/posts/django-transactioncommit_manually-and-accessing-db-from-template.html</link><description>&lt;div&gt;&lt;p&gt;Bumped into this issue twice and because the first time it happened was almost a year ago, in different project, I'd already lost my mental note about it when it happened again for second time. Our views functions are wrapped inside &lt;code&gt;@transaction.commit_manually&lt;/code&gt;, which look like below:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nd"&gt;@transaction.commit_manually&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;send_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="c"&gt;# do some stuff&lt;/span&gt;
+    &lt;span class="n"&gt;transaction&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'path/to/template.html'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This work flawlessly until recently, I need to add some logic in the template that need to check certain user's permission, before displaying the part. In the template, it just some function call that access db like:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;user.can_see_this&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"#"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;Some&lt;/span&gt; &lt;span class="k"&gt;link&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="nx"&gt;endif&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Django now raise &lt;code&gt;TransactionManagementError&lt;/code&gt; complaining I have pending commit/rollback. It doesn't make sense because I can verify that the line that executed &lt;code&gt;transaction.commit()&lt;/code&gt; was reached in the views above. Only after reading through &lt;a href="https://code.djangoproject.com/ticket/18080"&gt;this ticket&lt;/a&gt; on django issue tracker, I'd immediately remember the real issue.&lt;/p&gt;
+&lt;p&gt;Turn out this caused by new behavior of django transaction in 1.3 and above. Before 1.3, transaction only marked as dirty if we did any write database operation but since 1.3 and above, any database operation will mark the transaction as dirty. So the following code
+will work before 1.3:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nd"&gt;@transaction.commit_manually&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sendmessage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;transaction&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rollback&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="err"&gt; &lt;/span&gt; &lt;span class="err"&gt; &lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;objects&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pk&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt; &lt;/span&gt; &lt;span class="err"&gt; &lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;HttpResponse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'OK'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;All database operation now will mark the transaction as dirty and since we access the db in template - which happened during render after we called commit(), it obvious now why django complain we unclosed transaction.&lt;/p&gt;
+&lt;p&gt;It should be written like below:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="nd"&gt;@transaction.commit_manually&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;send_message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="c"&gt;# do some stuff&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;render&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'path/to/template.html'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;transaction&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</description><category>python</category><category>django</category><category>db</category><category>transaction</category><guid>http://k4ml.github.io/posts/django-transactioncommit_manually-and-accessing-db-from-template.html</guid><pubDate>Mon, 11 Nov 2013 19:37:17 GMT</pubDate></item><item><title>Django From Scratch</title><link>http://k4ml.github.io/posts/django-from-scratch.html</link><description>&lt;div&gt;&lt;div class="contents alert alert-info pull-left topic"&gt;
+&lt;p class="first sidebar-title"&gt;Contents&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/django-from-scratch.html#namespace"&gt;Namespace&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/django-from-scratch.html#views"&gt;Views&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/django-from-scratch.html#models"&gt;Models&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;p&gt;There are a lot of tutorials out there on Django and the official documentation also has one. For this post, I decided not to go through the typical route on how to get started with django. Let's 'ignore' the best practices and focus on what actually work and hopefully we can learn something along the way. So let's get started by downloading Django itself from the website.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/django-from-scratch.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>django</category><category>python</category><guid>http://k4ml.github.io/posts/django-from-scratch.html</guid><pubDate>Sat, 02 Nov 2013 18:34:04 GMT</pubDate></item><item><title>Hosting multiple apps at digital ocean droplet</title><link>http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html</link><description>&lt;div&gt;&lt;div class="contents alert alert-info pull-left topic"&gt;
+&lt;p class="first sidebar-title"&gt;Contents&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#nginx"&gt;Nginx&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#user"&gt;User&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#php"&gt;PHP&lt;/a&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#drupal"&gt;Drupal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#supervisor"&gt;Supervisor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#python"&gt;Python&lt;/a&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#gunicorn"&gt;Gunicorn&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#ruby"&gt;Ruby&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#issues"&gt;Issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;p&gt;This is to document a setup that I plan on a digital ocean droplet. It should 
+allow us to host applications of different platforms to co-exists side by side.&lt;br&gt;
+This initially inspired by &lt;a href="https://github.com/progrium/dokku"&gt;dokku&lt;/a&gt; setup but dokku still has some rough edges 
+making it not ready yet for production setup. This setup simply eliminate 
+[docker] and run application natively on the host instead inside a 
+&lt;a href="https://blogs.oracle.com/OTNGarage/entry/linux_containers_part_1_overview"&gt;container&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Based on diagram below, we'll use nginx as our frontend server. It'll not do 
+much other than forwarding requests to the backend apps running on different 
+port.  Each app will run inside specific user account so in theory it should 
+allow us to host apps for multiple users. Some planning on port assignment is 
+needed however in case you want to go in this route. For example user1 will use 
+port range 10000 and user2 using port 11000 space.&lt;/p&gt;
+&lt;p&gt;If you want to skip the write up and straightly get your hand dirty, just
+clone the &lt;a href="https://github.com/k4ml/do-hosting"&gt;github repo&lt;/a&gt; and fix all the path to suit your environment.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>php</category><category>python</category><category>hosting</category><category>WIP</category><guid>http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html</guid><pubDate>Fri, 04 Oct 2013 12:18:13 GMT</pubDate></item><item><title>PyInstaller</title><link>http://k4ml.github.io/posts/pyinstaller.html</link><description>&lt;div&gt;&lt;p&gt;Quick look into &lt;a href="http://www.pyinstaller.org/"&gt;pyinstaller&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Installation and usage straight forward - &lt;a href="https://github.com/k4ml/test-pyinstaller"&gt;https://github.com/k4ml/test-pyinstaller&lt;/a&gt;&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/pyinstaller.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>python</category><category>deployment</category><category>notes</category><guid>http://k4ml.github.io/posts/pyinstaller.html</guid><pubDate>Tue, 01 Oct 2013 15:26:00 GMT</pubDate></item><item><title>Get started with Ansible</title><link>http://k4ml.github.io/posts/get-started-with-ansible.html</link><description>&lt;div&gt;&lt;div class="contents alert alert-info pull-left topic"&gt;
+&lt;p class="first sidebar-title"&gt;Contents&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#inventory"&gt;Inventory&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#credentials"&gt;Credentials&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#module"&gt;Module&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#playbook"&gt;Playbook&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html#notes"&gt;Notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href="http://www.ansibleworks.com"&gt;Ansible&lt;/a&gt; is a configuration management tools, in the same space as &lt;a href="http://puppetlabs.com/"&gt;Puppet&lt;/a&gt;, 
+&lt;a href="http://www.opscode.com/chef/"&gt;Chef&lt;/a&gt;, &lt;a href="http://cfengine.com/"&gt;Cfengine&lt;/a&gt;, &lt;a href="http://saltstack.com/"&gt;SaltStack&lt;/a&gt; and &lt;a href="http://alternativeto.net/software/puppet/"&gt;few others&lt;/a&gt;. For so long being a 
+developer and also wearing a sysadmin hat, I have try to avoid using any of 
+these configuration management software, thinking they just added unnecessary 
+complexity to your workflow. But after spending countles hours building 
+automation script backed by Makefiles, bash, python with fabric, I started to 
+value a dedicated tools for these tasks.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/get-started-with-ansible.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>ansible</category><category>python</category><category>digital ocean</category><category>nginx</category><guid>http://k4ml.github.io/posts/get-started-with-ansible.html</guid><pubDate>Thu, 26 Sep 2013 16:56:32 GMT</pubDate></item><item><title>Upgrading to Django 1.5</title><link>http://k4ml.github.io/posts/upgrading-to-django-15.html</link><description>&lt;div&gt;&lt;p&gt;In the process of upgrading our apps to Django 1.5 from 1.4. Discovered the 
+following so far:-&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="https://docs.djangoproject.com/en/dev/releases/1.4/#django-db-models-fields-urlfield-verify-exists"&gt;URLField drop verify_exists 
+parameter&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;New url tag syntax - we seem to use the old syntax a lot, fortunately &lt;a href="http://stackoverflow.com/a/15373978/139870"&gt;one line
+sed can fix it&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Django form output changed a bit - we have test that check for output like &lt;code&gt;&amp;lt;input id="id_em" type="text" name="em"&lt;/code&gt;. This has changed to &lt;code&gt;&amp;lt;input id="id_em" name="em" size="25" type="text"&lt;/code&gt;. Can't find reference to this though.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;settings.ALLOWED_HOST&lt;/code&gt; now required if &lt;code&gt;DEBUG = False&lt;/code&gt;. Without this settings, you'll
+get &lt;a href="http://stackoverflow.com/questions/15128135/django-setting-debug-false-causes-500-error"&gt;500 error without further output in the error log&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Of course the list of changes lot more but these were the one that affected us.&lt;/p&gt;&lt;/div&gt;</description><category>python</category><category>django</category><guid>http://k4ml.github.io/posts/upgrading-to-django-15.html</guid><pubDate>Wed, 25 Sep 2013 00:21:52 GMT</pubDate></item><item><title>Ansible log</title><link>http://k4ml.github.io/posts/ansible-log.html</link><description>&lt;div&gt;&lt;p&gt;Ansible is an example of clash between sysadmin and developer mentality.&lt;br&gt;
+Sysadmin tend to think about system as a whole while developer always think 
+about their specific apps. While developer want to isolate, sysadmin want to 
+'propagate', if I can use such term.&lt;/p&gt;
+&lt;p&gt;I want to try ansible and see if it can be a better alternative to Fabric. The 
+first thing to do of course to install it. Since I'd already have my deployment 
+tools environment based on buildout, I want to install ansible using my 
+buildout config, rather than making it system-wide, or even 'user-wide' (mean 
+install it to my &lt;code&gt;$HOME&lt;/code&gt; dir). I don't want to pollute my $HOME, let alone the 
+system. It's impossible to install ansible with buildout since it want to write 
+to &lt;code&gt;/usr/share/ansible&lt;/code&gt; and buildout will raise &lt;code&gt;SandboxViolationError&lt;/code&gt; 
+exception.&lt;/p&gt;
+&lt;div class="sidebar"&gt;
+&lt;p class="first sidebar-title"&gt;What is virtualenv &amp;amp; pip ?&lt;/p&gt;
+&lt;p class="last"&gt;
+    Virtualenv allow you to create isolated python environment and pip is
+    command line tools to download Python packages from websites such as
+    PyPI.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Fortunately it's still installable through pip and also work inside virtualenv.&lt;br&gt;
+Running buildout under virtualenv still raise &lt;code&gt;SandboxViolationError&lt;/code&gt; though.  Enough rant, let's get started:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;virtualenv&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ansible&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ansible&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;ansible&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I spent quite sometime reading ansible docs to finally grasp the concept of 
+inventory. It's a place (a text file) where you define all the servers you want 
+to manage. By default ansible will look in &lt;code&gt;/etc/ansible/hosts&lt;/code&gt; file. You can 
+change this through configuration file &lt;a href="http://www.ansibleworks.com/docs/faq.html#id7"&gt;$HOME/.ansible.cfg&lt;/a&gt; and 
+set the value &lt;a href="https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg"&gt;hostfile       = /etc/ansible/hosts&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;pipz&lt;/span&gt;
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add main user&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name=kamal&lt;/span&gt;
+        &lt;span class="l-Scalar-Plain"&gt;home=/home/kamal&lt;/span&gt;
+
+&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Set up authorized key for kamal&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;authorized_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user=kamal&lt;/span&gt;
+                  &lt;span class="l-Scalar-Plain"&gt;state=present&lt;/span&gt;
+                  &lt;span class="l-Scalar-Plain"&gt;key="{{ item }}"&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;with_file&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;/home/kamal/.ssh/id_rsa-do.pub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Error: Host declaration is required&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://groups.google.com/forum/#!topic/ansible-project/QFDzbr3vGD0"&gt;Missing tasks&lt;/a&gt;&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;hosts&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;pipz&lt;/span&gt;
+  &lt;span class="l-Scalar-Plain"&gt;tasks&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Add main user&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;user&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name=kamal&lt;/span&gt;
+            &lt;span class="l-Scalar-Plain"&gt;home=/home/kamal&lt;/span&gt;
+
+    &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;name&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;Set up authorized key for kamal&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;authorized_key&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;user=kamal&lt;/span&gt;
+                      &lt;span class="l-Scalar-Plain"&gt;state=present&lt;/span&gt;
+                      &lt;span class="l-Scalar-Plain"&gt;key="{{ item }}"&lt;/span&gt;
+      &lt;span class="l-Scalar-Plain"&gt;with_file&lt;/span&gt;&lt;span class="p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="p-Indicator"&gt;-&lt;/span&gt; &lt;span class="l-Scalar-Plain"&gt;/home/kamal/.ssh/id_rsa-do.pub&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ansible&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;playbook&lt;/span&gt; &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yml&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;ansible_hosts&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ini&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;u&lt;/span&gt; &lt;span class="n"&gt;root&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;http://lextoumbourou.com/blog/posts/getting-started-with-ansible/#part-3&lt;/p&gt;&lt;/div&gt;</description><category>ansible</category><category>sysadmin</category><category>devops</category><category>python</category><guid>http://k4ml.github.io/posts/ansible-log.html</guid><pubDate>Tue, 24 Sep 2013 18:34:04 GMT</pubDate></item></channel></rss>

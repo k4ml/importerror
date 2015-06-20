@@ -1,0 +1,471 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Django The Hard Way | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/django-the-hard-way.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="django-the-hard-way.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Django The Hard Way</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2013-09-19T03:58:40+08:00" itemprop="datePublished">2013-09-19 03:58</time>
+        
+    
+        
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/django.html"><span class="badge badge-info">django</span></a>
+        
+            <a class="tag" href="../categories/python.html"><span class="badge badge-info">python</span></a>
+        
+            <a class="tag" href="../categories/tutorial.html"><span class="badge badge-info">tutorial</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><p>There are a lot of tutorials out there on Django and the official documentation also has one. For this post, I decided not to go through the typical route on how to get started with django. Let's 'ignore' the best practices and focus on what actually work and hopefully we can learn something along the way. So let's get started by downloading Django itself from the website.</p>
+<!-- TEASER_END -->
+
+<div class="code"><pre><span class="go">    $ wget -o django.tar.gz https://www.djangoproject.com/download/1.5.1/tarball/</span>
+<span class="go">    $ tar xzf django.tar.gz </span>
+<span class="go">    $ ls</span>
+<span class="go">    Django-1.5.1  django.tar.gz</span>
+<span class="go">    $ ls Django-1.5.1/</span>
+<span class="go">    AUTHORS  docs    INSTALL  MANIFEST.in  README.rst  setup.cfg  tests</span>
+<span class="go">    django   extras  LICENSE  PKG-INFO     scripts     setup.py</span>
+</pre></div>
+
+
+<p>What we're getting is called a Python package that supposed to be installed. But we're not going to install it, instead let just take what we really need. Take out the <code>django</code> directory and move to our current directory.</p>
+<div class="code"><pre><span class="go">    $ mv Django-1.5.1/django .</span>
+</pre></div>
+
+
+<p>One thing we should understand when get started with Django is that it's just Python. In Python the most important thing is to make sure we can import the module we want to use. Let's try to <code>import django</code>.</p>
+<div class="code"><pre><span class="go">    $ python</span>
+<span class="go">    Python 2.6.5 (r265:79063, Apr 16 2010, 13:09:56) </span>
+<span class="go">    [GCC 4.4.3] on linux2</span>
+<span class="go">    Type "help", "copyright", "credits" or "license" for more information.</span>
+
+<span class="go">    &gt;&gt;&gt; import django</span>
+<span class="go">    &gt;&gt;&gt; django</span>
+<span class="go">    &lt;module 'django' from 'django/__init__.py'&gt;</span>
+</pre></div>
+
+
+<p>This is great, we 'have' django now so let's build some application with it. In any computer program, it's important to know what is the entry point to that program. In C program we have the <code>main()</code> function for example, in Java you specify a class for the JVM to load and that class must have the <code>static main()</code> method. So what is the entry point to django application ? There will be at least 2 entry points to django application. First let's called command line entry point (CLI) and second the WSGI entry point. Let's ignore what is WSGI and focus on executing django application from command line. This is the minimal python script that you can use to invoke django application:-</p>
+<div class="code"><pre><span class="go">    $ cat main.py </span>
+<span class="go">    from django.core.management import execute_from_command_line</span>
+
+<span class="go">    execute_from_command_line()</span>
+</pre></div>
+
+
+<p>The filename can be anything but let's call it <code>main.py</code>. If you run that script with python, it will display a list of available sub-commands, along with some help message.</p>
+<div class="code"><pre><span class="go">    $ python main.py </span>
+<span class="go">    Usage: main.py subcommand [options] [args]</span>
+<span class="go">    ...</span>
+<span class="go">    [django]</span>
+<span class="go">    cleanup</span>
+<span class="go">    compilemessages</span>
+<span class="go">    createcachetable</span>
+<span class="go">    dbshell</span>
+<span class="go">    ...</span>
+<span class="go">    runserver</span>
+</pre></div>
+
+
+<p>The sub-command we're interested with is the <code>runserver</code>. That will start a process that listen at port 8000 and ready to serve HTTP request. People call it web server, quite similar to that well known Apache. Of course this web server that come with Django is not meant to replace Apache and far from usable outside of this local machine but that will be in another post. Let's try to run the <code>runserver</code> command:-</p>
+<div class="code"><pre><span class="go">    $ python main.py runserver</span>
+</pre></div>
+
+
+<p>You'll get a message like this:-</p>
+<div class="code"><pre><span class="go">    ImproperlyConfigured: Requested setting USE_I18N, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.</span>
+</pre></div>
+
+
+<p>So something not right, in order for Django to start up, you have to tell it how to configure itself. You have to provide some settings. The settings itself just another python module (there's another way to provide settings) which mean the module must be able to be imported from the python script that we use to run django. Let's create the settings module, name it <code>settings.py</code> (it can be anything):-</p>
+<div class="code"><pre><span class="go">    $ touch settings.py</span>
+<span class="go">    $ python</span>
+<span class="go">    &gt;&gt;&gt; import settings</span>
+<span class="go">    &gt;&gt;&gt; settings</span>
+<span class="go">    &lt;module 'settings' from 'settings.py'&gt; </span>
+</pre></div>
+
+
+<p>Now that we have settings module in place, let's modify our <code>main.py</code>:-</p>
+<div class="code"><pre><span class="go">    $ cat main.py</span>
+<span class="go">    import os</span>
+
+<span class="go">    from django.core.management import execute_from_command_line</span>
+
+<span class="go">    os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'</span>
+
+<span class="go">    execute_from_command_line()</span>
+</pre></div>
+
+
+<p>Above, we hardcode the value of <code>DJANGO_SETTINGS_MODULE</code> environment variables to our settings module. Just like any environment variables, we can also specify it when we run our script:-</p>
+<div class="code"><pre><span class="go">    $ DJANGO_SETTINGS_MODULE=settings python main.py</span>
+</pre></div>
+
+
+<p>The result would be the same. Specifying the environment variables value on the command line without hardcoding allow us to specify different settings to our app with having to modify the code. That's one of the reason why django choose to use environment variables to store pointer to the settings. One typical usecase when you want to have different settings for development and production. Let's continue with our app:-</p>
+<div class="code"><pre><span class="go">    $ python main.py runserver</span>
+<span class="go">    ImproperlyConfigured: The SECRET_KEY setting must not be empty.</span>
+</pre></div>
+
+
+<p>Django already come with list of <a href="https://docs.djangoproject.com/en/1.5/ref/settings/">default settings</a> but apparently for this one, you have to specify it yourself. Let's ignore first what the purpose of this <code>SECRET_KEY</code>. So fix our settings module to have that:-</p>
+<div class="code"><pre><span class="go">    $ cat settings.py</span>
+<span class="go">    SECRET_KEY = "1+)O49,&gt;}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"</span>
+</pre></div>
+
+
+<p>Run <code>runserver</code> again:-</p>
+<div class="code"><pre><span class="go">    $ python main.py runserver</span>
+<span class="go">    Validating models...</span>
+
+<span class="go">    0 errors found</span>
+<span class="go">    April 11, 2013 - 16:34:29</span>
+<span class="go">    Django version 1.5.1, using settings 'settings'</span>
+<span class="go">    Development server is running at http://127.0.0.1:8000/</span>
+<span class="go">    Quit the server with CONTROL-C.</span>
+</pre></div>
+
+
+<p>Now django happily start the server. Let's try to access it:-</p>
+<div class="code"><pre><span class="go">    $ curl http://localhost:8000/</span>
+<span class="go">    Traceback (most recent call last):</span>
+<span class="go">      File "/usr/lib/python2.6/wsgiref/handlers.py", line 93, in run</span>
+<span class="go">        self.result = application(self.environ, self.start_response)</span>
+<span class="go">      File "/home/kamal/python/dthw/django/core/handlers/wsgi.py", line 255, in __call__</span>
+<span class="go">        response = self.get_response(request)</span>
+<span class="go">      File "/home/kamal/python/dthw/django/core/handlers/base.py", line 85, in get_response</span>
+<span class="go">        urlconf = settings.ROOT_URLCONF</span>
+<span class="go">      File "/home/kamal/python/dthw/django/conf/__init__.py", line 54, in __getattr__</span>
+<span class="go">        return getattr(self._wrapped, name)</span>
+<span class="go">    AttributeError: 'Settings' object has no attribute 'ROOT_URLCONF'</span>
+<span class="go">    [11/Apr/2013 16:37:55] "GET / HTTP/1.1" 500 59</span>
+</pre></div>
+
+
+<p>The reason django gave you an error because you haven't tell yet django what to serve from your application. You can do this by providing a mapping between a set of url pattern to python function that will be called when the pattern match. Create a new python module, name it <code>urls.py</code> (once again, the name can be anything).</p>
+<div class="code"><pre><span class="go">    $ cat urls.py</span>
+<span class="go">    from django.http import HttpResponse</span>
+<span class="go">    from django.conf.urls import patterns, url</span>
+
+<span class="go">    def hello_world(request):</span>
+<span class="go">        return HttpResponse('Hello world')</span>
+
+<span class="go">    urlpatterns = patterns('',</span>
+<span class="go">        url(r'^$', hello_world),</span>
+<span class="go">    )</span>
+</pre></div>
+
+
+<p>The module must have a name called <code>urlpatterns</code> that having a reference to the return value of function <code>django.conf.urls.patterns</code>. You call the function by passing 2 or more parameters, the first parameter can just be an empty string (explanation should be in another post), the rest of the parameters should be a tuple of 2 items - (pattern, function). It's recommended however to wrap the tuple through django provided function <code>url()</code> as it will provide you with more features that you will need as your application grow. The function can be a direct reference to function object (like above) or just a string of valid import path to the function. In the later case, django will try to import the function and then call it.</p>
+<p>Once above is done, you can hook it into <code>settings.py</code> which now should look like:-</p>
+<div class="code"><pre><span class="go">    $ cat settings.py</span>
+<span class="go">    SECRET_KEY = "1+)O49,&gt;}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"</span>
+<span class="go">    ROOT_URLCONF = 'urls'</span>
+</pre></div>
+
+
+<div class="code"><pre><span class="go">`ROOT_URLCONF` should contain valid import path to our module that define the url mapping. Try to `runserver` and access our app again:-</span>
+
+<span class="go">    $ python manage.py runserver</span>
+</pre></div>
+
+
+<p>On another console:-</p>
+<div class="code"><pre><span class="go">    $ curl http://localhost:8000/</span>
+</pre></div>
+
+
+<p>Unfortunately django still come up with 500 error. This is because django refuse to run our function through the development server with DEBUG settings set to False. This is to avoid you from running this crippled web server for production application. You should use Apache with <code>mod_wsgi</code> or any other production ready wsgi server out there. So let's fix the settings:-</p>
+<div class="code"><pre><span class="go">    $ cat settings.py</span>
+<span class="go">    SECRET_KEY = "1+)O49,&gt;}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"</span>
+<span class="go">    ROOT_URLCONF = 'urls'</span>
+<span class="go">    DEBUG = True</span>
+</pre></div>
+
+
+<p>Now running the <code>runserver</code> and try accessing http://localhost:8000/ through browser or using curl will give the "Hello world" string. The takeout from this is that all the django need is just a function that it can call given a particular url. From that function you can do whatever you want as long as you return a valid value that is an instance of <code>django.http.HttpResponse</code> or it's subclass. Another important thing to know is that most of the settings require you to provide a valid python import path that django can use to import the required module. The module itself can be anywhere and django does not restrict you to any particular structure. As long as you can do <code>import somestuff</code>, that would be fine. How to make sure you module can be imported will be a point of another post though.</p>
+<h3 id="namespace">Namespace</h3>
+<p>So far what we have been doing is defining python module in the same directory as the script that executing our application (<code>main.py</code>). The is the easiest to get started because nothing we have to do in order for python to be able to import our module. Most of the time python can import module or package defined in the same directory of the executing script. In our case we defined <code>settings.py</code> and in <code>main.py</code> it's importable as <code>settings</code>. Similar goes to <code>urls.py</code>. These (settings, urls) however are too generic name that can potentially conflict with other python modules once our app grow and we need to use more python libraries than just django. Python has [namespace] to solve this so why not we start using it before getting too deep with our app.</p>
+<p>Create a new directory called <code>myapp</code> (or anything you wish) in the same directory containing <code>main.py</code>, <code>settings.py</code> and <code>urls.py</code>.</p>
+<div class="code"><pre><span class="go">    $ mkdir myapp</span>
+<span class="go">    $ ls</span>
+<span class="go">    django  main.py  myapp  settings.py  urls.py</span>
+</pre></div>
+
+
+<p>Then move <code>settings.py</code> and <code>urls.py</code> into the new directory.</p>
+<div class="code"><pre><span class="go">    $ ls</span>
+<span class="go">    django  main.py  myapp</span>
+<span class="go">    $ ls myapp</span>
+<span class="go">    settings.py  urls.py</span>
+</pre></div>
+
+
+<p><code>main.py</code> should remain outside as it is the entry point to our app and it will be much easier if it is not in the containing app. This way we can phrase it as <code>main.py</code> will call <code>myapp</code>, otherwise if we put <code>main.py</code> in <code>myapp</code>, then <code>myapp</code> has to call itself. While technically possible it will be much harder to explain. Django has done this in the beginning and has since corrected it in last few latest versions. In order for a directory to be recognised as valid python package (namespace), you have to provide a file named <code>__init__.py</code>. Most of the time it can be empty.</p>
+<div class="code"><pre><span class="go">    $ touch myapp/__init__.py</span>
+</pre></div>
+
+
+<p>Now we have to fix our settings a bit to reflect the new location of our modules. It should look like this:-</p>
+<div class="code"><pre><span class="go">    $ cat myapp/settings.py</span>
+<span class="go">    SECRET_KEY = "1+)O49,&gt;}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"</span>
+<span class="go">    ROOT_URLCONF = 'myapp.urls'</span>
+<span class="go">    DEBUG = True</span>
+</pre></div>
+
+
+<p><code>main.py</code> also need fixing:-</p>
+<div class="code"><pre><span class="go">    $ cat main.py</span>
+<span class="go">    import os</span>
+
+<span class="go">    from django.core.management import execute_from_command_line</span>
+
+<span class="go">    os.environ['DJANGO_SETTINGS_MODULE'] = 'myapp.settings'</span>
+
+<span class="go">    execute_from_command_line()</span>
+</pre></div>
+
+
+<h3 id="views">Views</h3>
+<p>So we know that django only need to call our function for any matched url and we defined that function in the same module we defined the url mapping - <code>urls.py</code>. This is fine for small app but splitting it into separate module is a good practice. So <code>urls.py</code> can just contain url mapping instead of mixing it with our application logic. Let's create new module to store our app function. We call it <code>views.py</code> but you can choose any name you like.</p>
+<div class="code"><pre><span class="go">    $ cat myapp/views.py</span>
+<span class="go">    from django.http import HttpResponse</span>
+
+<span class="go">    def hello_world(request):</span>
+<span class="go">        return HttpResponse('Hello world')</span>
+</pre></div>
+
+
+<p>Inside <code>urls.py</code> we import the views module and hook it into our url pattern:-</p>
+<div class="code"><pre><span class="go">    from django.conf.urls import patterns, url</span>
+
+<span class="go">    from myapp.views import hello_world</span>
+
+<span class="go">    urlpatterns = patterns('',</span>
+<span class="go">        url(r'^$', hello_world),</span>
+<span class="go">    )</span>
+</pre></div>
+
+
+<h3 id="models">Models</h3>
+<p>Now come the hardest part to explain because of some 'hardcoding' django did to implement the functionality. Unlike views, url config or settings, the name for the module that contain models definition was hardcoded in django - it want you to name it as <code>models.py</code>. Django also use <code>models.py</code> to imply some other parts of the framework. Let's define our models:-</p>
+<div class="code"><pre><span class="go">    $ cat myapp/models.py</span>
+<span class="go">    from django.db import models</span>
+
+<span class="go">    class Customer(models.Models):</span>
+<span class="go">        name = models.CharField(max_length=255)</span>
+</pre></div>
+
+
+<p>After defining models, you have to tell django the package that contain this <code>models.py</code> module. Our settings should look like:-</p>
+<div class="code"><pre><span class="go">    $ cat myapp/settings.py</span>
+<span class="go">    $ cat myapp/settings.py</span>
+<span class="go">    SECRET_KEY = "1+)O49,&gt;}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"</span>
+<span class="go">    ROOT_URLCONF = 'myapp.urls'</span>
+<span class="go">    DEBUG = True</span>
+<span class="go">    INSTALLED_APPS = ('myapp',)</span>
+</pre></div>
+
+
+<p>In short, what you define in <code>INSTALLED_APPS</code> basically just an import path to python package that contain <code>models.py</code> file. You can put all your models definition for your application in a single <code>models.py</code> but you maybe want to split it into multiple apps for better design. A common use case is when the <code>apps</code> can actually being reused in other project as well. It also not necessarily must be in the same directory as your current application. What important is it can be import by the python interpreter running your application. This will always true to third party libraries that you install such as from PyPI since that libraries will be installed in some other place on your system, not in your current project directory.</p>
+<p>Since we started to use db, we must define our database credentials settings:-</p>
+<div class="code"><pre><span class="go">    $ cat myapp/settings.py</span>
+<span class="go">    SECRET_KEY = "1+)O49,&gt;}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"</span>
+<span class="go">    ROOT_URLCONF = 'myapp.urls'</span>
+<span class="go">    DEBUG = True</span>
+<span class="go">    INSTALLED_APPS = ('myapp',)</span>
+<span class="go">    DATABASES = {</span>
+<span class="go">        'default': {</span>
+<span class="go">            'ENGINE': 'django.db.backends.sqlite3',</span>
+<span class="go">            'NAME': 'myapp.db',</span>
+<span class="go">        }</span>
+<span class="go">    }</span>
+</pre></div>
+
+
+<p>Once we configured <code>settings.INSTALLED_APPS</code> to have our app defined, we can run <code>syncdb</code> to let django create necessary database tables to store our models data:-</p>
+<div class="code"><pre><span class="go">    $ python main.py syncdb</span>
+<span class="go">    Creating tables ...</span>
+<span class="go">    Creating table myapp_customer</span>
+<span class="go">    Installing custom SQL ...</span>
+<span class="go">    Installing indexes ...</span>
+<span class="go">    Installed 0 object(s) from 0 fixture(s)</span>
+</pre></div></div>
+    </div>
+    
+    </div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="test-markdown.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="ansible-log.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/django-the-hard-way.html",
+        
+        disqus_title="Django The Hard Way",
+        disqus_identifier="cache/posts/django-the-hard-way.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

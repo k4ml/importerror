@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Get started with Ansible | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/get-started-with-ansible.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="get-started-with-ansible.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Get started with Ansible</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2013-09-27T00:56:32+08:00" itemprop="datePublished">2013-09-27 00:56</time>
+        
+    
+        
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/ansible.html"><span class="badge badge-info">ansible</span></a>
+        
+            <a class="tag" href="../categories/python.html"><span class="badge badge-info">python</span></a>
+        
+            <a class="tag" href="../categories/digital-ocean.html"><span class="badge badge-info">digital ocean</span></a>
+        
+            <a class="tag" href="../categories/nginx.html"><span class="badge badge-info">nginx</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><div class="contents alert alert-info pull-left topic">
+<p class="first sidebar-title">Contents</p>
+<ul><li><a href="get-started-with-ansible.html#inventory">Inventory</a></li>
+<li><a href="get-started-with-ansible.html#credentials">Credentials</a></li>
+<li><a href="get-started-with-ansible.html#module">Module</a></li>
+<li><a href="get-started-with-ansible.html#playbook">Playbook</a></li>
+<li><a href="get-started-with-ansible.html#notes">Notes</a></li>
+</ul></div>
+<p><a href="http://www.ansibleworks.com">Ansible</a> is a configuration management tools, in the same space as <a href="http://puppetlabs.com/">Puppet</a>, 
+<a href="http://www.opscode.com/chef/">Chef</a>, <a href="http://cfengine.com/">Cfengine</a>, <a href="http://saltstack.com/">SaltStack</a> and <a href="http://alternativeto.net/software/puppet/">few others</a>. For so long being a 
+developer and also wearing a sysadmin hat, I have try to avoid using any of 
+these configuration management software, thinking they just added unnecessary 
+complexity to your workflow. But after spending countles hours building 
+automation script backed by Makefiles, bash, python with fabric, I started to 
+value a dedicated tools for these tasks.</p>
+<!-- TEASER_END -->
+
+<p>The easiest way to get latest version of Ansible is by using python tools 
+<a href="https://pypi.python.org/pypi/pip">PIP</a>. Begin by installing it using <code>apt-get</code> (Ubuntu 12.04):-</p>
+<div class="sidebar"><p class="first sidebar-title">Note</p>
+This intentionally left other options to install ansible. I'll try in another
+post detailing various we way can get ansible installed.
+</div>
+
+<div class="code"><pre><span class="go">sudo apt-get install python-pip</span>
+<span class="go">sudo pip install ansible</span>
+</pre></div>
+
+
+<h3 id="inventory">Inventory</h3>
+<p>The first concept to understand in Ansible is the <a href="http://www.ansibleworks.com/docs/patterns.html">Inventory</a>, a plain text 
+file where we keep list of hosts (servers) we want to manage. By default 
+ansible will look at <code>/etc/ansible/hosts</code>. The content of the file should look 
+like this:-</p>
+<div class="code"><pre><span class="go">cat /etc/ansible/hosts</span>
+<span class="go">[server1]</span>
+<span class="go">192.168.0.1:10022</span>
+
+<span class="go">[server2]</span>
+<span class="go">192.168.0.2:10022</span>
+</pre></div>
+
+
+<p>The format can be more complex but above is enough for us to get started.<br>
+Basically we define the server name and below it's hostname, either IP address 
+or DNS name such as server1.com. By default ansible will connect using standard 
+ssh port 22 but if your ssh running on different port, use the format 
+<code>hostname:port</code>. The server name actually act as group so you can have more 
+than 1 host in each action. Following also possible:-</p>
+<div class="code"><pre><span class="go">[web-servers]</span>
+<span class="go">web1.server.com</span>
+<span class="go">web2.server.com</span>
+
+<span class="go">[db-servers]</span>
+<span class="go">192.168.0.1</span>
+</pre></div>
+
+
+<p>Now we can run our first ansible command:-</p>
+<div class="code"><pre><span class="go">ansible server1 -a '/bin/ls'</span>
+<span class="go">192.168.0.1 | success | rc=0 &gt;&gt;</span>
+<span class="go">dir1</span>
+<span class="go">dir2</span>
+</pre></div>
+
+
+<p>The above simply run command <code>ls</code> on the remote server and print it output.<br>
+This by no means useful enough or better than just plain ssh with command but 
+think about running the command on few servers at the same time. The above 
+command also bring us to next concept in ansible - <a href="http://www.ansibleworks.com/docs/modules.html">Module</a>.</p>
+<h3 id="credentials">Credentials</h3>
+<p>The above command will work only if you already setup password-less 
+authentication to your server using ssh public key. Otherwise you have to tell 
+ansible to use username/password authentication instead. For this you need 
+<code>sshpass</code> to be installed:-</p>
+<div class="code"><pre><span class="go">sudo apt-get install sshpass</span>
+</pre></div>
+
+
+<p>Then re-run previous ansible command by passing the extra options:-</p>
+<div class="code"><pre><span class="go">ansible server1 -a '/bin/ls' -u yourname -k</span>
+<span class="go">SSH password:</span>
+</pre></div>
+
+
+<p>The option <code>-k</code> will prompt you to enter the password. If you already set up
+SSH key but not using the default private, you can specify it through the command
+line:-</p>
+<div class="code"><pre><span class="go">ansible server1 -a '/bin/ls' -u yourname --private-key /path/to/id_rsa-custom</span>
+</pre></div>
+
+
+<h3 id="module">Module</h3>
+<p>Module basically what defined the ansible functionality. There are modules to 
+run command (like above), add/remove user, install packages, copy files, 
+provision new virtual machine instance such as AWS EC2 or Digital Ocean 
+droplets and much more.</p>
+<p>Through the command line, we can specify what module to run using <code>-m</code> option 
+and the arguments that the module require through <code>-a</code> option, like we're doing 
+above. If we don't specify <code>-m</code>, the default would be <code>command</code>. So both 
+commands below are equivalent:-</p>
+<div class="code"><pre><span class="go">ansible server1 -a '/bin/ls'</span>
+<span class="go">ansible server1 -m command -a '/bin/ls'</span>
+</pre></div>
+
+
+<h3 id="playbook">Playbook</h3>
+<p><a href="http://www.ansibleworks.com/docs/playbooks.html">Playbook</a> is what really make ansible a configuration management software. It 
+allow us to declaratively define what command to execute in order to configure 
+our system. It use <a href="http://en.wikipedia.org/wiki/YAML">YAML</a> for the file format. Let's try a very simple example,
+define a playbook that create new user, setup ssh key and then install nginx 
+webserver:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">server1</span>
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add main user</span>
+      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=kamal</span>
+            <span class="l-Scalar-Plain">home=/home/kamal</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Set up authorized key for kamal</span>
+      <span class="l-Scalar-Plain">authorized_key</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">user=kamal</span>
+                      <span class="l-Scalar-Plain">state=present</span>
+                      <span class="l-Scalar-Plain">key="{{ item }}"</span>
+      <span class="l-Scalar-Plain">with_file</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">/home/kamal/.ssh/id_rsa-do.pub</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Upgrade apt packages</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">upgrade=yes</span>
+           <span class="l-Scalar-Plain">update_cache=yes</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Install common packages</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">pkg={{ item }}</span>
+      <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">build-essential</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">telnet</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Install nginx</span>
+      <span class="l-Scalar-Plain">apt</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">name=nginx</span>
+
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Start nginx</span>
+      <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">service nginx start</span>
+</pre></div>
+
+
+<p>Save the above playbook as <code>main.yml</code> and then we can execute it through 
+command:-</p>
+<div class="code"><pre><span class="go">ansible-playbook main.yml -u root -i ansible_hosts.ini -k</span>
+</pre></div>
+
+
+<p>That's all for now. I'll try to post more topics on ansible as I progress 
+through my way learning it up.</p>
+<h3 id="notes">Notes</h3>
+<div class="code"><pre><span class="go">&lt;10.0.3.125&gt; ESTABLISH CONNECTION FOR USER: ubuntu</span>
+<span class="go">fatal: [10.0.3.125] =&gt; to use the 'ssh' connection type with passwords, you </span>
+<span class="go">must install the sshpass program</span>
+</pre></div>
+
+
+<p>On minimal ubuntu installation, some required packages maybe not installed:-</p>
+<div class="code"><pre><span class="go">TASK: [Upgrade apt packages] ************************************************** </span>
+<span class="go">failed: [10.0.3.125] =&gt; {"failed": true}</span>
+<span class="go">msg: Could not import python modules: apt, apt_pkg. Please install python-apt </span>
+<span class="go">package.</span>
+</pre></div>
+
+
+<p>We need at least <code>python-apt</code> and <code>aptitude</code> to be pre-installed on the remote
+system.</p></div>
+    </div>
+    
+    </div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="do-not-trust-host-header.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="pengenalan-vagrant.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/get-started-with-ansible.html",
+        
+        disqus_title="Get started with Ansible",
+        disqus_identifier="cache/posts/get-started-with-ansible.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

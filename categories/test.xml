@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (test)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/test.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Test Markdown</title><link>http://k4ml.github.io/posts/test-markdown.html</link><description>&lt;div&gt;&lt;p&gt;Write your post here.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;using_nikola&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s"&gt;'yes'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="sidebar"&gt;
+&lt;p class="first sidebar-title"&gt;Using 5.3 ?&lt;/p&gt;
+&lt;p class="last"&gt;
+    This tutorial is based on Nikola from github master. Some details are not
+    correct for the 5.3 release. Master works quite well most of the time, but you may
+    want to wait until the 5.4 release in a few days (which will include an updated version of
+    this document).
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$using_nikola&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s1"&gt;'yes'&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Two popular plain text markup formats are Markdown and reST. Markdown usage is pretty ubiquitous; it’s used by many blogs, sites like reddit and github, etc. The Python project uses reST, and has the Sphinx doc processing tool generate their html docs, as do lots of other Python-based projects.&lt;/p&gt;&lt;/div&gt;</description><category>markdown</category><category>test</category><guid>http://k4ml.github.io/posts/test-markdown.html</guid><pubDate>Tue, 17 Sep 2013 02:48:40 GMT</pubDate></item></channel></rss>

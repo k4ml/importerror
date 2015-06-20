@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (pycon)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/pycon.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Mini PyCon MY 2014</title><link>http://k4ml.github.io/posts/mini-pycon-my-2014.html</link><description>&lt;div&gt;&lt;p&gt;This is the first mini PyCon held in Malaysia so congratulation to the &lt;a href="http://www.pycon.my/mini-pycon-my-2014/staff"&gt;team&lt;/a&gt; that
+finally make it happened. It just 1 day event filled with tracks on various topic
+related to python. Due to the space limitation, all sessions being held serially in
+a single room. Having attend a number of PyCon APAC last time in SG, I'm quite happy
+that I managed to follow all the sessions in this mini pycon. It quite frustrating when
+you have to decide between two interesting sessions because it run in parallel in two
+different places. Below are some quick notes from the sessions that I managed to recall.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;
+&lt;p&gt;Sphinx and Read The Docs - Eric Holscher&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Defacto documentation tools in Python Community.&lt;/li&gt;
+&lt;li&gt;While RTD and Sphinx are both valuable tools that we have in Python,
+  I can't really stand RST for writing. It kind of Latex where everytime I need
+  to write, I have to read the documentation again to look for all the syntax.&lt;/li&gt;
+&lt;li&gt;I have only used RTD once in the past, for writing my &lt;a href="http://asas-django.rtfd.org"&gt;unfinished book&lt;/a&gt;
+  on django.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python on Google App Engine - Desmond Lua&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Quite an interesting talk.&lt;/li&gt;
+&lt;li&gt;Everything you did probably would cost money so you have to give extra
+  attention on how you write your app.&lt;/li&gt;
+&lt;li&gt;I had a thought of moving &lt;a href="http://harga.smach.net"&gt;Cari Harga Barang&lt;/a&gt; to App Engine
+  in order to save some money on the hosting and also the time to manage it but look
+  like it will cost more with App Engine since there's lot of write operations to store
+  all the items and keep it updated daily.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Boosting Productivity with IPython - Boey Pak Cheong&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Finally, I had a visual on what Ipython Notebook really is. In fact, in the
+  later talk, the presenter was using IPython Notebook to show and demonstrate
+  his python code snippet.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python Powered Cloud - Joseph Ziegler&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;This imo the most interesting talk.&lt;/li&gt;
+&lt;li&gt;I have long heard about Elastic Beanstalk (EB) but never had a chance to give it a try.&lt;/li&gt;
+&lt;li&gt;EB probably what I have been looking on how to deploy our apps.&lt;/li&gt;
+&lt;li&gt;The only downside of EB is that it based on RHEL which mean for
+  organization that been using Ubuntu, it will be a huge leap to migrate.&lt;/li&gt;
+&lt;li&gt;Another cool stuff shown in this talk, the &lt;a href="https://github.com/newsapps/beeswithmachineguns"&gt;bees army&lt;/a&gt;.
+  It being used to DDOS the website in order to demo how EB auto scaling work. Still
+  wondering how this thing went out of my radar ;).&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Python in Embedded and Robotics Development - Yap Wen Jiun&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;I'm not into robotic (yet), maybe until my kid ready to play around
+  with computer and all the stuff.&lt;/li&gt;
+&lt;li&gt;There's a kind of OS for robotic stuff call &lt;a href="http://wiki.ros.org/"&gt;ROS&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Creating Powerful RESTful API Services with Django Tastypie - Leong Seh Hui&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;We used Django Rest Framework for one of our app in development.&lt;/li&gt;
+&lt;li&gt;The speaker however never used DRF so unable to get his insight on the
+  differences between both framework.&lt;/li&gt;
+&lt;li&gt;Looking at &lt;a href="https://github.com/toastdriven/django-tastypie#why-tastypie"&gt;Why Tastypie section&lt;/a&gt;
+  which say 'You DON'T want to have to write your own serializer to make the output right.',
+  ok, that sound true.&lt;/li&gt;
+&lt;li&gt;Tastypie way of hooking the Resource into urls.py also captured my attention since it
+  look similar to what I'm doing with my little library &lt;a href="https://bitbucket.org/k4ml/django-viewrouter"&gt;django-viewrouter&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>pycon</category><category>python</category><guid>http://k4ml.github.io/posts/mini-pycon-my-2014.html</guid><pubDate>Sun, 16 Mar 2014 00:19:20 GMT</pubDate></item></channel></rss>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (php)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/php.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Bagaimana $_POST dan $_GET terhasil</title><link>http://k4ml.github.io/posts/bagaimana-_post-dan-_get-terhasil.html</link><description>&lt;p&gt;No translation yet, please red the Malay version.&lt;/p&gt;</description><category>php</category><guid>http://k4ml.github.io/posts/bagaimana-_post-dan-_get-terhasil.html</guid><pubDate>Mon, 31 Mar 2014 08:23:49 GMT</pubDate></item><item><title>PHP: Headers already sent and HTTP basic</title><link>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</link><description>&lt;div&gt;&lt;p&gt;If there's one error that must be encountered by all PHP developers, this:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;Warning&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cannot&lt;/span&gt; &lt;span class="n"&gt;modify&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="n"&gt;already&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;probably one of it. Anyone who developing in PHP must at least once having issue
+involving this. Lot of articles and answers have been written on this issue, and &lt;a href="http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php"&gt;this
+answer on stackoverflow&lt;/a&gt; is one of the most comprehensive write up explaining the issue,
+why it happen and how to fix it. So I don't plan to talk much on the PHP part in this post
+but more on the HTTP part.&lt;/p&gt;
+&lt;h3 id="what-is-http"&gt;What is HTTP ?&lt;/h3&gt;
+&lt;p&gt;It's a protocol that govern how a piece of information can be exchanged over the Internet.
+There are lot of protocols defined and being used on the Internet but HTTP definitely one
+of the widely used protocol in form of what layman known as web, or World Wide Web (WWW).
+The protocol is being defined as &lt;a href="https://www.ietf.org/rfc/rfc2616.txt"&gt;RFC 2616&lt;/a&gt; and as we will later realized, it is a
+text protocol. Being a text based protocol make it much easier to study and understand and
+test it in practical manner since no special tools needed to actually implement the protocol.
+Before we delved deeper into the protocol, let also clear up what actually meant by the word
+protocol itself.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>php</category><category>http</category><category>headers</category><guid>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</guid><pubDate>Mon, 03 Mar 2014 06:37:42 GMT</pubDate></item><item><title>Hosting multiple apps at digital ocean droplet</title><link>http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html</link><description>&lt;div&gt;&lt;div class="contents alert alert-info pull-left topic"&gt;
+&lt;p class="first sidebar-title"&gt;Contents&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#nginx"&gt;Nginx&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#user"&gt;User&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#php"&gt;PHP&lt;/a&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#drupal"&gt;Drupal&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#supervisor"&gt;Supervisor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#python"&gt;Python&lt;/a&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#gunicorn"&gt;Gunicorn&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#ruby"&gt;Ruby&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html#issues"&gt;Issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+&lt;p&gt;This is to document a setup that I plan on a digital ocean droplet. It should 
+allow us to host applications of different platforms to co-exists side by side.&lt;br&gt;
+This initially inspired by &lt;a href="https://github.com/progrium/dokku"&gt;dokku&lt;/a&gt; setup but dokku still has some rough edges 
+making it not ready yet for production setup. This setup simply eliminate 
+[docker] and run application natively on the host instead inside a 
+&lt;a href="https://blogs.oracle.com/OTNGarage/entry/linux_containers_part_1_overview"&gt;container&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Based on diagram below, we'll use nginx as our frontend server. It'll not do 
+much other than forwarding requests to the backend apps running on different 
+port.  Each app will run inside specific user account so in theory it should 
+allow us to host apps for multiple users. Some planning on port assignment is 
+needed however in case you want to go in this route. For example user1 will use 
+port range 10000 and user2 using port 11000 space.&lt;/p&gt;
+&lt;p&gt;If you want to skip the write up and straightly get your hand dirty, just
+clone the &lt;a href="https://github.com/k4ml/do-hosting"&gt;github repo&lt;/a&gt; and fix all the path to suit your environment.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>php</category><category>python</category><category>hosting</category><category>WIP</category><guid>http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html</guid><pubDate>Fri, 04 Oct 2013 12:18:13 GMT</pubDate></item></channel></rss>

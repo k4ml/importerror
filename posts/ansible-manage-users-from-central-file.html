@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Ansible: Manage users from central file | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/ansible-manage-users-from-central-file.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="ansible-manage-users-from-central-file.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Ansible: Manage users from central file</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2015-04-01T23:30:52+08:00" itemprop="datePublished">2015-04-01 23:30</time>
+        
+    
+        
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/ansible.html"><span class="badge badge-info">ansible</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><p>I want to achieve this kind of playbook:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Development server</span>
+  <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">devserver</span>
+  <span class="l-Scalar-Plain">sudo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+  <span class="l-Scalar-Plain">vars_files</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">data/users/users.yml</span>
+  <span class="l-Scalar-Plain">vars</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">users</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">all_users.ali</span><span class="nv"> </span><span class="s">}}"</span>
+        <span class="p-Indicator">-</span> <span class="s">"{{</span><span class="nv"> </span><span class="s">all_users.kamal</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="l-Scalar-Plain">roles</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">development</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mysql-client</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">users</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">common</span>
+</pre></div>
+
+
+<p>Users should be defined in a central file but in playbook for each hosts, I should be
+able to mix and match users like above. The file <code>data/users/users.yml</code> above look like:-</p>
+<div class="code"><pre><span class="l-Scalar-Plain">all_users</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">ali</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ali</span>
+        <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Ali Ahmad</span>
+        <span class="l-Scalar-Plain">groups</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'admin'</span><span class="p-Indicator">]</span>
+        <span class="l-Scalar-Plain">ssh_key</span><span class="p-Indicator">:</span>
+          <span class="p-Indicator">-</span> <span class="s">"ssh-dss</span><span class="nv"> </span><span class="s">AAAA</span><span class="nv"> </span><span class="s">..."</span>
+
+    <span class="l-Scalar-Plain">kamal</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">username</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">kamal</span>
+        <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Kamal Mustafa</span>
+        <span class="l-Scalar-Plain">groups</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'admin'</span><span class="p-Indicator">]</span>
+        <span class="l-Scalar-Plain">ssh_key</span><span class="p-Indicator">:</span>
+          <span class="p-Indicator">-</span> <span class="s">"ssh-rsa</span><span class="nv"> </span><span class="s">AAAA</span><span class="nv"> </span><span class="s">..."</span>
+
+<span class="l-Scalar-Plain">users_deleted</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user1</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">user2</span>
+</pre></div>
+
+
+<p>Initially I used <a href="https://github.com/mivok/ansible-users/blob/master/tasks/main.yml">ansible-users</a> roles but
+it has users defined in <code>group_vars</code> file. It allow me to separate users by group but that also mean if some
+users exists in multiple groups, I have to repeat defining the user data.</p>
+<p>My first attempt then look like this:-</p>
+<div class="code"><pre><span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Development server</span>
+  <span class="l-Scalar-Plain">hosts</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">devserver</span>
+  <span class="l-Scalar-Plain">sudo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+  <span class="l-Scalar-Plain">vars_files</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">data/users/users.yml</span>
+  <span class="l-Scalar-Plain">roles</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">development</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">mysql-client</span>
+
+  <span class="l-Scalar-Plain">tasks</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tasks/add_user.yml accounts_to_add={{ all_users }}</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tasks/common.yml users={{ all_users }}</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">include</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tasks/delete_user.yml accounts_to_delete={{ deleted_users }}</span>
+</pre></div>
+
+
+<p>With <code>data/users/users.yml</code> defined as:-</p>
+<div class="code"><pre><span class="l-Scalar-Plain">all_users</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">ali</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">kamal</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">aman</span>
+</pre></div>
+
+
+<p>And the tasks <code>add_user.yml</code> was very clunkyly defined:-</p>
+<div class="code"><pre><span class="nn">---</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Create user</span>
+  <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">home=/home/{{ item }} name={{ item }} shell=/bin/bash state=present</span>
+  <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">accounts_to_add</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Add SSH key</span>
+  <span class="l-Scalar-Plain">authorized_key</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">user={{ item }} key="{{ lookup('file', playbook_dir + '/data/users/' + item + '/key.pub') }}"</span>
+  <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">accounts_to_add</span>
+  <span class="l-Scalar-Plain">tags</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'user-config'</span><span class="p-Indicator">]</span>
+
+<span class="p-Indicator">-</span> <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Lock user {{ item }}</span>
+  <span class="l-Scalar-Plain">command</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">usermod --lock {{ item }}</span>
+  <span class="l-Scalar-Plain">with_items</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">accounts_to_add</span>
+  <span class="l-Scalar-Plain">tags</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="s">'user-config'</span><span class="p-Indicator">]</span>
+</pre></div>
+
+
+<p>Had to deal with the <code>lookup()</code> issue where it keep giving errors:-</p>
+<div class="code"><pre><span class="nl">fatal:</span> <span class="p">[</span><span class="n">devserver</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">A</span> <span class="n">variable</span> <span class="n">inserted</span> <span class="n">a</span> <span class="n">new</span> <span class="n">parameter</span> <span class="n">into</span> <span class="n">the</span> <span class="n">module</span> <span class="n">args</span><span class="p">.</span> <span class="n">Be</span> <span class="n">sure</span> <span class="n">to</span> <span class="n">quote</span> <span class="n">variables</span> <span class="k">if</span> <span class="n">they</span> <span class="n">contain</span> <span class="n">equal</span> <span class="n">signs</span> <span class="p">(</span><span class="k">for</span> <span class="n">example</span><span class="o">:</span> <span class="s">"{{var}}"</span><span class="p">).</span>
+</pre></div>
+
+
+<p>The answer actually already there, you have to quote the <code>lookup(...)</code> but I spent hours looking for solution,
+the price has to pay when you didn't read error message properly, sigh ...</p>
+<p>I'm not really satisfied with this solution since it mean for every playbook, you'll keep repeating the tasks
+section. [ansible-users] roles is better here since you just include the roles and the users variables being
+inferred automatically. So I keep searching for solution to split <code>group_vars</code> file until I realized can reference
+variables in the playbook.</p></div>
+    </div>
+    
+    </div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="django-where-does-the-application-start.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="git-remove-files-from-commit.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/ansible-manage-users-from-central-file.html",
+        
+        disqus_title="Ansible: Manage users from central file",
+        disqus_identifier="cache/posts/ansible-manage-users-from-central-file.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

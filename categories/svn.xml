@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (svn)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/svn.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Subversion shallow checkout</title><link>http://k4ml.github.io/posts/subversion-shallow-checkout.html</link><description>&lt;div&gt;&lt;p&gt;Usecase - we want to work on branch 155-new-dashboard and trunk only. Checking 
+out the root repository will give us the whole repo with all the branches and 
+tags. For a big repository, this will take sometime. To do shallow checkout, 
+subversion provide the &lt;code&gt;--depth&lt;/code&gt; &lt;a href="http://svnbook.red-bean.com/en/1.6/svn.advanced.sparsedirs.html"&gt;options&lt;/a&gt; to the checkout command.&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;svn&lt;/span&gt; &lt;span class="n"&gt;co&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;depth&lt;/span&gt; &lt;span class="n"&gt;immediates&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;//server.com/path/to/repo&lt;/span&gt;
+&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="n"&gt;repo&lt;/span&gt;
+&lt;span class="n"&gt;branches&lt;/span&gt; &lt;span class="n"&gt;tags&lt;/span&gt; &lt;span class="n"&gt;trunk&lt;/span&gt;
+&lt;span class="cp"&gt;# at this point all directories are empty&lt;/span&gt;
+&lt;span class="n"&gt;svn&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;branches&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;155&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dashboard&lt;/span&gt;
+&lt;span class="n"&gt;cd&lt;/span&gt; &lt;span class="n"&gt;trunk&lt;/span&gt;
+&lt;span class="n"&gt;svn&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;depth&lt;/span&gt; &lt;span class="n"&gt;infinity&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The catch is the last step. Simply doing &lt;code&gt;svn up&lt;/code&gt; in trunk won't checkout 
+anything. Fortunately, subversion allow setting up &lt;code&gt;--depth&lt;/code&gt; in each 
+sub-directory.&lt;/p&gt;&lt;/div&gt;</description><category>subversion</category><category>svn</category><category>version control</category><guid>http://k4ml.github.io/posts/subversion-shallow-checkout.html</guid><pubDate>Tue, 24 Sep 2013 19:39:26 GMT</pubDate></item></channel></rss>

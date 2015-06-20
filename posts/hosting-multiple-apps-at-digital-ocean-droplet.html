@@ -1,0 +1,549 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="This is to document a setup that I plan on a digital ocean droplet. It should allow us to host applications of different platforms to co-exists side by side."><meta name="author" content="Mohd Kamal Bin Mustafa"><title>Hosting multiple apps at digital ocean droplet | ImportError</title><link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"><link href="../assets/css/rst.css" rel="stylesheet" type="text/css"><link href="../assets/css/code.css" rel="stylesheet" type="text/css"><link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css"><link href="../assets/css/theme.css" rel="stylesheet" type="text/css"><link href="../assets/css/custom.css" rel="stylesheet" type="text/css"><link rel="canonical" href="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html"><!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]--><link rel="alternate" type="application/rss+xml" title="RSS (en)" href="../rss.xml"><link rel="alternate" type="application/rss+xml" title="RSS (ms)" href="../ms/rss.xml"></head><body>
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://k4ml.github.io">ImportError</a>
+        </div><!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav"><li><a href="../archive.html">Archives</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../projects.html">Projects</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../categories/index.html">Tags</a>
+            
+        
+    
+        
+            
+                </li><li><a href="../rss.xml">RSS</a>
+            
+        
+    
+
+            </li></ul><ul class="nav navbar-nav navbar-right"><li>
+    
+        
+    
+        
+            </li><li><a href="../ms/index.html" rel="alternate" hreflang="ms">Malay</a></li>
+        
+    
+
+                
+                
+                
+                    
+
+    <li>
+    <a href="hosting-multiple-apps-at-digital-ocean-droplet.md" id="sourcelink">Source</a>
+    </li>
+
+
+                
+            </ul></div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav><!-- End of Menubar --><div class="container">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            <div class="col-md-8 col-md-push-4">
+            
+    <article class="postbox post-text"><div class="h-entry" itemscope="itemscope" itemtype="http://schema.org/Article">
+    
+    <h1 class="p-name" itemprop="headline name">Hosting multiple apps at digital ocean droplet</h1>
+    
+
+    <hr><small>
+        Posted: <time class="published dt-published" datetime="2013-10-04T20:18:13+08:00" itemprop="datePublished">2013-10-04 20:18</time>
+        
+    
+        
+            
+        
+            
+        
+    
+
+        
+    
+          |  More posts about
+        
+            <a class="tag" href="../categories/php.html"><span class="badge badge-info">php</span></a>
+        
+            <a class="tag" href="../categories/python.html"><span class="badge badge-info">python</span></a>
+        
+            <a class="tag" href="../categories/hosting.html"><span class="badge badge-info">hosting</span></a>
+        
+            <a class="tag" href="../categories/wip.html"><span class="badge badge-info">WIP</span></a>
+        
+    
+
+    </small>
+    <hr><div class="e-content" itemprop="articleBody text">
+    <div><div class="contents alert alert-info pull-left topic">
+<p class="first sidebar-title">Contents</p>
+<ul><li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#nginx">Nginx</a></li>
+<li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#user">User</a></li>
+<li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#php">PHP</a><ul><li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#drupal">Drupal</a></li>
+</ul></li>
+<li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#supervisor">Supervisor</a></li>
+<li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#python">Python</a><ul><li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#gunicorn">Gunicorn</a></li>
+</ul></li>
+<li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#ruby">Ruby</a></li>
+<li><a href="hosting-multiple-apps-at-digital-ocean-droplet.html#issues">Issues</a></li>
+</ul></div>
+<p>This is to document a setup that I plan on a digital ocean droplet. It should 
+allow us to host applications of different platforms to co-exists side by side.<br>
+This initially inspired by <a href="https://github.com/progrium/dokku">dokku</a> setup but dokku still has some rough edges 
+making it not ready yet for production setup. This setup simply eliminate 
+[docker] and run application natively on the host instead inside a 
+<a href="https://blogs.oracle.com/OTNGarage/entry/linux_containers_part_1_overview">container</a>.</p>
+<p>Based on diagram below, we'll use nginx as our frontend server. It'll not do 
+much other than forwarding requests to the backend apps running on different 
+port.  Each app will run inside specific user account so in theory it should 
+allow us to host apps for multiple users. Some planning on port assignment is 
+needed however in case you want to go in this route. For example user1 will use 
+port range 10000 and user2 using port 11000 space.</p>
+<p>If you want to skip the write up and straightly get your hand dirty, just
+clone the <a href="https://github.com/k4ml/do-hosting">github repo</a> and fix all the path to suit your environment.</p>
+<!--TEASER_END-->
+
+<p><a href="http://imgur.com/koVrXaN"><img src="http://i.imgur.com/koVrXaN.jpg" title="Hosted by imgur.com"></a></p>
+<p>We'll start with installing all the required packages first. This assume you 
+already logged to the server as root:-</p>
+<div class="code"><pre><span class="go">apt-get install nginx libapache2-mod-php5 php5-gd php5-sqlite python-dev</span>
+<span class="go">apt-get install python-virtualenv supervisor</span>
+<span class="go">update-rc.d apache2 disable</span>
+</pre></div>
+
+
+<p>We disable apache from being started at startup since we're not going to use 
+the default setup. Each apps will run their own minimal instance of apache.<br>
+You'll see some errors after the installation, apache2 failed to start since 
+nginx already used the port 80.</p>
+<h3 id="nginx">Nginx</h3>
+<p>Open `/etc/nginx/nginx.conf, remove existing config and add the following 
+config:-</p>
+<div class="code"><pre><span class="k">user</span> <span class="s">www-data</span><span class="p">;</span>
+<span class="k">worker_processes</span> <span class="mi">4</span><span class="p">;</span>
+<span class="k">pid</span> <span class="s">/var/run/nginx.pid</span><span class="p">;</span>
+
+<span class="k">events</span> <span class="p">{</span>
+        <span class="kn">worker_connections</span> <span class="mi">768</span><span class="p">;</span>
+        <span class="c1"># multi_accept on;</span>
+<span class="p">}</span>
+
+<span class="k">http</span> <span class="p">{</span>
+        <span class="kn">sendfile</span> <span class="no">on</span><span class="p">;</span>
+        <span class="kn">tcp_nopush</span> <span class="no">on</span><span class="p">;</span>
+        <span class="kn">tcp_nodelay</span> <span class="no">on</span><span class="p">;</span>
+        <span class="kn">keepalive_timeout</span> <span class="mi">65</span><span class="p">;</span>
+        <span class="kn">types_hash_max_size</span> <span class="mi">2048</span><span class="p">;</span>
+        <span class="c1"># server_tokens off;</span>
+
+        <span class="kn">server_names_hash_bucket_size</span> <span class="mi">64</span><span class="p">;</span>
+        <span class="c1"># server_name_in_redirect off;</span>
+
+        <span class="kn">include</span> <span class="s">/etc/nginx/mime.types</span><span class="p">;</span>
+        <span class="kn">default_type</span> <span class="s">application/octet-stream</span><span class="p">;</span>
+
+        <span class="kn">access_log</span> <span class="s">/var/log/nginx/access.log</span><span class="p">;</span>
+        <span class="kn">error_log</span> <span class="s">/var/log/nginx/error.log</span><span class="p">;</span>
+
+        <span class="kn">gzip</span> <span class="no">on</span><span class="p">;</span>
+        <span class="kn">gzip_disable</span> <span class="s">"msie6"</span><span class="p">;</span>
+
+        <span class="kn">include</span> <span class="s">/etc/nginx/conf.d/*.conf</span><span class="p">;</span>
+        <span class="kn">include</span> <span class="s">/etc/nginx/sites-enabled/*</span><span class="p">;</span>
+        <span class="kn">include</span> <span class="s">/home/user1/webapps/*/nginx/nginx.conf</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>It's the last line that really matter so if you want to keep the existing 
+config, just add the last line. Test the config by running <code>nginx -t</code>. If no 
+errors shown, we're done with nginx.</p>
+<h3 id="user">User</h3>
+<p>We'll keep all our apps in a specific user account. Begin by creating the user 
+account:-</p>
+<div class="code"><pre><span class="go">adduser --disabled-login --gecos '' user1</span>
+</pre></div>
+
+
+<p>We disabled user login since we're not going to log in to this account 
+directly. The option <code>--gecos ''</code> will skip the interactive prompt asking for 
+full name, phone number etc.</p>
+<p>Switch to the newly created user to start setting up the initial app layout.</p>
+<div class="code"><pre><span class="go">su user1</span>
+<span class="go">mkdir -p /home/user1/webapps/drupal</span>
+<span class="go">mkdir -p /home/user1/webapps/drupal/apache2</span>
+<span class="go">mkdir -p /home/user1/webapps/drupal/nginx</span>
+<span class="go">mkdir -p /home/user1/webapps/drupal/app/public</span>
+</pre></div>
+
+
+<p>We'll put all our apps inside a folder called <code>webapps</code> inside the user's home 
+directory. Our first app will be a PHP app and I took <a href="http://drupal.org/">drupal</a> as an example.<br>
+Before we can setup drupal, we have to configure our PHP environment first.</p>
+<h3 id="php">PHP</h3>
+<p>Create a directory to hold the apache2 environment for our PHP app.</p>
+<div class="code"><pre><span class="go">cd /home/user1/webapps/drupal</span>
+<span class="gp">#</span> create minimal apache2 config
+<span class="go">cat - &gt; apache2.conf</span>
+<span class="go">ServerRoot /home/user1/webapps/drupal/apache2</span>
+<span class="go">Listen 10000</span>
+<span class="go">PidFile apache2.pid</span>
+<span class="go">LockFile apache2.lock</span>
+<span class="go">TypesConfig /etc/mime.types</span>
+
+<span class="go">LoadModule authz_host_module /usr/lib/apache2/modules/mod_authz_host.so</span>
+<span class="go">LoadModule dir_module /usr/lib/apache2/modules/mod_dir.so</span>
+<span class="go">LoadModule mime_module /usr/lib/apache2/modules/mod_mime.so</span>
+<span class="go">LoadModule rewrite_module /usr/lib/apache2/modules/mod_rewrite.so</span>
+<span class="go">LoadModule php5_module /usr/lib/apache2/modules/libphp5.so</span>
+
+<span class="go">LogLevel info</span>
+<span class="go">ErrorLog "|cat"</span>
+<span class="go">LogFormat "%h %l %u %t \"%r\" %&gt;s %b" common</span>
+<span class="go">CustomLog "|cat" common</span>
+
+<span class="go">DocumentRoot "/home/user1/webapps/drupal/app/public"</span>
+<span class="go">&lt;Directory "/home/user1/webapps/drupal/app/public"&gt;</span>
+<span class="go">  AllowOverride all</span>
+<span class="go">  Order allow,deny</span>
+<span class="go">  Allow from all</span>
+<span class="go">&lt;/Directory&gt;</span>
+
+<span class="go">AddType application/x-httpd-php .php</span>
+<span class="go">DirectoryIndex index.html index.php</span>
+<span class="go">^D</span>
+</pre></div>
+
+
+<p>Notice that we run this apache2 instance at port 10000. Now let's test running 
+the instance:-</p>
+<div class="code"><pre><span class="go">apache2 -d /home/user1/webapps/drupal/apache2 -f apache2.conf -e info -DFOREGROUND</span>
+</pre></div>
+
+
+<p>You should see the apache process running. Type <code>CTRL-C</code> to stop it. Even 
+though we manage to run our apache instance now, it's still not accessible from 
+outside yet. Let's configure nginx to proxy request from outside to this 
+instance. Add our specific nginx config for our app in 
+<code>/home/user1/webapps/drupal/nginx/nginx.conf</code>:-</p>
+<div class="code"><pre><span class="k">upstream</span> <span class="s">user1-drupal</span> <span class="p">{</span> <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">10000</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">server</span> <span class="p">{</span>
+  <span class="kn">listen</span>      <span class="mi">80</span><span class="p">;</span>
+  <span class="kn">server_name</span> <span class="s">drupal.mysite.com</span><span class="p">;</span>
+  <span class="kn">location</span>    <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">proxy_pass</span>  <span class="s">http://user1-drupal</span><span class="p">;</span>
+    <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">"upgrade"</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$http_host</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Port</span> <span class="nv">$server_port</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Test our nginx config to make sure nothing go wrong and then restart it:-</p>
+<div class="code"><pre><span class="go">nginx -t</span>
+<span class="go">service nginx restart</span>
+<span class="go">apache2 -d /home/user1/webapps/drupal/apache2 -f apache2.conf -e info -DFOREGROUND</span>
+</pre></div>
+
+
+<p>If nothing goes wrong, we can access our website now at 
+http://drupal.mysite.com/. We should get Not Found error from browser. Add 
+<code>index.php</code> to our public folder to verify we can properly execute PHP script.</p>
+<p>To avoid having to type the lengthy command in order to start apache2, let's wrap
+it into a simple script. Save it in <code>/home/user1/webapps/drupal/apache2/start.sh</code>:-</p>
+<div class="code"><pre><span class="c">#!/bin/bash</span>
+
+<span class="nb">exec </span>apache2 -d /home/user1/webapps/drupal/apache2 -f apache2.conf -e info -DFOREGROUND
+</pre></div>
+
+
+<p>While our apache instance now running, it's not yet permanent, mean when we close our
+console or our ssh connection drop, it will stop. We'll use process manager called
+<a href="http://supervisord.org/">Supervisor</a> to turn our apache2 process into a daemon.</p>
+<h4 id="drupal">Drupal</h4>
+<h3 id="supervisor">Supervisor</h3>
+<p>Create new supervisor config file in <code>/home/user1/etc/supervisord.conf</code>:-</p>
+<div class="code"><pre><span class="na">logfile</span><span class="o">=</span><span class="s">/home/user1/var/logs/supervisor/supervisord.log</span>
+<span class="na">logfile_maxbytes</span><span class="o">=</span><span class="s">20MB</span>
+<span class="na">logfile_backups</span><span class="o">=</span><span class="s">10</span>
+<span class="na">loglevel</span><span class="o">=</span><span class="s">debug</span>
+<span class="na">pidfile</span><span class="o">=</span><span class="s">/home/user1/var/run/supervisord.pid</span>
+<span class="na">nodaemon</span><span class="o">=</span><span class="s">false</span>
+<span class="na">minfds</span><span class="o">=</span><span class="s">1024</span>
+<span class="na">minprocs</span><span class="o">=</span><span class="s">200</span>
+
+<span class="k">[unix_http_server]</span>
+<span class="na">file</span><span class="o">=</span><span class="s">/home/user1/var/run/supervisor.sock</span>
+
+<span class="k">[supervisorctl]</span>
+<span class="na">serverurl</span><span class="o">=</span><span class="s">unix:///home/user1/var/run/supervisor.sock</span>
+
+<span class="k">[rpcinterface:supervisor]</span>
+<span class="na">supervisor.rpcinterface_factory</span> <span class="o">=</span> <span class="s">supervisor.rpcinterface:make_main_rpcinterface</span>
+
+<span class="k">[include]</span>
+<span class="na">files</span> <span class="o">=</span> <span class="s">/home/user1/webapps/*/supervisor/supervisor.conf</span>
+</pre></div>
+
+
+<p>Next add supervisor config specific to our app in <code>/home/user1/webapps/drupal/supervisor/supervisor.conf</code>:-</p>
+<div class="code"><pre><span class="k">[program:drupal]</span>
+<span class="na">command</span><span class="o">=</span><span class="s">pidproxy /home/user1/webapps/drupal/apache2/apache2.pid /home/user1/webapps/drupal/apache2/start.sh</span>
+<span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">exitcodes</span><span class="o">=</span><span class="s">0</span>
+<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/home/user1/var/logs/supervisor/drupal.log</span>
+<span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
+</pre></div>
+
+
+<p>Above config allow us to manage the apache2 process using <code>supervisorctl</code> command:-</p>
+<div class="code"><pre><span class="go">supervisorctl -c ~/etc/supervisord.conf start drupal</span>
+<span class="go">supervisorctl -c ~/etc/supervisord.conf status</span>
+<span class="go">drupal                           RUNNING    pid 840, uptime 18:43:55</span>
+<span class="go">supervisorctl -c ~/etc/supervisord.conf stop drupal</span>
+<span class="go">drupal: stopped</span>
+</pre></div>
+
+
+<p>There's one issue with running apache2 process under supervisor. Apache2 create a
+child processes and supervisor cannot control all these child processes. That mean when
+we stop the process using supervisor, the child processes will keep running and
+servicing our website as usual. The workaround is to launch the process using <code>pidproxy</code>
+as shown in the above config.</p>
+<p>To easily manage the supervisor, download <a href="https://gist.github.com/k4ml/6846809/raw/085bbff60d4736cf89b63ce4716796e79b932739/supervisord.sh">this script</a> and put it in
+<code>/home/user1/bin/supervisord.sh</code>. Then you should be able to control supervisord
+daemon as:-</p>
+<div class="code"><pre><span class="gp">$</span>HOME/bin/supervisord.sh start
+<span class="gp">$</span>HOME/bin/supervisord.sh status
+<span class="gp">$</span>HOME/bin/supervisord.sh stop
+</pre></div>
+
+
+<p>This supervisord daemon is still not started when the server reboot. For now I'll just
+call the script to start daemon from cron every 10 minutes:-</p>
+<div class="code"><pre><span class="go">crontab -l</span>
+<span class="gp">#</span> m h  dom mon dow   <span class="nb">command</span>
+<span class="go">*/10 * * * * /home/user1/bin/supervisord.sh start</span>
+</pre></div>
+
+
+<h3 id="python">Python</h3>
+<p>Python app should run inside a <a href="http://pypi.python.org/pypi/virtualenv">virtualenv</a> to isolate it from system python. This
+allow us to install packages required only for our app and changes to system wide
+python packages shouldn't affect our app. For this example, we'll use <a href="http://mezzanine.jupo.org/">Mezzanine</a>,
+a Content Management System that quite popular in Python.</p>
+<p>Add nginx config for our python app first. The file in <code>/home/user1/webapps/mezzanine/nginx/nginx.conf</code> should look like:-</p>
+<div class="code"><pre><span class="k">upstream</span> <span class="s">user1-mezzanine</span> <span class="p">{</span> <span class="kn">server</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">10001</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">server</span> <span class="p">{</span>
+  <span class="kn">listen</span>      <span class="mi">80</span><span class="p">;</span>
+  <span class="kn">server_name</span> <span class="s">mezzanine.mysite.com</span><span class="p">;</span>
+  <span class="kn">location</span>    <span class="s">/</span> <span class="p">{</span>
+    <span class="kn">proxy_pass</span>  <span class="s">http://user1-mezzanine</span><span class="p">;</span>
+    <span class="kn">proxy_http_version</span> <span class="mi">1</span><span class="s">.1</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Upgrade</span> <span class="nv">$http_upgrade</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Connection</span> <span class="s">"upgrade"</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$http_host</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Proto</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-For</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+    <span class="kn">proxy_set_header</span> <span class="s">X-Forwarded-Port</span> <span class="nv">$server_port</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<div class="code"><pre><span class="go">mkdir -p /home/user1/webapps/mezzanine/app</span>
+<span class="go">cd /home/user1/webapps/mezzanine</span>
+<span class="go">virtualenv venv</span>
+<span class="go">./venv/bin/pip install mezzanine</span>
+<span class="go">cd app</span>
+<span class="go">../venv/bin/mezzanine-project myproject</span>
+<span class="go">cd myproject</span>
+<span class="go">../../venv/bin/python manage.py createdb</span>
+<span class="go">../../venv/bin/python manage.py runserver 10001</span>
+</pre></div>
+
+
+<p>Our python app running at port 10001 and nginx now would correctly proxied request
+to http://mezzanine.mysite.com/ to the django development server running for
+our app.</p>
+<h4 id="gunicorn">Gunicorn</h4>
+<p>Django development server is not meant to run in production so in order to serve our
+python app, we'll use <a href="http://gunicorn.org/">gunicorn</a>, one of the many <a href="http://wsgi.readthedocs.org/en/latest/">WSGI</a> server available in Python.
+Begin by installing gunicorn:-</p>
+<div class="code"><pre><span class="go">cd /home/user1/webapps/mezzanine/app</span>
+<span class="go">../venv/bin/pip install gunicorn</span>
+<span class="go">../venv/bin/gunicorn -b 127.0.0.1:10001 myproject.wsgi:application</span>
+</pre></div>
+
+
+<p>Our app now being served through gunicorn but still have one problem. Gunicorn will
+only run python files but not static files such as css, js or images. While we can
+configure nginx to also serve the static files, I'd prefer not to do that since
+the nginx process is a system wide process - it shouldn't do more than just proxying
+the request to backend server. For now we'll took simple approach and serve the static
+files as part of our python app. We need a little package call <code>dj-static</code> that provide
+thin middleware to serve all the static files.</p>
+<div class="code"><pre><span class="go">../venv/bin/pip install dj-static</span>
+</pre></div>
+
+
+<p>We have to modify our <code>wsgi.py</code> file a bit. Make sure it look like below:-</p>
+<div class="code"><pre><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+<span class="n">settings_module</span> <span class="o">=</span> <span class="s">"</span><span class="si">%s</span><span class="s">.settings"</span> <span class="o">%</span> <span class="n">PROJECT_ROOT</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">"DJANGO_SETTINGS_MODULE"</span><span class="p">,</span> <span class="n">settings_module</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">django.core.wsgi</span> <span class="kn">import</span> <span class="n">get_wsgi_application</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">get_wsgi_application</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">dj_static</span> <span class="kn">import</span> <span class="n">Cling</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">Cling</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Our python app running under gunicorn should be ready now. The final part is to manage
+it under supervisor. Add new entry to our supervisor.conf file:-</p>
+<div class="code"><pre><span class="k">[program:mezzanine]</span>
+<span class="na">command</span><span class="o">=</span><span class="s">/home/user1/webapps/mezzanine/venv/start.sh</span>
+<span class="na">directory</span><span class="o">=</span><span class="s">/home/user1/webapps/mezzanine/app</span>
+<span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">exitcodes</span><span class="o">=</span><span class="s">0</span>
+<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/home/user1/var/logs/supervisor/mezzanine.log</span>
+<span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
+</pre></div>
+
+
+<h3 id="ruby">Ruby</h3>
+<h3 id="issues">Issues</h3>
+<p>nginx: [emerg] could not build the server_names_hash, you should increase server_names_hash_bucket_size: 32
+server_names_hash_bucket_size 64;</p>
+<p>http://zroger.com/blog/apache-in-the-foreground/
+http://supervisord.org/subprocess.html#pidproxy-program
+https://github.com/kennethreitz/dj-static</p></div>
+    </div>
+    
+        <meta content="This is to document a setup that I plan on a digital ocean droplet. It should allow us to host applications of different platforms to co-exists side by side." itemprop="description"></div>
+    
+    
+        <ul class="pager"><li class="previous">
+                <a href="pyinstaller.html" rel="prev">← Previous post</a>
+            </li>
+        
+        
+            <li class="next">
+                <a href="ansible-playbook-specify-hosts-on-the-command-line.html" rel="next">Next post →</a>
+            </li>
+        
+        </ul><div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="importerror",
+        
+            disqus_url="http://k4ml.github.io/posts/hosting-multiple-apps-at-digital-ocean-droplet.html",
+        
+        disqus_title="Hosting multiple apps at digital ocean droplet",
+        disqus_identifier="cache/posts/hosting-multiple-apps-at-digital-ocean-droplet.html",
+        disqus_config = function () {
+            this.language = "";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+
+    
+
+    
+    
+    
+
+    </article></div>
+            <div class="col-md-4 col-md-pull-8">
+                <div class="panel panel-default"></div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading"><h3 class="panel-title">About me</h3></div>
+                    <div class="panel-body">
+                        <p><img src="../images/me-small.jpg" style="float: right; width: 130px; height: 131px;">
+Web developer in Malaysia. Currently work at <a href="http://www.marimore.co.jp/">MARIMORE Inc</a> building internet 
+services using Python and Django web framework.</p>
+<p><code>ImportError</code> is an error message emitted by Python when it failed to load certain
+module as requested by programmer. It's a very common error when someone new to
+the language trying it out. This website on the same theme, will try provide help
+for newcomers on any technologies to overcome their first hurdle.</p>
+<h3>Others</h3>
+<p>I can also be found at the following sites:-</p>
+<ul><li>http://k4ml.blogspot.com/</li>
+<li>http://k4ml.github.io/</li>
+<li>http://metak4ml.blogspot.com/</li>
+<li>http://www.mydev.my/</li>
+<li>http://github.com/k4ml/</li>
+</ul><h3>Disclaimers</h3>
+<p>The postings on this site are my own and don't necessarily represent my employer's
+positions, strategies or opinions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--End of body content-->
+
+        <footer>
+            Contents © 2015         <a href="mailto:joe@demo.site">Mohd Kamal Bin Mustafa</a> - Powered by         <a href="http://getnikola.com">Nikola</a>         
+        </footer></div>
+</div>
+
+
+    
+        
+            <script src="../assets/js/jquery-1.10.2.min.js" type="text/javascript"></script><script src="../assets/js/bootstrap.min.js" type="text/javascript"></script><script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul><li><a class="addthis_button_facebook"></a>
+</li><li><a class="addthis_button_google_plusone_share"></a>
+</li><li><a class="addthis_button_linkedin"></a>
+</li><li><a class="addthis_button_twitter"></a>
+</li></ul></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-44689253-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script></body></html>

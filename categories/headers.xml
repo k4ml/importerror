@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>ImportError (headers)</title><link>http://k4ml.github.io</link><description></description><atom:link href="http://k4ml.github.io/categories/headers.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 20 Jun 2015 12:11:37 GMT</lastBuildDate><generator>Nikola &lt;http://getnikola.com/&gt;</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>PHP: Headers already sent and HTTP basic</title><link>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</link><description>&lt;div&gt;&lt;p&gt;If there's one error that must be encountered by all PHP developers, this:-&lt;/p&gt;
+&lt;div class="code"&gt;&lt;pre&gt;&lt;span class="n"&gt;Warning&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Cannot&lt;/span&gt; &lt;span class="n"&gt;modify&lt;/span&gt; &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="n"&gt;information&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="n"&gt;already&lt;/span&gt; &lt;span class="n"&gt;sent&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;probably one of it. Anyone who developing in PHP must at least once having issue
+involving this. Lot of articles and answers have been written on this issue, and &lt;a href="http://stackoverflow.com/questions/8028957/how-to-fix-headers-already-sent-error-in-php"&gt;this
+answer on stackoverflow&lt;/a&gt; is one of the most comprehensive write up explaining the issue,
+why it happen and how to fix it. So I don't plan to talk much on the PHP part in this post
+but more on the HTTP part.&lt;/p&gt;
+&lt;h3 id="what-is-http"&gt;What is HTTP ?&lt;/h3&gt;
+&lt;p&gt;It's a protocol that govern how a piece of information can be exchanged over the Internet.
+There are lot of protocols defined and being used on the Internet but HTTP definitely one
+of the widely used protocol in form of what layman known as web, or World Wide Web (WWW).
+The protocol is being defined as &lt;a href="https://www.ietf.org/rfc/rfc2616.txt"&gt;RFC 2616&lt;/a&gt; and as we will later realized, it is a
+text protocol. Being a text based protocol make it much easier to study and understand and
+test it in practical manner since no special tools needed to actually implement the protocol.
+Before we delved deeper into the protocol, let also clear up what actually meant by the word
+protocol itself.&lt;/p&gt;
+&lt;p class="more"&gt;&lt;a href="http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html"&gt;Read more…&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</description><category>php</category><category>http</category><category>headers</category><guid>http://k4ml.github.io/posts/php-headers-already-sent-and-http-basic.html</guid><pubDate>Mon, 03 Mar 2014 06:37:42 GMT</pubDate></item></channel></rss>

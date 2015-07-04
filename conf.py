@@ -408,6 +408,7 @@ COMMENT_SYSTEM_ID = "importerror"
 import mytoc
 from markdown.extensions.codehilite import CodeHiliteExtension
 codehilite = CodeHiliteExtension([('linenums', True)])
+codehilite = CodeHiliteExtension()
 MARKDOWN_EXTENSIONS = ['fenced_code', codehilite, mytoc.TocExtension()]
 
 # Social buttons. This is sample code for AddThis (which was the default for a
@@ -506,6 +507,8 @@ MARKDOWN_EXTENSIONS = ['fenced_code', codehilite, mytoc.TocExtension()]
 # """
 # ENABLED_EXTRAS = ['local_search']
 #
+EXTRA_HEAD_DATA = """
+"""
 
 
 # Use content distribution networks for jquery and twitter-bootstrap css and js

@@ -20,6 +20,14 @@ lang="{{ lang }}">
         {{ notes.css() }}
     {% endif %}
     {{ extra_head_data }}
+<!-- Open Graph Meta Tags BEGIN -->
+<meta content='{% if post %} {{ post.title() }} {% else %} {{ blog_title }}{% endif %}' property='og:title'/>
+<meta content='{{ blog_title }}' property='og:site_name'/>
+<meta content="{% if post %}{{ post.permalink(absolute=True) }}{% else %}{{ abs_link('/') }}{% endif %}" property='og:url'/>
+<meta content='{% if post %}{{ post.description() }}{% else %}{{ description }}{% endif %}' property='og:description'/>
+<meta content='article' property='og:type'/>
+<meta content='http://i.imgur.com/r0ao0RJ.png' property='og:image'/>
+<!-- Open Graph Meta Tags END -->
 </head>
 <body>
 <!-- Menubar -->

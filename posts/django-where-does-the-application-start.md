@@ -4,7 +4,7 @@
 .. date: 2014/11/01 16:00:14
 .. tags: django, wsgi, learn
 .. link: 
-.. description: 
+.. description: Walkthrough into the internal parts of Django application, where the code start executing.
 .. type: text
 -->
 
@@ -25,6 +25,8 @@ web server, either `mod_wsgi`, `gunicorn`, `Paste`, `Rocket`, `Waitress`, `Circu
 WSGI server you can find on PyPI. I can still remember the day when there's none pure Python
 WSGI server exists (except CherryPy) and how I'd really envy Rails's community for having Mongrel.
 That day has long gone.
+
+<!-- TEASER_END -->
 
 Let's dive to the first entry point - when you run your django application through the
 `manage.py runserver` command. Typical django application (as generated) by the `startproject` command
@@ -181,5 +183,10 @@ class WSGIHandler(base.BaseHandler):
                     self._request_middleware = None
                     raise
 ```
+Notice the similarity between the above code and the basic WSGI application we have seen here ? The difference is that the Django
+code above is using class, instead of simple function but the interface still remained similar as you can see in the method
+`__call__(self, environ, start_response)` above. This class, when instantiated, the instance will be callable just like function.
+
+So far we've only gone through the request/response part of Django. There's still a lot to cover - ORM, templates, middlewares, forms etc. This post was written in hurry so if I missed some key details, feel free to ask in the comments below. 
 
 [get_handler]:https://github.com/django/django/blob/master/django/core/management/commands/runserver.py#L56

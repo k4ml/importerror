@@ -13,3 +13,11 @@ div.code {
           height: auto;
           overflow: auto;
         }
+
+.postbox {
+    border-bottom-color: white;
+}
+
+.postbox small {
+    font-size: 50%;
+}

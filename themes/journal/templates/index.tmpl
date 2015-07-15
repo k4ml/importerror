@@ -1,0 +1,16 @@
+{#  -*- coding: utf-8 -*- #}
+{% import 'index_helper.tmpl' as helper with context %}
+{% import 'comments_helper.tmpl' as comments with context %}
+{% extends 'base.tmpl' %}
+{% block content %}
+    {% for post in posts %}
+        <article class="postbox h-entry post-{{ post.meta('type') }}">
+        <h2 class="p-name"><a href="{{ post.permalink() }}" class="u-url">{{ post.title() }}</a>
+        <small>&nbsp;&nbsp;
+             {{ messages("Posted") }}: <time class="published dt-published" datetime="{{ post.date.isoformat() }}">{{ post.formatted_date(date_format) }}</time>
+        </small></h2>
+    {% endfor %}
+    {{ helper.html_pager() }}
+    {{ comments.comment_link_script() }}
+	{{ helper.mathjax_script(posts) }}
+{% endblock %}

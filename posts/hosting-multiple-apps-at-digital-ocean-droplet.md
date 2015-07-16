@@ -6,6 +6,7 @@
 .. title: Hosting multiple apps at digital ocean droplet
 .. slug: hosting-multiple-apps-at-digital-ocean-droplet
 .. description: Make the best use of your Digital Ocean droplet by hosting multiple apps, be it PHP, Python, Ruby etc side by side.
+.. previewimage: http://i.imgur.com/koVrXaN.jpg
 -->
 
 [TOC]

@@ -2,7 +2,7 @@
 .. title: Ansible: Manage users from central file
 .. slug: ansible-manage-users-from-central-file
 .. date: 2015/04/01 23:30:52
-.. tags: ansible
+.. tags: ansible, devops, sysadmin
 .. link: 
 .. description: 
 .. type: text

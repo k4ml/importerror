@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: ansible, python, digital ocean, nginx
+.. tags: ansible, python, digital ocean, nginx, devops, sysadmin
 .. date: 2013/09/27 00:56:32
 .. title: Get started with Ansible
 .. slug: get-started-with-ansible

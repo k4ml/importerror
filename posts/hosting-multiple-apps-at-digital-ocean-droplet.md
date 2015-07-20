@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: This is to document a setup that I plan on a digital ocean droplet. It should allow us to host applications of different platforms to co-exists side by side.  
-.. tags: php, python, hosting, WIP
+.. tags: php, python, hosting, WIP, devops, sysadmin
 .. date: 2013/10/04 20:18:13
 .. title: Hosting multiple apps at digital ocean droplet
 .. slug: hosting-multiple-apps-at-digital-ocean-droplet

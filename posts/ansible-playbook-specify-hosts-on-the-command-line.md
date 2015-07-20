@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: ansible
+.. tags: ansible, devops, sysadmin
 .. date: 2013/10/07 07:28:10
 .. title: Ansible-Playbook: Specify hosts on the command line
 .. slug: ansible-playbook-specify-hosts-on-the-command-line

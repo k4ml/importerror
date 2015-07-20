@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: 
+.. tags: devops, vagrant
 .. date: 2013/09/29 22:43:02
 .. title: Pengenalan Vagrant
 .. slug: pengenalan-vagrant

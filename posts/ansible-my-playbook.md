@@ -1,7 +1,7 @@
 <!-- 
 .. link: 
 .. description: 
-.. tags: ansible, WIP
+.. tags: ansible, WIP, devops, sysadmin
 .. date: 2013/10/08 04:02:25
 .. title: Ansible: My Playbook
 .. slug: ansible-my-playbook

@@ -5,6 +5,8 @@
 .. date: 2013/11/03 02:34:04
 .. title: Django From Scratch
 .. slug: django-from-scratch
+.. previewimage: https://www.djangoproject.com/s/img/logos/django-logo-negative.png
+.. description: Uncommon approach to learn django by starting from the very basic of handcoding everything, skipping some of the shortcut provided by django-admin startproject command.
 -->
 
 [TOC]

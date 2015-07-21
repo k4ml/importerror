@@ -14,11 +14,11 @@ There are a lot of tutorials out there on Django and the official documentation 
 <!-- TEASER_END -->
 
 ```console
-$ wget -o django.tar.gz https://www.djangoproject.com/download/1.5.1/tarball/
+$ wget -O django.tar.gz https://www.djangoproject.com/download/1.8.3/tarball/
 $ tar xzf django.tar.gz 
 $ ls
-Django-1.5.1  django.tar.gz
-$ ls Django-1.5.1/
+Django-1.8.3  django.tar.gz
+$ ls Django-1.8.3/
 AUTHORS  docs    INSTALL  MANIFEST.in  README.rst  setup.cfg  tests
 django   extras  LICENSE  PKG-INFO     scripts     setup.py
 ```
@@ -26,7 +26,7 @@ django   extras  LICENSE  PKG-INFO     scripts     setup.py
 What we're getting is called a Python package that supposed to be installed. But we're not going to install it, instead let just take what we really need. Take out the `django` directory and move to our current directory.
 
 ```console
-$ mv Django-1.5.1/django .
+$ mv Django-1.8.3/django .
 ```
 
 One thing we should understand when get started with Django is that it's just Python. In Python the most important thing is to make sure we can import the module we want to use. Let's try to `import django`.
@@ -75,7 +75,7 @@ $ python main.py runserver
 
 You'll get a message like this:-
 
-    ImproperlyConfigured: Requested setting USE_I18N, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
+    django.core.exceptions.ImproperlyConfigured: Requested setting DEFAULT_INDEX_TABLESPACE, but settings are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
 
 So something not right, in order for Django to start up, you have to tell it how to configure itself. You have to provide some settings. The settings itself just another python module (there's another way to provide settings) which mean the module must be able to be imported from the python script that we use to run django. Let's create the settings module, name it `settings.py` (it can be anything):-
 
@@ -122,14 +122,33 @@ SECRET_KEY = "1+)O49,>}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"
 
 Run `runserver` again:-
 
+You'll get this error:-
+
+    CommandError: You must set settings.ALLOWED_HOSTS if DEBUG is False.
+
+So add this another settings:-
+
+```console
+$ cat settings.py
+SECRET_KEY = "1+)O49,>}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"
+DEBUG = True
+```
+The error above mentioned something called `ALLOWED_HOSTS` but let's ignore that for now. It's a settings for production so it's not applicable yet in our case. We'll revisit that once we want to deploy our app to production server. Let's run the app again:-
+
 ```console
 $ python main.py runserver
-Validating models...
+Performing system checks...
 
-0 errors found
-April 11, 2013 - 16:34:29
-Django version 1.5.1, using settings 'settings'
-Development server is running at http://127.0.0.1:8000/
+System check identified some issues:
+
+WARNINGS:
+?: (1_7.W001) MIDDLEWARE_CLASSES is not set.
+        HINT: Django 1.7 changed the global defaults for the MIDDLEWARE_CLASSES. django.contrib.sessions.middleware.SessionMiddleware, django.contrib.auth.middleware.AuthenticationMiddleware, and django.contrib.messages.middleware.MessageMiddleware were removed from the defaults. If your project needs these middleware then you should configure this setting.
+
+System check identified 1 issue (0 silenced).
+July 21, 2015 - 14:55:21
+Django version 1.8.3, using settings 'settings'
+Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
@@ -185,15 +204,6 @@ On another console:-
     
 ```console
 $ curl http://localhost:8000/
-```
-
-Unfortunately django still come up with 500 error. This is because django refuse to run our function through the development server with DEBUG settings set to False. This is to avoid you from running this crippled web server for production application. You should use Apache with `mod_wsgi` or any other production ready wsgi server out there. So let's fix the settings:-
-
-```console
-$ cat settings.py
-SECRET_KEY = "1+)O49,>}5!$+ 43*PN+2+=(2S'W*0^1_|76n{_"
-ROOT_URLCONF = 'urls'
-DEBUG = True
 ```
 
 Now running the `runserver` and try accessing http://localhost:8000/ through browser or using curl will give the "Hello world" string. The takeout from this is that all the django need is just a function that it can call given a particular url. From that function you can do whatever you want as long as you return a valid value that is an instance of `django.http.HttpResponse` or it's subclass. Another important thing to know is that most of the settings require you to provide a valid python import path that django can use to import the required module. The module itself can be anywhere and django does not restrict you to any particular structure. As long as you can do `import somestuff`, that would be fine. How to make sure you module can be imported will be a point of another post though.

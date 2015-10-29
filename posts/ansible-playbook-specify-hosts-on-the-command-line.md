@@ -28,7 +28,7 @@ playbook:-
 We can write it as:-
 
 ```yaml
-- hosts: $hosts
+- hosts: {{hosts}}
   tasks:
     - name: Add user
       user: name=kamal
